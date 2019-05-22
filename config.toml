@@ -1,0 +1,115 @@
+baseURL = "https://facebook.tracking.exposed/"
+languageCode = "en-us"
+title = "Tracking Exposed"
+theme = "trex"
+enableRobotsTXT = true
+canonifyURLs = true
+[params]
+    subtitle = "facebook"
+    description = "Facebook Tracking Exposed is a web browser addon that collects the stories visible in your Facebook News feed and a website that aggregates that data from all the users who have the addon installed. Our vision is to increase transparency behind personalization algorithms"
+    subsite = "true"
+    background = "#FFF"
+    primary = "#3C5A96"
+    primary_light = ""
+    secondary = ""
+    tertiary_dark = ""
+    tertiary = ""
+
+[permalinks]
+    posts = "/:slug/"
+
+#sectionPagesMenu = "main"
+
+
+menu = ["main", "footer"]
+
+ [[menu.main]]
+    page = "Pages"
+    identifier = "pages"
+    name = "Pages"
+    url = "#"
+    weight = -100
+ [[menu.main]]
+    page = "Researcher"
+    identifier = "researcher"
+    name = "Researcher"
+    url = "/page/researcher/"
+    parent = "pages"
+    weight = -110
+ [[menu.main]]
+    page = "Individual"
+    identifier = "Individual"
+    parent = "pages"
+    name = "Individual"
+    url = "/page/individual/"
+    weight = -120
+ [[menu.main]]
+    page = "data-activism"
+    identifier = "data-activism"
+    parent = "pages"
+    name = "Data activism"
+    url = "/page/data-activism/"
+    weight = -130
+ [[menu.main]]
+    page = "Ethos"
+    identifier = "ethos"
+    name = "Goals and ethos"
+    parent = "pages"
+    url = "/page/ethos/"
+    weight = -140
+ [[menu.main]]
+    page = "RSS"
+    identifier = "rss"
+    parent = "pages"
+    name = "Watch events"
+    url = "/page/rss/"
+    weight = -150
+ [[menu.main]]
+    page = "Country"
+    identifier = "country"
+    name = "Countries"
+    url = "/country/"
+    weight = -160
+ [[menu.main]]
+    page = "Language"
+    identifier = "language"
+    name = "Languages"
+    url = "/language/"
+    weight = -170
+
+ [[menu.footer]]
+    page = "get-the-extension"
+    identifier = "get-the-extension"
+    name = "Get the extension"
+    url = "/page/get-the-extension/"
+    weight = -110
+ [[menu.footer]]
+     page = "Researcher"
+     identifier = "researcher"
+     name = "Researcher"
+     url = "/page/researcher/"
+     weight = -120
+ [[menu.footer]]
+     page = "Individual"
+     identifier = "individual"
+     name = "Individual"
+     url = "/page/individual/"
+     weight = -130
+ [[menu.footer]]
+     page = "data-activism"
+     identifier = "data-activism"
+     name = "Data activism"
+     url = "/page/data-activism/"
+     weight = -140
+ [[menu.footer]]
+     page = "Ethos"
+     identifier = "ethos"
+     name = "Goals and ethos"
+     url = "/page/ethos/"
+     weight = -150
+ [[menu.footer]]
+     page = "RSS"
+     identifier = "rss"
+     name = "Watch events horizontally"
+     url = "/page/rss/"
+     weight = -160
