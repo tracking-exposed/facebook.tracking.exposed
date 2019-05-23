@@ -21,95 +21,63 @@ canonifyURLs = true
 #sectionPagesMenu = "main"
 
 
-menu = ["main", "footer"]
-
+[menu]
  [[menu.main]]
-    page = "Pages"
-    identifier = "pages"
-    name = "Pages"
+    page = "Reality Check"
+    identifier = "reality-check"
+    name= "Reality Check"
+    url = "/reality-check/"
+    weight = -180
+ [[menu.main]]
+    page = "Zuckless News"
+    identifier = "zuckless-news"
+    name = "Zuckless News"
+    url = "/zuckless-news/"
+    weight = -170
+ [[menu.main]]
+    page = "Analysis & Publications"
+    identifier = "analysis-and-publications"
+    name = "Analysis & Publications"
+    url = "/analysis-and-publications/"
+    weight = -160
+ [[menu.main]]
+    page = "More"
+    identifier = "more"
+    name = "More"
     url = "#"
     weight = -100
  [[menu.main]]
-    page = "Researcher"
-    identifier = "researcher"
-    name = "Researcher"
-    url = "/page/researcher/"
-    parent = "pages"
+    page = "About"
+    identifier = "about"
+    name = "About"
+    url = "/page/about/"
+    parent = "more"
     weight = -110
  [[menu.main]]
-    page = "Individual"
-    identifier = "Individual"
-    parent = "pages"
-    name = "Individual"
-    url = "/page/individual/"
+    page = "Data Activism"
+    identifier = "Data Activism"
+    parent = "more"
+    name = "Data Activism"
+    url = "/page/data-activism/"
     weight = -120
  [[menu.main]]
-    page = "data-activism"
-    identifier = "data-activism"
-    parent = "pages"
-    name = "Data activism"
-    url = "/page/data-activism/"
+    page = "API Documentation"
+    identifier = "api-documentation"
+    parent = "more"
+    name = "API Documentation"
+    url = "/page/api-documentation/"
     weight = -130
  [[menu.main]]
-    page = "Ethos"
-    identifier = "ethos"
-    name = "Goals and ethos"
-    parent = "pages"
-    url = "/page/ethos/"
+    page = "Get Involved"
+    identifier = "get-involved"
+    name = "Get Involved"
+    parent = "more"
+    url = "/page/get-involved/"
     weight = -140
- [[menu.main]]
-    page = "RSS"
-    identifier = "rss"
-    parent = "pages"
-    name = "Watch events"
-    url = "/page/rss/"
-    weight = -150
- [[menu.main]]
-    page = "Country"
-    identifier = "country"
-    name = "Countries"
-    url = "/country/"
-    weight = -160
- [[menu.main]]
-    page = "Language"
-    identifier = "language"
-    name = "Languages"
-    url = "/language/"
-    weight = -170
 
  [[menu.footer]]
     page = "get-the-extension"
     identifier = "get-the-extension"
     name = "Get the extension"
-    url = "/page/get-the-extension/"
+    url = "/background/get-the-extension/"
     weight = -110
- [[menu.footer]]
-     page = "Researcher"
-     identifier = "researcher"
-     name = "Researcher"
-     url = "/page/researcher/"
-     weight = -120
- [[menu.footer]]
-     page = "Individual"
-     identifier = "individual"
-     name = "Individual"
-     url = "/page/individual/"
-     weight = -130
- [[menu.footer]]
-     page = "data-activism"
-     identifier = "data-activism"
-     name = "Data activism"
-     url = "/page/data-activism/"
-     weight = -140
- [[menu.footer]]
-     page = "Ethos"
-     identifier = "ethos"
-     name = "Goals and ethos"
-     url = "/page/ethos/"
-     weight = -150
- [[menu.footer]]
-     page = "RSS"
-     identifier = "rss"
-     name = "Watch events horizontally"
-     url = "/page/rss/"
-     weight = -160

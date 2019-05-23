@@ -1,3 +1,8 @@
+---
+title: Problem
+draft: false
+---
+
 include hdrnavbar 
 .polite-propaganda
 

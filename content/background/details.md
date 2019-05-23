@@ -1,3 +1,8 @@
+---
+title: Details
+draft: false
+---
+
 include hdrnavbar
 .polite-propaganda
 

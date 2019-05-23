@@ -1,3 +1,8 @@
+---
+title: Glossary
+draft: false
+---
+
 include hdrnavbar
 .polite-propaganda
 
