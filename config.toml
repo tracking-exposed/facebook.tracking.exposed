@@ -50,7 +50,7 @@ canonifyURLs = true
     page = "About"
     identifier = "about"
     name = "About"
-    url = "/page/about/"
+    url = "/about/"
     parent = "more"
     weight = -110
  [[menu.main]]
@@ -58,26 +58,71 @@ canonifyURLs = true
     identifier = "Data Activism"
     parent = "more"
     name = "Data Activism"
-    url = "/page/data-activism/"
+    url = "/data-activism/"
     weight = -120
  [[menu.main]]
     page = "API Documentation"
     identifier = "api-documentation"
     parent = "more"
     name = "API Documentation"
-    url = "/page/api-documentation/"
+    url = "/api-documentation/"
     weight = -130
  [[menu.main]]
     page = "Get Involved"
     identifier = "get-involved"
     name = "Get Involved"
     parent = "more"
-    url = "/page/get-involved/"
+    url = "/get-involved/"
     weight = -140
+ [[menu.main]]
+    page = "Impact"
+    identifier = "impact"
+    name = "Impact"
+    parent = "more"
+    url = "/impact/"
+    weight = -150
+ [[menu.main]]
+    page = "What We Collect"
+    identifier = "what-we-collect"
+    name = "What We Collect"
+    parent = "more"
+    url = "/what-we-collect/"
+    weight = -150
+
 
  [[menu.footer]]
-    page = "get-the-extension"
-    identifier = "get-the-extension"
-    name = "Get the extension"
-    url = "/background/get-the-extension/"
-    weight = -110
+    page = "Background"
+    identifier = "background"
+    name = "Background"
+    url = "/background/"
+    weight = 100
+ [[menu.footer]]
+    page = "Details"
+    identifier = "details"
+    name = "Details"
+    url = "/background/details/"
+    weight = 110
+ [[menu.footer]]
+    page = "Glossary"
+    identifier = "glossary"
+    name = "Glossary"
+    url = "/background/glossary/"
+    weight = 120
+ [[menu.footer]]
+    page = "Problem"
+    identifier = "problem"
+    name = "Problem"
+    url = "/background/problem/"
+    weight = 130
+ [[menu.footer]]
+    page = "Solution"
+    identifier = "solution"
+    name = "Solution"
+    url = "/background/solution/"
+    weight = 140
+ [[menu.footer]]
+    page = "Summaries"
+    identifier = "summaries"
+    name = "Summaries"
+    url = "/background/summaries/"
+    weight = 150
