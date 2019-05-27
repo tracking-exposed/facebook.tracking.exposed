@@ -39,7 +39,6 @@ And if you can, please consider [donating](/donate/) ;)
 - Costantino Carugno, data analysis and advocate
 - Barbara Gianessi, editing and various help
 - Sophie Charleson, editing and communication
-- [Diego Luca Candido](https://github.com/joxer), SRE and monitoring
 
 
 ## Past Sponsor and Partners
