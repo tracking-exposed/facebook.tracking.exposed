@@ -1,12 +1,9 @@
 ---
 title: "About"
-date: 2019-04-03T22:04:22Z
 draft: false
 ---
 
-
 The team below is volunteer based. The project is managed as a GPL free software community, part of a larger plan: [tracking.exposed](https://tracking.exposed).
-
 
 ## Contacts:
 

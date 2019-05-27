@@ -1,5 +1,5 @@
 ---
-title: Learn More
+title: Background
 ---
 
 Facebook Tracking Exposed is the first project part of the [Tracking Exposed](https://tracking.exposed) umbrella, it started in Summer 2016 as concept, December 2016 the working prototype and here you can find the project status and vision updated to December 2018. It is Free Software project, get out our github repos: [browser extension](https://github.com/tracking-exposed/web-extension), [backend](https://github.com/tracking-exposed/facebook).

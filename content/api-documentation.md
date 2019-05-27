@@ -1,6 +1,5 @@
 ---
 title: "API Documentation"
-date: 2019-05-18T15:09:22+01:00
 draft: false
 ---
 

@@ -5,30 +5,37 @@ draft: false
 ---
 
 <div class="container">
-    ol
-        li Select a language among the various available. They comes from the public post scraped from Facebook, processed via 
-            a(href="https://dandelion.eu") dandelion.eu
-            |.
-        li Select one of the wikipedia 
-            a(href="/fbtrexRSS") voices matched in the last 7 days
-            |.
-        li Copy-Paste the RSS feed and subscribe using one of the many RSS readers
+    <ol>
+        <li>
+            Select a language among the various available. They comes from the public post scraped from Facebook, processed via 
+            <a href="https://dandelion.eu">dandelion.eu</a>
+        </li>
+        <li> Select one of the wikipedia 
+            <a href="/fbtrexRSS">voices matched in the last 7 days</a>
+        </li>
+        <li>
+            Copy-Paste the RSS feed and subscribe using one of the many RSS readers
+        </li>
+    </ol>
 </div>
 
-.container
-    div.col-md-12#available
+<div class="container">
+    <div class="col-md-12" id="available">
+    </div>
+</div>
 
-.container.center.hidden
-    br
-    span.labelt Language:
-    span.labelv#language
-    span.labelt Wikipedia voices:
-    span.labelv#counter
+<div class="container center hidden">
+    <span class="labelt">Language:</span>
+    <span class="labelv" id="language"></span>
+    <span class="labelt">Wikipedia voices:</span>
+    <span class="labelv" id="counter"></span>
+</div>
 
-.container.center.hidden
-    div.labelt#status
-    input(type="text" class="form-control" id="inputbar")
-
+<div class="container center hidden">
+    <div class="labelt" id="status">
+        <input type="text" class="form-control" id="inputbar">
+    </div>
+</div>
 
 ### [fbTREX RSS feed](https://facebook.tracking.exposed/rss/) has rolled out ahead of the 2019 European elections to empower citizens to educate themselves and each other based on a collective feed of information on various subjects.
 
