@@ -1,13 +1,14 @@
 baseURL = "https://facebook.tracking.exposed/"
 languageCode = "en-us"
-title = "Tracking Exposed"
+title = "Facebook Tracking Exposed"
 theme = "trex"
 enableRobotsTXT = true
 canonifyURLs = true
 [params]
-    subtitle = "facebook"
+    subtitle = "Facebook"
+    subsite = "facebook"
     description = "Facebook Tracking Exposed is a web browser addon that collects the stories visible in your Facebook News feed and a website that aggregates that data from all the users who have the addon installed. Our vision is to increase transparency behind personalization algorithms"
-    subsite = "true"
+    tagline = "If you don't pay for a product maybe you are the product."
     background = "#FFF"
     primary = "#3C5A96"
     primary_light = ""
@@ -17,9 +18,6 @@ canonifyURLs = true
 
 [permalinks]
     posts = "/:slug/"
-
-#sectionPagesMenu = "main"
-
 
 [menu]
  [[menu.main]]
@@ -89,6 +87,24 @@ canonifyURLs = true
     url = "/what-we-collect/"
     weight = -150
 
+ [[menu.featured]]
+    page = "Reality Check"
+    identifier = "reality-check"
+    name= "Reality Check"
+    url = "/reality-check/"
+    weight = -180
+ [[menu.featured]]
+    page = "Zuckless News"
+    identifier = "zuckless-news"
+    name = "Zuckless News"
+    url = "/zuckless-news/"
+    weight = -170
+ [[menu.featured]]
+    page = "Analysis & Publications"
+    identifier = "analysis-and-publications"
+    name = "Analysis & Publications"
+    url = "/analysis-and-publications/"
+    weight = -160
 
  [[menu.footer]]
     page = "Background"

@@ -2,6 +2,8 @@
 title: "Reality Check"
 date: 2019-04-03T22:04:22Z
 draft: false
+type: "app"
+permalink: /reality-check/ 
 ---
 
 ## Hi! it is 2018, and this project run over a major update cycle, but first:
