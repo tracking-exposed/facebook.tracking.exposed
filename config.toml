@@ -107,38 +107,43 @@ canonifyURLs = true
     weight = -160
 
  [[menu.footer]]
-    page = "Background"
-    identifier = "background"
-    name = "Background"
-    url = "/background/"
-    weight = 100
+    page = "executive-summary"
+    identifier = "executive-summary"
+    name = "Project Summary"
+    url = "/background/summary"
+    weight = -140
+
  [[menu.footer]]
-    page = "Details"
-    identifier = "details"
-    name = "Details"
-    url = "/background/details/"
-    weight = 110
- [[menu.footer]]
-    page = "Glossary"
-    identifier = "glossary"
+    page = "glossary"
+    identifier = "glossaty"
     name = "Glossary"
-    url = "/background/glossary/"
-    weight = 120
+    url = "/background/glossary"
+    weight = -130
+
  [[menu.footer]]
-    page = "Problem"
+    page = "problem"
     identifier = "problem"
-    name = "Problem"
-    url = "/background/problem/"
-    weight = 130
+    name = "Problem definition"
+    url = "/background/problem"
+    weight = -120
+
  [[menu.footer]]
-    page = "Solution"
+    page = "solution"
     identifier = "solution"
-    name = "Solution"
-    url = "/background/solution/"
-    weight = 140
+    name = "Mandate/Solution"
+    url = "/background/solution"
+    weight = -110
+
  [[menu.footer]]
-    page = "Summaries"
-    identifier = "summaries"
-    name = "Summaries"
-    url = "/background/summaries/"
-    weight = 150
+    page = "ethics"
+    identifier = "ethics"
+    name = "Our Ethics"
+    url = "/background/ethics"
+    weight = -100
+
+ [[menu.footer]]
+    page = "get-the-extension"
+    identifier = "get-the-extension"
+    name = "Get the extension"
+    url = "/background/get-the-extension/"
+    weight = -90
