@@ -1,4 +1,4 @@
-baseURL = "https://facebook.tracking.exposed/"
+baseURL = "https://testing.tracking.exposed/"
 languageCode = "en-us"
 title = "Facebook Tracking Exposed"
 theme = "trex"
