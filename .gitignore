@@ -2,3 +2,4 @@
 *.swo
 resources/
 themes/
+public/*
