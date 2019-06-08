@@ -2,7 +2,7 @@ const dev = true
 
 let url_feed = "https://facebook.tracking.exposed/feeds/0"
 if (dev) {
-    url_feed = "https://testing.tracking.exposed/feeds/0/"
+    url_feed = "https://testing.tracking.exposed/feeds/0"
 }
 
 function getToken() {

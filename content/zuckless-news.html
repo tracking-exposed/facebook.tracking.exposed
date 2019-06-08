@@ -1,0 +1,121 @@
+---
+title: "Zuckless News"
+date: 2019-01-30T15:09:22+01:00
+draft: false
+type: "app"
+---
+<div class="jumbotron facebook">
+    <div class="container mt-5 mb-5">
+        <h1>Zuckless News</h1>
+        <div id="choose-language" class="steps mb-5">
+            <h3 class="mb-3">
+                Select one of the following languages
+            </h3>
+            <ul id="available-languages" class="list-unstyled list-inline">
+            </ul>
+        </div>
+        <div id="choose-topic" class="steps mb-5 hidden">
+            <h3>
+                Start typing and choose from <strong id="counter"></strong> topics in <strong id="language"></strong>
+            </h3>
+            <div class="input-group">
+                <input type="text" data-provide="typeahead" class="form-control typeahead" id="input-topic">
+            </div>
+        </div>
+        <div id="copy-rss" class="steps hidden">
+            <h3>
+                <span id="language"></span> News Feed for <strong id="chosen-topic"></strong>
+            </h3>
+            <div class="form-group">
+                <label>
+                    Copy & paste this URL into an RSS news reader
+                </label>
+                <div id="rss-feed-url" class="input-group mb-2"></div>
+            </div>
+        </div>
+        <div id="error" class="steps hidden">
+            <h3>Oops</h3>
+            <p>Something is wrong with the our API. Please <a id="start-again" href="#">try again</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h2>How It Works</h2>
+
+    <h4 id="matched-voices">Matched Voices</h4>
+    <ul>
+        <li>All the supporters that have the browser extension installed observe
+            public posts</li>
+        <li>We pass the text observed to our partner: <a href="https://dandelion.eu">dandelion.eu</a></li>
+        <li>Dandelion analyzes the text and tries to discover which wikipedia
+            pages are related to it. For example, if someone mentions "we can
+            talk on hangout" Dandelion would recognize "Google" -- because
+            Hangouts is a Google product (and you shouldn't use it!)</li>
+        <li>These keywords are called "topics", and you choose which ones you
+            want to subscribe to</li>
+        <li>The RSS post is composed based on the metadata we successfully
+            extract from Facebook posts. This might have some problems, that's
+            why you might see this page.</li>
+    </ul>
+    <p>And we are working to improve it, as <a href="https://github.com/tracking-exposed/facebook">free software project</a></p>
+
+    <h4 id="what-is-rss">What is RSS?</h4>
+    <p>RSS is a format which delivers a disintermediated, chronologically-ordered feed for web content. It is often used by news sites and blogs because it enables readers to subscribe to receive updates about new content through RSS reader webapps or software.</p>
+    <p>For more information on the history and use of RSS versus social media, check out <a href="https://motherboard.vice.com/en_us/article/a3mm4z/the-rise-and-demise-of-rss">this article</a>.</p>
+
+    <h4 id="rss-readers">RSS Readers</h4>
+    <p>There are various RSS readers for various platforms, but here are some of the options to get you started:</p>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Cross-Platform</h5>
+            <ul>
+                <li><a href="https://feedly.com/">Feedly</a>: Webapp, iOS, Android. Proprietary. Requires registration, but not a valid email.<br />
+                </li>
+                <li><a href="https://getstream.io/winds/">Winds</a>: Pre-compiled binaries for Windows, OSX and GNU/Linux. Open source. Requires registration, but not a valid email.</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h5>Mac OS</h5>
+            <ul>
+                <li><a href="https://github.com/ViennaRSS/vienna-rss/releases/tag/v/3.5.3">ViennaRSS</a>: Pre-compiled binaries, compatible with Mojave. Open source.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Android</h5>
+            <ul>
+                <li><a href="https://play.google.com/store/apps/details?id=net.frju.flym&amp;hl=en_US">Flym</a>: FOSS alternative.</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h5>Other Resources</h5>
+            <ul>
+                <li>
+                    <a href="https://en.wikipedia.org/wiki/Comparison_of_feed_aggregators">
+                        Wikipedia's comparison of feed readers
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/topics/rss-reader">
+                        Readers available on github
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="/js/typeahead.bundle.min.js"></script>
+<script src="/js/global.js"></script>
+<script src="/js/zuckless-news.js"></script>
+<script>
+$(document).ready(function() {
+    loadLanguages();
+    $("#start-again").click(function() {
+        $(".steps").hide();
+        $("#choose-language").show();
+    });
+})
+</script>
