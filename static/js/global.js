@@ -1,6 +1,6 @@
-const dev = true
+const dev = false
 
-let url_feed = "https://facebook.tracking.exposed/feeds/0"
+let url_feed = "https://testing.tracking.exposed/feeds/0"
 if (dev) {
     url_feed = "https://testing.tracking.exposed/feeds/0"
 }
