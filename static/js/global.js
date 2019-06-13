@@ -25,5 +25,6 @@ buildApiUrl = function(end) {
 	end = end + ".json"
     }
 
-    return `${window.location.origin}/${api_path}/${end}`
+    console.log(`double check: URL composed ${window.location.origin}${api_path}${end}`);
+    return `${window.location.origin}${api_path}${end}`
 }
