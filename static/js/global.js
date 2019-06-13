@@ -22,6 +22,7 @@ buildApiUrl = function(end) {
     let api_path = "/api/v2"
     if (dev) {
         api_path = "/fixtures"
+	end = end + ".json"
     }
 
     return `${window.location.origin}/${api_path}/${end}`
