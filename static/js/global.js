@@ -25,7 +25,9 @@ var buildApiUrl = function(end) {
     let api_path = "/api/v2"
     if (dev) {
         api_path = "/fixtures"
+	end = end + ".json"
     }
 
-    return `${window.location.origin}/${api_path}/${end}`
+    console.log(`double check: URL composed ${window.location.origin}${api_path}${end}`);
+    return `${window.location.origin}${api_path}${end}`
 }
