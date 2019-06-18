@@ -1,0 +1,105 @@
+---
+title: "Reality Check"
+date: 2019-04-03T22:04:22Z
+draft: false
+type: "app"
+permalink: /reality-check/
+---
+<div id="reality-check" class="app">
+    <div class="container">
+        <div class="profile-left mt-3">
+            <div class="mb-3">
+                <div class="avatar mb-3">
+                    <img src="/images/zuck-congress.jpg">
+                </div>
+                <h1 class="mb-0">Alice B. Carol</h1>
+                <strong class="username">@alicebcarol</strong>
+            </div>
+
+            <div class="list-group list-group-flush mb-3">
+                <span>Filters By</span>
+                <button class="list-group-item list-group-item-action active" type="button" onclick="filterBy()">
+                    All Types
+                </button>
+                <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.posts')">
+                    Posts
+                </button>
+                <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.photo')">
+                    Pictures
+                </button>
+                <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.videos')">
+                    Videos
+                </button>
+                <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.groups')">
+                    Groups
+                </button>
+                <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.events')">
+                    Events
+                </button>
+                <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.advertisement')">
+                    Advertisements
+                </button>
+            </div>
+            <div class="list-group mb-5">
+                <span>Sort By</span>
+                <button class="list-group-item list-group-item-action" type="button" onclick="sortBy('date')">
+                    Date
+                </button>
+                <button class="list-group-item list-group-item-action" type="button" onclick="sortBy('author')">
+                    Author
+                </button>
+               <button class="list-group-item list-group-item-action" type="button" onclick="sortBy('type')">
+                   Type
+               </button>
+                <button class="list-group-item list-group-item-action" type="button" onclick="sortBy()">
+                    Original
+                </button>
+            </div>
+        </div>
+        <div class="feed-right ml-3">
+            <div class="masthead mb-3">
+                <div class="banner">
+                    <h1>Reality Check</h1>
+                </div>
+                <div class="actions pt-2 pl-2">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-light" href="#how-it-works">
+                            How It Works
+                        </a>
+                        <a class="btn btn-facebook" href="#check-your-reality">
+                            Check Your Reality
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="summary" class="col-md-8">
+                    <span>Real News Feed</span>
+                </div>
+                <div id="stats" class="col-md-4">
+                    <span>Topics</span>
+                    <div class="stats-item p-2">
+                        <p>The following are topics which Facebook thinks you
+                        want to constantly see every day:</p>
+                        <ul class="list-unstyled">
+                            <li>Cats</li>
+                            <li>Babies</li>
+                            <li>Love</li>
+                            <li>Justin Bieber</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<script src="/js/moment-with-locales.min.js"></script>
+<script src="/js/global.js"></script>
+<script src="/js/reality-check.js"></script>
+<script>
+$(document).ready(function() {
+    initializeSummary();
+    //initializeStats();
+});
+</script>
