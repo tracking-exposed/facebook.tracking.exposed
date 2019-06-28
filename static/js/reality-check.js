@@ -7,7 +7,7 @@ function initializeToken() {
 
 function initializeSummary() {
   const token = getToken();
-  const url = buildApiUrl(`/personal/${token}/summary.json`);
+  const url = buildApiUrl(`/personal/${token}/summary`);
 
   $.getJSON(url, (data) => {
     console.log(`Retrived ${_.size(data)} objects`);

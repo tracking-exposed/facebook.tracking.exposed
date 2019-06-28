@@ -5,6 +5,7 @@ draft: false
 type: "app"
 permalink: /reality-check/
 ---
+<link rel="stylesheet" href="/css/c3.min.css">
 <div id="reality-check" class="app">
     <div class="container">
         <div class="profile-left mt-3">
@@ -72,11 +73,19 @@ permalink: /reality-check/
                     </div>
                 </div>
             </div>
+            <div class="container-c3 p-2 mb-3">
+                <div id="chart"></div>
+            </div>
             <div class="row">
                 <div id="summary" class="col-md-8">
                     <span>Real News Feed</span>
                 </div>
                 <div id="stats" class="col-md-4">
+                    <span>Todays Use</span>
+                    <div class="stats-item p-2 mb-3">
+                        <div id="piechart"></div>
+                    </div>
+
                     <span>Topics</span>
                     <div class="stats-item p-2">
                         <p>The following are topics which Facebook thinks you
@@ -95,11 +104,79 @@ permalink: /reality-check/
     </div>
 </div>
 <script src="/js/moment-with-locales.min.js"></script>
+<script src="/js/d3.min.js"></script>
+<script src="/js/c3.min.js"></script>
 <script src="/js/global.js"></script>
 <script src="/js/reality-check.js"></script>
 <script>
 $(document).ready(function() {
     initializeSummary();
     //initializeStats();
+
+    var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+            columns: [
+                ['data1', 30, 200, 100, 400, 150, 250],
+                ['data2', 50, 20, 10, 40, 15, 25]
+            ]
+        }
+    });
+
+    var piechart = c3.generate({
+        bindto: '#piechart',
+        data: {
+            columns: [
+                ['data1', 30],
+                ['data2', 120],
+            ],
+            type: 'pie',
+            onclick: function(d, i) {
+                console.log("onclick", d, i);
+            },
+            onmouseover: function(d, i) {
+                console.log("onmouseover", d, i);
+            },
+            onmouseout: function (d, i) {
+                console.log("onmouseout", d, i);
+            }
+        }
+    });
+
+    setTimeout(function () {
+        piechart.load({
+            columns: [
+                ["setosa",
+                0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2,
+                0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5,
+                0.2, 0.2, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.1, 0.2, 0.2, 0.2,
+                0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2,
+                0.2, 0.2],
+                ["versicolor",
+                1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5,
+                1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2,
+                1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6,
+                1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3,
+                1.1, 1.3],
+                ["virginica",
+                2.5, 1.9, 2.1, 1.8, 2.2, 2.1, 1.7, 1.8, 1.8, 2.5, 2.0, 1.9,
+                2.1, 2.0, 2.4, 2.3, 1.8, 2.2, 2.3, 1.5, 2.3, 2.0, 2.0, 1.8,
+                2.1, 1.8, 1.8, 1.8, 2.1, 1.6, 1.9, 2.0, 2.2, 1.5, 1.4, 2.3,
+                2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0,
+                2.3, 1.8],
+            ]
+        });
+    }, 1500);
+
+    setTimeout(function () {
+        piechart.unload({
+            ids: 'data1'
+        });
+        piechart.unload({
+            ids: 'data2'
+        });
+    }, 2500);
+
+
 });
 </script>
