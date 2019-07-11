@@ -1,10 +1,9 @@
 ---
-title: Project Summaries
-subtitle: opening, executive problem, executive solution
+title: Executive Summary
+subtitle: executive summary, executive problem, executive solution
 draft: false
 ---
 
-#### Executive Summary
 fbTREX is a tool to empower citizens facing the opaqueness of Automated Decision Making in their life. We address Facebook as the first platform, because the personal and social impact of News Feed algorithms is, in our opinion, one of the most significant violations of freedom of our time.
 
 It wants also explore the benefits of public owned datasets, collect forensically valid evidence to exert their rights, and works with the Academy, to educate people on algorithm influence. 
@@ -33,4 +32,9 @@ The research questions of these analyses are to better understand how the platfo
 
 We will visualize the differences for the user in an easy to understand way. On top of this educational  experience, we want to implement  accessible interfaces and design to allow users to experiment with different algorithms. An algorithm is a form of prioritization which is going to stay in our lives; we want to let users experiment with their data to see if they can develop a better algorithm than Facebook. It might seem like an impossible task due to the unmatchable capacity of the two entities. Still, we have a chance: as free-willed human beings, we are curious and often change, especially when we add input received outside social networks and bring them back into our online activities- and this curiosity can be/should be reflected in our interactions within social networks. We believe that a more personalized  algorithm "owned" by users might eventually perform differently than Facebook, but the users can pick the most appropriate use in different situations within  daily life. fbTREX offers a new potential reality of how users and algorithms can co-exist, by allowing users agency and ownership over the algorithm, and letting users experiment with all of the potential alternatives for social interactions, information, and news that an algorithm can display. Display the possibility, suggest a new potential, let imagine a new reality. Show the power of the algorithm, let the user experiment with alternatives.
 
-We say "perform differently" and not "perform worse than Facebook" because, better or worse is a matter of metrics. To be clear, we are exploring this metric; our first scientific publication and the first initial months of research have been used to explore how we can measure algorithms, which is necessary before we  start to develop any kind of replacement.
+We say "_perform differently_" and not "_perform better than Facebook_" because, better or worse is a matter of metrics. To be clear, we are exploring this metric; our first scientific publication and the first initial months of research have been used to explore how we can measure algorithms, which is necessary before we  start to develop any kind of replacement.
+
+#### as .pdf
+
+You can download the 15 pages of [Project vision and status](https://github.com/tracking-exposed/presentation/raw/master/fbTREX%20-%20project%20status%20and%20analysis%20-%20December%202018.pdf) in .pdf, it has been released in winter 2018. 
+

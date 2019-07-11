@@ -104,40 +104,35 @@ canonifyURLs = true
     page = "executive-summary"
     identifier = "executive-summary"
     name = "Project Summary"
-    url = "/background/summary"
+    url = "/background/executive-summaries"
     weight = -140
-
  [[menu.footer]]
     page = "glossary"
-    identifier = "glossaty"
+    identifier = "glossary"
     name = "Glossary"
     url = "/background/glossary"
     weight = -130
-
  [[menu.footer]]
     page = "problem"
     identifier = "problem"
     name = "Problem definition"
     url = "/background/problem"
     weight = -120
-
  [[menu.footer]]
     page = "solution"
     identifier = "solution"
-    name = "Mandate/Solution"
+    name = "Our solution and mandate"
     url = "/background/solution"
     weight = -110
-
  [[menu.footer]]
     page = "ethics"
     identifier = "ethics"
-    name = "Our Ethics"
+    name = "Ethics"
     url = "/background/ethics"
     weight = -100
-
  [[menu.footer]]
     page = "get-the-extension"
     identifier = "get-the-extension"
-    name = "Get the extension"
-    url = "/background/get-the-extension/"
+    name = "Join us!"
+    url = "/join"
     weight = -90
