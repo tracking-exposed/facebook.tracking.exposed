@@ -1,11 +1,13 @@
 ---
 title: Glossary
+layout: page
 draft: false
 ---
 
 The definitions below are intended for a non-expert audience which wants to understand the fbTREX project vision. If you want to complain about the accuracy, most likely is because you are not the intended audience. This text has been written by a person without your technical knowledge, on the pourpose to be clear for readers with the same background.
 
 #### Dataset
+
 A data set (or dataset) is a collection of [data](https://en.wikipedia.org/wiki/Data). Most commonly a data set corresponds to the contents of a [single database table](https://en.wikipedia.org/wiki/Table_(database)).
 
 We use the word dataset to reference the fbTREX dataset = the data we have collected through the collective observation of the Facebook timeline. The dataset is one of the ways to measure our adoption ratio. In [the 'open stats' page](/impact), few basic statistics explain how and what we are collecting, in the building of this dataset.
