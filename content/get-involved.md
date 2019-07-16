@@ -5,24 +5,21 @@ draft: false
 
 There are three degree you can be involved with the project, you'll be mentioned on the [about](/about) page when you reach the third.
 
-
-## First step: know a bit of us
-
-{{<colorblock text="First step" >}}
+{{<colorblock text="First step: know as bit of us" >}}
 
 Read our most recent publications marked as [articles](/analysis-and-publication), they are the shortest. If you want to read also 'longform' or 'videos', you welcome!
 
-{{<box color="secondary" text="Install the browser extension." >}}
+{{<colorblock color="secondary" text="Find a friend, install together the browser extension." >}}
 
-You should install if for yourself and for a friend.
-This is not a joke =) engage with a friend you'll test your ability of talking about the project, and you'll understand what is not correctly explained by us. Plus, you'll test how much you want to really be dedicated on this. At the end: you are the one who wants to join.
+Engage with a friend you'll test your ability of talking about the project, and you'll understand what is not correctly explained by us.
+
+Plus, you'll test how much you want to really be dedicated on this. At the end: you are the one who wants to join.
 
 If you don't have Facebook (**congraturation!**) you should create a dummy profile. You might find helpful these notes on how to [how to create a research persona](/research-persona).
 
-
 {{- partial "get-fb-extension.html" . -}}
 
-## Second step: get into the process
+{{<colorblock text="Second step: get into the process." >}}
 
 Join our mattermost channel, say helo.
 
@@ -34,10 +31,15 @@ Based on your experience made at the first step if you found something unclear, 
 
 Please! Read carefully the existing open tickets, what is listed there would be addressed with a certain time, and then reported in our [monthly report](https://tracking.exposed/monthly). In the mattermost channel we can have a discussion about your issue, before you open it on github.
 
-## Third step: active role
+{{<colorblock text="Third step: take an active role." >}}
 
-* TODO
+Now is time for you to specialize and do what you might originally looked for:
 
-### The issue with volunteers 
+* Algorithm analysis? figuring out the proper research question TODO
+* Community Support?
+* Outreach and communication?
 
-They require time. knowledge transfert, weekly support, constant updates. We are trying to build a self-sustaining system, and there is not a cookbook because every community is different.
+### Conclusion: complexity in volunteering 
+
+It require time and planning from our side. We should do knowledge transfert, weekly support, constant updates. The goal is having new people which shares our value and become independent in actions. We should aim to an inclusive, growing self-sustaining system, and there is not a cookbook because every community is different.
+
