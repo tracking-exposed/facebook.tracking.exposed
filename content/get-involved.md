@@ -17,15 +17,15 @@ Plus, you'll test how much you want to really be dedicated on this. At the end: 
 
 If you don't have Facebook (**congraturation!**) you should create a dummy profile. You might find helpful these notes on how to [how to create a research persona](/research-persona).
 
-{{- partial "get-fb-extension.html" . -}}
+{{< fb-extension >}}
 
 {{<colorblock text="Second step: get into the process." >}}
 
 Join our mattermost channel, say helo.
 
-Based on your experience made at the first step if you found something unclear, you need to open a github account (is the only way to interact with the software project), 
+Based on your experience made at the first step if you found something unclear, you need to open a github account (is the only way to interact with the software project),
 
-* **You found a content problem?** such as expression, English grammar, broken links, or missing pieces? You should [create a new issue](https://github.com/tracking-exposed/facebook.tracking.exposed/issues), describe the change you expect and why it matters. 
+* **You found a content problem?** such as expression, English grammar, broken links, or missing pieces? You should [create a new issue](https://github.com/tracking-exposed/facebook.tracking.exposed/issues), describe the change you expect and why it matters.
 * If you find any limit **is the brwoser extension**, [create an issue on the appropriate repository](https://github.com/tracking-exposed/web-extension/issues), that package is mostly javascript code.
 * If analysis, API or metadata format are broken to you, reach out [in simple English](https://github.com/tracking-exposed/facebook/issues).
 
@@ -39,7 +39,6 @@ Now is time for you to specialize and do what you might originally looked for:
 * Community Support?
 * Outreach and communication?
 
-### Conclusion: complexity in volunteering 
+### Conclusion: complexity in volunteering
 
 It require time and planning from our side. We should do knowledge transfert, weekly support, constant updates. The goal is having new people which shares our value and become independent in actions. We should aim to an inclusive, growing self-sustaining system, and there is not a cookbook because every community is different.
-

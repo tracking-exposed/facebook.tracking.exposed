@@ -5,16 +5,19 @@ draft: false
 ---
 
 
-### 2019 Coming soon
+### 2019
 
+{{<filterbox kind="article" link="https://eu19.tracking.exposed" desc="European Election Algorithm analysis">}}
+
+- Release of [eu19.tracking.exposed](https://eu19.tracking.exposed), describe
 - European electoral campaign monitoring:
-  [high level project description](https://github.com/tracking-exposed/presentation/blob/master/European%20Election%20action%20plan%20-%20v1.3.pdf).
+  [high level project description](https://github.com/tracking-exposed/presentation/blob/master/European%20Election%20action%20plan%20-%20v1.3.pdf)
 
 
 ### 2018 Publications
 
 - **PEVA/Performance** Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman - [Fairness in online social network timelines: Measurements, models and mechanism design](https://eduardohargreaves.files.wordpress.com/2018/11/fairness_arxiv.pdf)
-- I Performance Evaluation (2018). DOI:10.1016/j.peva.2018.09.009 [arXiv](https://arxiv.org/pdf/1809.05530.pdf) 
+- I Performance Evaluation (2018). DOI:10.1016/j.peva.2018.09.009 [arXiv](https://arxiv.org/pdf/1809.05530.pdf)
 
 ```
 @article{
@@ -38,7 +41,7 @@ draft: false
 }
 ```
 
-- Fosint-SI, Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman; 
+- Fosint-SI, Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman;
   [Biases in the Facebook News Feed: a Case Study on the Italian Elections](https://arxiv.org/pdf/1807.08346.pdf), Fosint-SI 2018, in conjunction with ASONAM 2018, Proceedings of the 2018 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining
 - [ASONAM](https://arxiv.org/pdf/1807.08346.pdf) DOI:10.1109/ASONAM.2018.8508659
 
@@ -70,7 +73,7 @@ draft: false
 }
 ```
 
-- Brasnam, Eduardo Hargreaves, Daniel Sadoc Menasché, Giovanni Neglia, and Claudio Agosti, 
+- Brasnam, Eduardo Hargreaves, Daniel Sadoc Menasché, Giovanni Neglia, and Claudio Agosti,
   [Visibilidade no Facebook: Modelos, Medições e Implicações, in:](https://eduardohargreaves.files.wordpress.com/2018/07/visibilidade-facebook-modelos-7.pdf)
   Proceedings of the Brazilian Workshop on Social Network Analysis and Mining
 
@@ -98,17 +101,17 @@ draft: false
 
 ### 2018 - publications with NGO
 
-- TacticalTech publish a report written by Claudio Agosti and Fabio Chiusi, on 
-  [Italian political election and digital propaganda](https://ourdataourselves.tacticaltech.org/posts/overview-italy/). FbTREX data, released in 
+- TacticalTech publish a report written by Claudio Agosti and Fabio Chiusi, on
+  [Italian political election and digital propaganda](https://ourdataourselves.tacticaltech.org/posts/overview-italy/). FbTREX data, released in
   [this repository](https://github.com/tracking-exposed/experiments-data/tree/master/e18), have been used in a portion of the report.
-- WebFoundation released a report produced by a joint collaboration: 
+- WebFoundation released a report produced by a joint collaboration:
     [The invisible curation of content](https://webfoundation.org/research/the-invisible-curation-of-content-facebooks-news-feed-and-our-information-diets/).
-- For the Italian elections 2018 has been made a dedicated campaign, with this dedicated website (in italian) 
-  [elezioni.tracking.exposed](https://elezioni.tracking.exposed) some English blogpost commenting on the analysis are: 
-  [Methodology / Background](https://medium.com/@trackingexposed/facebook-tracking-exposed-background-80e0f72e615f), 
-  [how we test Facebook algorithm](https://medium.com/@trackingexposed/testing-facebook-algorithm-in-an-electoral-campaign-methodology-e7f886776890), 
-  [first observation of algorithm influence](https://medium.com/@trackingexposed/first-sighting-of-facebook-algorithmic-influence-9e6a0a70781b), 
-  [when an algorithm is fair? judging discrimination](https://medium.com/@trackingexposed/judging-algorithm-discrimination-faee15989be), 
+- For the Italian elections 2018 has been made a dedicated campaign, with this dedicated website (in italian)
+  [elezioni.tracking.exposed](https://elezioni.tracking.exposed) some English blogpost commenting on the analysis are:
+  [Methodology / Background](https://medium.com/@trackingexposed/facebook-tracking-exposed-background-80e0f72e615f),
+  [how we test Facebook algorithm](https://medium.com/@trackingexposed/testing-facebook-algorithm-in-an-electoral-campaign-methodology-e7f886776890),
+  [first observation of algorithm influence](https://medium.com/@trackingexposed/first-sighting-of-facebook-algorithmic-influence-9e6a0a70781b),
+  [when an algorithm is fair? judging discrimination](https://medium.com/@trackingexposed/judging-algorithm-discrimination-faee15989be),
   [Facebook stab online News Media twice](https://medium.com/@trackingexposed/facebook-stab-online-media-twice-3bd751dbd819), and
-  [how FB algorithm insulates fascists from reality](https://medium.com/@trackingexposed/the-iron-bubble-or-how-the-facebook-algorithm-insulates-fascists-from-reality-d36739b0758b). Plus, this is in Italian 
+  [how FB algorithm insulates fascists from reality](https://medium.com/@trackingexposed/the-iron-bubble-or-how-the-facebook-algorithm-insulates-fascists-from-reality-d36739b0758b). Plus, this is in Italian
   [Takeaways tattici sull'informazione politica social driven](https://medium.com/@cirku17/takeaways-tattici-sullinformazione-politica-social-driven-7514b9d8f3d7).
