@@ -88,18 +88,24 @@ canonifyURLs = true
     name= "Reality Check"
     url = "/reality-check/"
     weight = -180
+    pre = "/images/fb-reality-check.png"
+    post = "Check the reality Facebook thinks you should be seeing in your feed"
  [[menu.featured]]
     page = "Zuckless News"
     identifier = "zuckless-news"
     name = "Zuckless News"
     url = "/zuckless-news/"
     weight = -170
+    pre = "/images/fb-zuckless-news.png"
+    post = "Create and read custom news feeds based on topics without the Zuck"
  [[menu.featured]]
     page = "Analysis & Publications"
     identifier = "analysis-and-publications"
     name = "Analysis & Publications"
     url = "/analysis-and-publications/"
     weight = -160
+    pre = "/images/fb-analysis-and-publications.png"
+    post = "Browse our analsis and publications of Facebooks algorithms"
 
  [[menu.footer]]
     page = "executive-summary"
