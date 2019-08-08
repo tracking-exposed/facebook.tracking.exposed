@@ -39,7 +39,7 @@ As soon as we have data that finally show us the effects of the algorithm, we ar
 
 We [documented](https://webfoundation.org/research/the-invisible-curation-of-content-facebooks-news-feed-and-our-information-diets/) our tests, published [research](https://www.privacyinternational.org/examples/data-exploitation-italian-elections), released [open data](https://github.com/tracking-exposed/experiments-data), and inspired new [publications](https://eduardohargreaves.files.wordpress.com/2018/11/fairness_arxiv.pdf). It is interesting to note how the data that Facebook released to its researchers never allowed for such analysis.
 
-{{< colorblock text="The fight against the abuse of political ads was to be done in 2015, now what?" >}}
+{{<colorblock text="The fight against the abuse of political ads was to be done in 2015, now what?" >}}
 
   * Because of the media coverage and the imaginary created by the triad "Brexit, Donald Trump and Russian Bots", most of research is now focused on disinformation, bots and political advertising.
   * Having had the EU Parliament as well as the American and UK Congresses interrogating Mark Zuckerberg regarding political advertisement, as well as having had two years of activity by Facebook PR about not allowing political propaganda abuse anymore, it's a sign that an institutional effort, as well as a response by the company, already took place.

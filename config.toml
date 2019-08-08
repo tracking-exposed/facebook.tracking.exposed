@@ -9,7 +9,7 @@ canonifyURLs = true
     openGraphSiteName = "Facebook Tracking Exposed"
     subsite = "facebook"
     description = "Facebook Tracking Exposed is a web browser addon that collects the stories visible in your Facebook News feed and a website that aggregates that data from all the users who have the addon installed. Our vision is to increase transparency behind personalization algorithms"
-    tagline = "We challenge Facebook algorithm hegemony by empowering social media users and researchers."
+    tagline = "Individual should be in control of their algorithm"
 
 [permalinks]
     posts = "/:slug/"
@@ -105,7 +105,7 @@ canonifyURLs = true
     url = "/analysis-and-publications/"
     weight = -160
     pre = "/images/fb-analysis-and-publications.png"
-    post = "Browse our analsis and publications of Facebooks algorithms"
+    post = "Browse our analysis and publications on the Facebooks algorithm"
 
  [[menu.footer]]
     page = "executive-summary"
