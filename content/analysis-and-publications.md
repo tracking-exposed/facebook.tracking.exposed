@@ -4,114 +4,50 @@ date: 2019-04-01T15:32:40+01:00
 draft: false
 ---
 
-
-### 2019
-
-{{<filterbox kind="article" link="https://eu19.tracking.exposed" desc="European Election Algorithm analysis">}}
-
-- Release of [eu19.tracking.exposed](https://eu19.tracking.exposed), describe
-- European electoral campaign monitoring:
-  [high level project description](https://github.com/tracking-exposed/presentation/blob/master/European%20Election%20action%20plan%20-%20v1.3.pdf)
+<h3 style="text-align:center;padding-top:1em;padding-bottom:1em;" class="highlight secondary">
+    2019
+    <a href="#2018">2018</a>
+    <a href="#2017">2017</a>
+</h3>
 
 
-### 2018 Publications
+{{<resource kind="video" title="Transmediale: unboxing ex-machina" when="February"  description="The video linked contains only our 24 minutes, but the whole panel discussion was including other challenges from different perspectives on how social media platform affects society." href="https://vimeo.com/322250610" >}}
+<!-- vimeo video as attachment, original event as primary link, like CPDP -->
 
-- **PEVA/Performance** Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman - [Fairness in online social network timelines: Measurements, models and mechanism design](https://eduardohargreaves.files.wordpress.com/2018/11/fairness_arxiv.pdf)
-- I Performance Evaluation (2018). DOI:10.1016/j.peva.2018.09.009 [arXiv](https://arxiv.org/pdf/1809.05530.pdf)
+{{<resource kind="event" title="How to unmask and fight online manipulation" when="February"  description="EDPS working group against misinformation. fbTREX highlight how research can use it and assess proper rensponsabilities to the actors in the misinformation chain. Platform are not neutral, we were looking how algorithm affects the information flows." href="https://www.eudebates.tv/eu_elections_2019/edps-for-eu-elections-how-to-unmask-and-fight-online-manipulation/" >}}
 
-```
-@article{
-    Hargreaves2018fairness,
-    author = {
-        Hargreaves,
-        Eduardo and Agosti,
-        Claudio and Menasch{\'{e}},
-        Daniel and Neglia,
-        Giovanni and Reiffers-Masson,
-        Alexandre and Altman,
-        Eitan
-    },
-    doi = {10.1016/j.peva.2018.09.009},
-    issn = {01665316},
-    journal = {Performance Evaluation},
-    title = {{
-        Fairness in online social network timelines: Measurements, models and mechanism design
-    }},
-    year = {2018}
-}
-```
+{{<resource kind="event" title="CPDP:Safeguarding elections an international problem with no internatioanl solution" when="January" description="Coordinated by TacticalTech, in this panel we discussed issue on election" href="https://www.cpdpconferences.org/cpdp-panels/data-and-elections-an-international-problem-with-no-international-solution" resources="https://vimeo.com/317686100">}}
 
-- Fosint-SI, Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman;
-  [Biases in the Facebook News Feed: a Case Study on the Italian Elections](https://arxiv.org/pdf/1807.08346.pdf), Fosint-SI 2018, in conjunction with ASONAM 2018, Proceedings of the 2018 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining
-- [ASONAM](https://arxiv.org/pdf/1807.08346.pdf) DOI:10.1109/ASONAM.2018.8508659
+{{<resource kind="event" title="PrivacyCamp: Towards real safeguards: Data driven political campaigns and EU election" when="January" description="Ides, options, quick exchange of stuff" href="https://privacycamp.eu/?page_id=1067" resources="">}}
 
-```
-@inproceedings{
-    Hargreaves2018bias,
-    author = {
-        Hargreaves,
-        Eduardo and Agosti,
-        Claudio and Menasche,
-        Daniel and Neglia,
-        Giovanni and Reiffers-Masson,
-        Alexandre and Altman,
-    Eitan},
-    booktitle = {
-        2018 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining (ASONAM)
-    },
-    doi = {10.1109/ASONAM.2018.8508659},
-    isbn = {978-1-5386-6051-5},
-    month = {aug},
-    number = {Section IV},
-    pages = {806--812},
-    publisher = {IEEE},
-    title = {{
-        Biases in the Facebook News Feed: A Case Study on the Italian Elections
-    }},
-    url = {https://ieeexplore.ieee.org/document/8508659/},
-    year = {2018}
-}
-```
+{{<resource kind="link" link="https://eu19.tracking.exposed" title="European Election Algorithm analysis" description="a investigation campaign on how algorithms affects public debate. It's REPLICABLE. an experiment on how to build focus campaing and analysis. Usable in moment of high attention and concerns" resources="https://github.com/tracking-exposed/presentation/blob/master/European%20Election%20action%20plan%20-%20v1.3.pdf" >}}
 
-- Brasnam, Eduardo Hargreaves, Daniel Sadoc Menasché, Giovanni Neglia, and Claudio Agosti,
-  [Visibilidade no Facebook: Modelos, Medições e Implicações, in:](https://eduardohargreaves.files.wordpress.com/2018/07/visibilidade-facebook-modelos-7.pdf)
-  Proceedings of the Brazilian Workshop on Social Network Analysis and Mining
+## 2018
 
-  [BraSNAM](https://eduardohargreaves.files.wordpress.com/2018/07/visibilidade-facebook-modelos-7.pdf) Natal, Rio Grande do Norte, Brasil. Julho, 2018
-  [file](http://portaldeconteudo.sbc.org.br/index.php/brasnam/article/view/3591)
+{{<resource kind="paper" title="[Fairness in online social network timelines: Measurements, models and mechanism design" description="I Performance Evaluation (2018). DOI:10.1016/j.peva.2018.09.009" href="https://arxiv.org/pdf/1809.05530.pdf" authors="PEVA/Performance Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman" resources="https://eduardohargreaves.files.wordpress.com/2018/11/fairness_arxiv.pdf" >}}
 
-```
-@article{
-    brasnam,
-    author = {
-        Eduardo Hargreaves,
-        Daniel Menasché,
-        Giovanni Neglia,
-        Claudio Agosti
-    },
-    title = {Visibilidade no Facebook: Modelos, Medições e Implicações},
-    journal = {Brazilian Workshop on Social Network Analysis and Mining (BraSNAM_CSBC)},
-    volume = {7},
-    number = {1/2018},
-    year = {2018},
-    issn = {2595-6094},
-    url = {http://portaldeconteudo.sbc.org.br/index.php/brasnam/article/view/3591}
-}
-```
+{{<resource kind="paper" title="Biases in the Facebook News Feed: a Case Study on the Italian Elections" description="Fosint-SI 2018, in conjunction with ASONAM 2018, Proceedings of the 2018 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining" href="https://arxiv.org/pdf/1807.08346.pdf" resources="DOI:10.1109/ASONAM.2018.8508659" authors="Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman"  >}}
 
-### 2018 - publications with NGO
+{{<resource kind="paper" title="Visibilidade no Facebook: Modelos, Medições e Implicações" description="Proceedings of the Brazilian Workshop on Social Network Analysis and Mining" href="https://eduardohargreaves.files.wordpress.com/2018/07/visibilidade-facebook-modelos-7.pdf" authors="Brasnam, Eduardo Hargreaves, Daniel Sadoc Menasché, Giovanni Neglia, and Claudio Agosti" resources="http://portaldeconteudo.sbc.org.br/index.php/brasnam/article/view/3591)">}} 
 
-- TacticalTech publish a report written by Claudio Agosti and Fabio Chiusi, on
-  [Italian political election and digital propaganda](https://ourdataourselves.tacticaltech.org/posts/overview-italy/). FbTREX data, released in
-  [this repository](https://github.com/tracking-exposed/experiments-data/tree/master/e18), have been used in a portion of the report.
-- WebFoundation released a report produced by a joint collaboration:
-    [The invisible curation of content](https://webfoundation.org/research/the-invisible-curation-of-content-facebooks-news-feed-and-our-information-diets/).
-- For the Italian elections 2018 has been made a dedicated campaign, with this dedicated website (in italian)
-  [elezioni.tracking.exposed](https://elezioni.tracking.exposed) some English blogpost commenting on the analysis are:
-  [Methodology / Background](https://medium.com/@trackingexposed/facebook-tracking-exposed-background-80e0f72e615f),
-  [how we test Facebook algorithm](https://medium.com/@trackingexposed/testing-facebook-algorithm-in-an-electoral-campaign-methodology-e7f886776890),
-  [first observation of algorithm influence](https://medium.com/@trackingexposed/first-sighting-of-facebook-algorithmic-influence-9e6a0a70781b),
-  [when an algorithm is fair? judging discrimination](https://medium.com/@trackingexposed/judging-algorithm-discrimination-faee15989be),
-  [Facebook stab online News Media twice](https://medium.com/@trackingexposed/facebook-stab-online-media-twice-3bd751dbd819), and
-  [how FB algorithm insulates fascists from reality](https://medium.com/@trackingexposed/the-iron-bubble-or-how-the-facebook-algorithm-insulates-fascists-from-reality-d36739b0758b). Plus, this is in Italian
-  [Takeaways tattici sull'informazione politica social driven](https://medium.com/@cirku17/takeaways-tattici-sullinformazione-politica-social-driven-7514b9d8f3d7).
+{{<resource kind="paper" title="Italian political election and digital propaganda" description="TacticalTech publish a report written by Claudio Agosti and Fabio Chiusi" href="https://ourdataourselves.tacticaltech.org/posts/overview-italy/)" resources="https://github.com/tracking-exposed/experiments-data/tree/master/e18" >}}
+
+
+{{<resource kind="paper" title="The invisible curation of content" description="WebFoundation released a report produced by a joint collaboration" href="https://webfoundation.org/research/the-invisible-curation-of-content-facebooks-news-feed-and-our-information-diets/" >}}
+
+{{<resource kind="link" title="Elezioni italiane 2018, un'analisi mirata alla scoperta degli spazi usati dall'algoritmo" href="https://italian.tracking.exposed" description="Una ricerca sviluppata con sei profili sotto il nostro controllo. Abbiamo diminuito le variabili utilizzabili dall'algoritmo ed abbiamo studiato come venivano servite le news in modo personalizzato" href="" resources="https://elezioni.tracking.exposed" >}}
+
+## 2017
+
+{{<resource kind="video" href="https://www.youtube.com/watch?v=ct9d-o7NrSg" title="(SHA2017) Exposing what Facebook wants you to see" description="A talk about our early version of fbTREX, after 1 year of existence" resources="https://github.com/tracking-exposed/presentation/blob/master/FBTREX-SHA-2017.pdf" >}}
+
+{{<resource kind="event" href="http://www.journalismfestival.com/programme/2017/exposing-what-facebook-wants-you-to-see" description="International Journalism Festival, Perugia" title="Panel discussion \"exposing what Facebook wants you to see\"" authors="Renata Avila, Federico Sarchi, Claudio Agosti" resources="https://www.youtube.com/watch?v=wpnmDz9Os50" >}} 
+
+{{<resource description="Toolbox Coworking, Turin" title="Torino Hack Night"  href="/talks-torinohacknight/" author="Constantino Carugno Gilberto Conti" >}}
+
+{{<resource kind="event" title="facebook.tracking.exposed project exposure" description="At c-base, Berlin, one of the first vidoe of fbTREX in the wild, when the beta version was going to start" href="https://vimeo.com/189842857" resources="/talks-netzpolitischer054/" author="Claudio Agosti" >}}
+
+{{<resource kind="event" title="facebook.tracking.exposed (project pitch)" description="Hack'n'Tell, at c-base, Berlin" href="https://docs.google.com/presentation/d/e/2PACX-1vR1Tz-G2fm9Nu0oe8lrAoG8aYCamT2kpZAn98B-AHP-ZNli88A4u5hOKrp-UMBDP4Iq2NP3Bl3xY0C5/pub?start=false&loop=false&slide=id.p" author="Alberto Granzotto" resources="we won a price and we should find evidence to link" >}}
+            
+{{<resource kind="event" title="facebook.tracking.exposed (code show-off)" description="At PyData" href="https://docs.google.com/presentation/d/1uDd2oNxWSOJPfm-Jrm0k-4SBS2BNAomfhF6Ef_609So/edit#slide=id.p" author="Alberto Granzotto" resources="we won a price and we should find evidence to link" author="Alberto Granzotto" >}}
+
