@@ -5,6 +5,64 @@ function initializeToken() {
   $('#token').text(token);
 }
 
+function initializeDaily() {
+  const token = getToken();
+  const url = buildApiUrl(`/personal/${token}/daily/today`);
+
+  $.getJSON(url, (data) => {
+    let daily = ''
+    _.forEach(data, function(item, count) {
+        console.log(item.nature)
+        let hasBorder = '';
+        if (count > 0 ) {
+            hasBorder = 'graph-day-border'
+        }
+
+        daily = `<div class="graph-day flex-fill pl-3 pr-3 ${hasBorder}">
+            <span class="text-muted">${moment(item.day).format('LL')}</span><br>
+            <span class="seconds">${Math.round(item.totalSeconds / 60)}</span><br>
+            Minutes Spent<br>
+            <div id="daily-pie-${count}" class="daily-pie"></div>
+            <p><span class="posts">${item.npost}</span><br>
+            Posts Read</p>
+            <a class="daily-details btn btn-light btn-block" href="#day-${item.day}">
+                See Details
+            </a>
+        </div>`;
+        $('#chat-daily').append(daily)
+
+        let pieId = `#daily-pie-${count}`;
+        let pieChart = c3.generate({
+            bindto: pieId,
+            data: {
+                columns: [
+                    ['organic', item.nature.organic],
+                    ['ads', item.nature.sponsored]
+                ],
+                type: 'pie',
+                labels: false
+            },
+            color: {
+                pattern: ['#3b5898', '#d9d9d9']
+            },
+            legend: {
+                show: false
+            },
+            size: {
+                height: 180,
+                width: 180
+            }
+        });
+    });
+
+    // Add details events
+    $('.daily-details').on('click', function() {
+        alert('will show details for: ' + $(this).attr('href'))
+    });
+  });
+}
+
+
 function initializeSummary() {
   const token = getToken();
   const url = buildApiUrl(`/personal/${token}/summary`);
@@ -89,6 +147,7 @@ function initializeSummary() {
   });
 };
 
+
 function initIsotope() {
   $grid = $('.grid').isotope({
     // set itemSelector so .grid-sizer is not used in layout
@@ -104,6 +163,44 @@ function initIsotope() {
       author: '.author',
     }
   });
+}
+
+
+function makeChartStacked() {
+    var chartstacked = c3.generate({
+        bindto: '#chart-stacked',
+        data: {
+            columns: [
+                ['data1', -30, 200, 200, 400, -150, 250],
+                ['data2', 130, 100, -100, 200, -150, 50],
+                ['data3', -230, 200, 200, -300, 250, 250]
+            ],
+            type: 'bar',
+            groups: [
+                ['data1', 'data2']
+            ]
+        },
+        grid: {
+            y: {
+                lines: [{value:0}]
+            }
+        }
+    })
+
+    setTimeout(function () {
+        chartstacked.groups([['data1', 'data2', 'data3']])
+    }, 1000);
+
+    setTimeout(function () {
+        chartstacked.load({
+            columns: [['data4', 100, -50, 150, 200, -300, -100]]
+        });
+    }, 1500);
+
+    setTimeout(function () {
+        chartstacked.groups([['data1', 'data2', 'data3', 'data4']])
+    }, 2000);
+
 }
 
 function filterBy(filter = '*') {
