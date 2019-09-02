@@ -5,11 +5,16 @@ draft: false
 
 ## Introduction
 
+
+### Shared concepts
+
 The main URL to access our API is:
 `https://facebook.tracking.exposed/api/v2/`.
 
-<br>`UserToken` is an unique identifier for you Facebook user. It's a 40-characters long hexadecimal string. You can retrieve it by clicking on "Your Data" when you open Facebook on the browser where you installed the Fbtrex extension. In the URL bar you will find the string. Just copy-paste it.<br>
+`UserToken` is an unique identifier for you Facebook user. It's a 40-characters long hexadecimal string. You can retrieve it by clicking on "Your Data" when you open Facebook on the browser where you installed the fbtrex extension. In the URL bar you will find the string. Just copy-paste it.
+
 `Paging` defines the number of entries that are retrieved by the API, as well as the number of entries to skip. For example, if you call `/200-50` at the end of a "Summary" query, you will get 200 entries and skip the 50 most recent ones. If you call `/2000-0` you will just get the 2000 most recent entries.
+
 ## API Index
 <table>
   <tr>
@@ -515,6 +520,30 @@ Response:<br>
 
 
 ****
+## <a name="daily"></a>Daily aggregated Statistics
+
+#### URL
+`https://facebook.tracking.exposed/api/v2/persona/daily/$PAGING`
+<br>
+#### Description
+Aggregated daily statistics on individual usage. It is used by realityCheck at the first visualization.
+
+#### Data Specifics
+
+
+#### Sample Usage
+Request:
+    `https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/daily/0-2`
+
+Response:<br>
+    ` {"content":{"impressions":15614360,"impressions_lw":162084,"aggregated":2673,"aggregated_lw":140,"labels":87946,"labels_lw":87946,"semantics":625307,"semantics_lw":625307,"anomalies":0,"anomalies_lw":0,"summary":1741653,"summary_lw":89911,"errors":52708,"errors_lw":52708,"metadata":1747629,"metadata_lw":89938,"htmls":9767659,"htmls_lw":110072,"accesses":215408,"accesses_lw":974,"timelines":1207216,"timelines_lw":12826,"supporters":3486,"supporters_lw":13},"computedt":"2019-04-23T13:53:34.254Z","next":"2019-04-23T13:55:34.254Z","cacheTimeSeconds":120}`
+
+
+****
+
+# Node API
+
+This API is meant for public statistics. They are aggregated and/or anonymized.
 
 ## <a name="counter"></a>General Statistics
 

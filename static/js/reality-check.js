@@ -1,5 +1,8 @@
 let $grid;
 
+/* in regards to the API used in this file, please consult
+ * the file in content/api-documentation.md */
+
 function initializeToken() {
   const token = getToken();
   $('#token').text(token);
@@ -7,7 +10,7 @@ function initializeToken() {
 
 function initializeDaily() {
   const token = getToken();
-  const url = buildApiUrl(`/personal/${token}/daily/today`);
+  const url = buildApiUrl(`/personal/${token}/daily/0-3`);
 
   $.getJSON(url, (data) => {
     let daily = ''
