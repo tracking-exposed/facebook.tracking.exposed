@@ -28,11 +28,11 @@ function initializeDaily() {
             <div id="daily-pie-${count}" class="daily-pie"></div>
             <p><span class="posts">${item.npost}</span><br>
             Posts Read</p>
-            <a class="daily-details btn btn-light btn-block" href="#day-${item.day}">
+            <a class="daily-details btn btn-light btn-block" href="#${item.day}">
                 See Details
             </a>
         </div>`;
-        $('#chat-daily').append(daily)
+        $('#daily-overview').append(daily)
 
         let pieId = `#daily-pie-${count}`;
         let pieChart = c3.generate({
@@ -60,8 +60,20 @@ function initializeDaily() {
 
     // Add details events
     $('.daily-details').on('click', function() {
-        alert('will show details for: ' + $(this).attr('href'))
+        console.log('will show details for: ' + $(this).attr('href'))
+        showSpecificDay($(this).attr('href').replace('#', ''));
     });
+
+    $('.daily-nav').on('click', function() {
+        alert('Browse ' + $(this).data('direction') + ' to: ' + $(this).data('date'))  
+    });
+
+    $('#daily-back').on('click', function() {
+        $('#daily-overview').removeClass('d-none').addClass('d-flex flex-row');
+        $('#daily-specific-topics').html('');
+        $('#daily-specific').addClass('d-none').find('h2').html('');
+    });
+
   });
 }
 
@@ -168,6 +180,70 @@ function initIsotope() {
   });
 }
 
+function showSpecificDay(day) { 
+    const token = getToken();
+    const url = buildApiUrl(`/personal/${token}/daily/${day}`);
+
+    $.getJSON(url, (data) => {
+        let dayViz = ''
+
+        $('#daily-overview').removeClass('d-flex flex-row').addClass('d-none');
+        $('#daily-specific').removeClass('d-none')
+            .find('h2').html('On ' + moment(day).format('LL'));
+
+        // Build topics
+        let topics = {}
+        _.forEach(data, function(item, count) {
+            _.forEach(item.l, function(term, count) {
+                if (topics[term]) {
+                    topics[term] = topics[term] + 1
+                } else {
+                    topics[term] = 1
+                }            
+            });
+        });
+
+        var counts = _.values(topics);
+        var uniques = _.uniq(counts).sort(function(a, b){return b-a});
+
+        _.forEach(uniques, function(num) {
+            if (num > 1) {
+            $('#daily-specific-topics').append(`<hr>
+            <div class="row">
+                <div class="col-3 text-center">
+                    <h2>${num}<span class="color-light">x</span></h2>
+                    Items
+                </div>
+                <div class="col-9">
+                    <ul id="topics-${num}" class="list-unstyled">
+                    </ul>
+                </div>
+            </div>`);
+            }
+        });
+
+        _.forEach(topics, function(count, term) {
+            if (count > 1) {
+                $('#topics-' + count).append(`
+                <li class="mb-3">
+                    <a class="daily-topic-browse" href="#${term}">${term}</a>
+                </li>`);
+            }
+        })
+
+        // Update navs
+        var startDate = moment(day);
+        var pastDay = startDate.subtract(1, 'days').format('YYYY-MM-DD');
+        var addDay = startDate.add(2, 'days').format('YYYY-MM-DD');
+        $('#daily-past').data('date', pastDay)
+        $('#daily-future').data('date', addDay)
+
+        // Topic
+        $('.daily-topic-browse').on('click', function() {
+            alert('Show topic: ' + $(this).attr('href'));
+        });
+    });
+}
 
 function makeChartStacked() {
     var chartstacked = c3.generate({
