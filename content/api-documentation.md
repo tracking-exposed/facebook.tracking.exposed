@@ -3,19 +3,26 @@ title: "API Documentation"
 draft: false
 ---
 
-## Introduction
-
+The API here documented are implemented in our [AGPL3 code](https://github.com/tracking.exposed/facebook).
 
 ### Shared concepts
 
-The main URL to access our API is:
+The base URL to access our API is:
 `https://facebook.tracking.exposed/api/v2/`.
 
-`UserToken` is an unique identifier for you Facebook user. It's a 40-characters long hexadecimal string. You can retrieve it by clicking on "Your Data" when you open Facebook on the browser where you installed the fbtrex extension. In the URL bar you will find the string. Just copy-paste it.
+There are some variables you need to have to perform a successful HTTP GET:
 
-`Paging` defines the number of entries that are retrieved by the API, as well as the number of entries to skip. For example, if you call `/200-50` at the end of a "Summary" query, you will get 200 entries and skip the 50 most recent ones. If you call `/2000-0` you will just get the 2000 most recent entries.
+`paging` defines the number of entries that are retrieved by the API, as well as the number of entries to skip. For example, if you call `/200-50` at the end of a "Summary" query, you will get 200 entries and skip the 50 most recent ones. If you call `/2000-0` you will just get the 2000 most recent entries.
+(_It is rate-limited, you can't download all the data with just one query_).
 
-## API Index
+# Personal API
+
+`userToken` is an unique identifier for you Facebook user. It's a 40-characters long hexadecimal string. You can retrieve it by clicking on "Your Data" when you open Facebook on the browser where you installed the fbtrex extension. In the URL bar you will find the string. Just copy-paste it.
+
+#### Special token for tests
+
+To help develpment, when you are lacking of a personal token, you can test the API using `thisisaworkingtokenusablewhenperformtest` in your API requests. The data returned are consistent and they belong to some of our non-personal profile.
+
 <table>
   <tr>
     <th>Name</th>
@@ -25,34 +32,27 @@ The main URL to access our API is:
   <tr>
     <td>Personal Summary</td>
     <td><a href=#summary>link</a></td>
-    <td>personal/userToken/summary/paging</td>
+    <td>personal/$userToken/summary/$paging</td>
   </tr>
   <tr>
     <td>Personal Stats</td>
     <td><a href=#personalstats>link</a></td>
-    <td>personal/userToken/stats/paging</td>
+    <td>personal/$userToken/stats/$paging</td>
   </tr>
   <tr>
-    <td>Personal Csv</td>
+    <td>Personal CSV</td>
     <td><a href=#csv>link</a></td>
-    <td>personal/userToken/csv/paging</td>
-
+    <td>personal/$userToken/csv/$paging</td>
   </tr>
   <tr>
     <td>Data Exporter</td>
     <td><a href=#exporter>link</a></td>
-    <td>personal/userToken/exporter/paging</td>
-
+    <td>personal/$userToken/exporter/$paging</td>
   </tr>
   <tr>
     <td>Delete your Data</td>
     <td><a href=#delete>link</a></td>
-    <td>personal/userToken/remove/paging</td>
-  </tr>
-  <tr>
-    <td>General Statistics</td>
-    <td><a href=#counter>link</a></td>
-    <td>statistics/counter</td>
+    <td>personal/$userToken/remove/$paging</td>
   </tr>
 </table>
 
@@ -219,14 +219,14 @@ Returns a summary of personal data of an user. `$YOUR_TOKEN` is your userToken, 
   </tr>
 </table>
 
-#### Sample Usage
-Request:
-    `https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/summary/1-0`
+#### Request
 
-Response:
+`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/summary/1-0`
 
-`[
-{
+#### Response
+
+```
+[{
 "impressionTime": "2019-04-19T18:06:49.000Z",
 "impressionOrder": 41,
 "semanticId": "7cd2480750f1cdb23215da6da4186b30cbe2f424",
@@ -261,14 +261,17 @@ Response:
 "LIKE": 29,
 "ANGRY": 18,
 "HAHA": 8
-}`
+},
+{}]
+```
+
 ****
 
 ## <a name="personalstats"></a>Personal Stats
 
 #### URL
 `https://facebook.tracking.exposed/api/v2/personal/$YOUR_TOKEN/stats/$AMOUNT-$SKIP`
-<br>
+
 #### Description
 Returns a list of timelines for the user, including a count for the number of impression and all the data contained in summary.
 `$YOUR_TOKEN` is your userToken, paging is defined by two integers, `$AMOUNT` is the number of entries you want to get, `$SKIP` is how many entries you want to skip.
@@ -317,13 +320,14 @@ Returns a list of timelines for the user, including a count for the number of im
   </tr>
 </table>
 
-#### Sample Usage
-Request:
-    `https://facebook.tracking.exposed/api/v2/personal/userToken/stats/1-0`
+#### Request
 
-Response:
+`https://facebook.tracking.exposed/api/v2/personal/userToken/stats/1-0`
 
-`{
+#### Response
+
+```
+{
     "storedTimelines": 31,
     "served": {
         "amount": 1,
@@ -352,12 +356,13 @@ Response:
     "timelines": {
         "ac11229201721912aa129128192aa": 12
     }
-}`
+}
+```
 
 
 ****
 
-## <a name="csv"></a>Personal Csv
+## <a name="csv"></a>Personal CSV
 
 #### URL
 `https://facebook.tracking.exposed/api/v2/personal/$YOUR_TOKEN/csv/$AMOUNT-$SKIP`
@@ -468,14 +473,38 @@ Returns a comma-separated-values file containing personal data of an user. `$YOU
   </tr>
 </table>
 
-#### Sample Usage
-Request:
-    `https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/csv/1-0`
+#### Request
 
-Response:
-`"nature","publicationTime","postId","permaLink","fblinktype","source","sourceLink","displaySource","textsize","texts","impressionTime","impressionOrder","user","timeline","semanticId"`
-`"organic","2019-04-18T17:21:30.000Z","1247146142126177","/CatalunyaDiari/posts/1247146142126177","posts","Catalunya Diari","https://www.facebook.com/CatalunyaDiari/","Catalunya Diari","171"," ‖▩‖ ","2019-04-21T15:05:15.000Z","14","goulash-nocilla-cucumber","onion-couscous-strawberry","82a416a63569d1b65ddfae1ff5b5812b13a247cf"`
+`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/csv/1-0`
 
+#### Response, in CSV format:
+
+```
+"nature","publicationTime","postId","permaLink","fblinktype","source","sourceLink","displaySource","textsize","texts","impressionTime","impressionOrder","user","timeline","semanticId"
+"organic","2019-04-18T17:21:30.000Z","1247146142126177","/CatalunyaDiari/posts/1247146142126177","posts","Catalunya Diari","https://www.facebook.com/CatalunyaDiari/","Catalunya Diari","171"," ‖▩‖ ","2019-04-21T15:05:15.000Z","14","goulash-nocilla-cucumber","onion-couscous-strawberry","82a416a63569d1b65ddfae1ff5b5812b13a247cf"
+```
+
+****
+
+## <a name="enrich"></a>Your Enriched data
+
+#### URL
+`https://facebook.tracking.exposed/api/v2/personal/$YOUR_TOKEN/enrich/$PAGING`
+<br>
+
+Returns the summary, enriched by semantic analysis, if available
+
+#### Data Specifics
+
+TBD
+
+#### Request
+
+`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/enrich/`
+
+#### Response
+
+TBD
 
 ****
 
@@ -491,11 +520,12 @@ Returns all the data you own on our platform. `$YOUR_TOKEN` is your userToken.
 
 TBD
 
-#### Sample Usage
-Request:
+#### Request
     `https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/exporter/`
 
+#### Response
 
+TBD
 
 ****
 
@@ -511,13 +541,13 @@ Removes the data you own on our platform. `$YOUR_TOKEN` is your userToken. The o
 
 TBD
 
-#### Sample Usage
-Request:
-    `https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/remove/5`
+#### Request
 
-Response:<br>
-    `{"timelines":5,"impressions":63,"htmls":35,"summaries":35}`
+`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/remove/5`
 
+#### Response
+
+`{"timelines":5,"impressions":63,"htmls":35,"summaries":35}`
 
 ****
 ## <a name="daily"></a>Daily aggregated Statistics
@@ -530,36 +560,92 @@ Aggregated daily statistics on individual usage. It is used by realityCheck at t
 
 #### Data Specifics
 
+#### Request
 
-#### Sample Usage
-Request:
-    `https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/daily/0-2`
+`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/daily/0-2`
 
-Response:<br>
-    ` {"content":{"impressions":15614360,"impressions_lw":162084,"aggregated":2673,"aggregated_lw":140,"labels":87946,"labels_lw":87946,"semantics":625307,"semantics_lw":625307,"anomalies":0,"anomalies_lw":0,"summary":1741653,"summary_lw":89911,"errors":52708,"errors_lw":52708,"metadata":1747629,"metadata_lw":89938,"htmls":9767659,"htmls_lw":110072,"accesses":215408,"accesses_lw":974,"timelines":1207216,"timelines_lw":12826,"supporters":3486,"supporters_lw":13},"computedt":"2019-04-23T13:53:34.254Z","next":"2019-04-23T13:55:34.254Z","cacheTimeSeconds":120}`
+#### Response
 
+TBD
 
 ****
 
 # Node API
+
+These APIs are not personal, they do not require $userToken and they can be queried by anyone.
+These API should not contain any information which might help an observer to spot who is the supporter using fbtrex.
+
+_TODO: complete this list_, give a look to [the implementation](https://github.com/tracking-exposed/facebook/blob/master/lib/contentAPI.js).
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>URL</th>
+  </tr>
+  <tr>
+    <td>General Statistics</td>
+    <td><a href=#counter>link</a></td>
+    <td>statistics/counter</td>
+  </tr>
+</table>
 
 This API is meant for public statistics. They are aggregated and/or anonymized.
 
 ## <a name="counter"></a>General Statistics
 
 #### URL
+
 `https://facebook.tracking.exposed/api/v2/statistics/counter`
-<br>
+
 #### Description
 General statistics on facebook.tracking.exposed. Contains global and last week's information. Please note that the fields that terminate in *_lw* are for *last week*.
 
 #### Data Specifics
 
-TBD
+This API take as input all the _database collections_, and simply count the amount of objects contained.
+for example: _impressions_ produced two fields:
 
-#### Sample Usage
-Request:
-    `https://facebook.tracking.exposed/api/v2/statistics/counter`
+  * impression: it is the count of the whole collection. all the impressions collected in the system
+  * impression_lw: it is the count of the impression recorded in the **l**ast **w**eek.
 
-Response:<br>
-    `{"content":{"impressions":15614360,"impressions_lw":162084,"aggregated":2673,"aggregated_lw":140,"labels":87946,"labels_lw":87946,"semantics":625307,"semantics_lw":625307,"anomalies":0,"anomalies_lw":0,"summary":1741653,"summary_lw":89911,"errors":52708,"errors_lw":52708,"metadata":1747629,"metadata_lw":89938,"htmls":9767659,"htmls_lw":110072,"accesses":215408,"accesses_lw":974,"timelines":1207216,"timelines_lw":12826,"supporters":3486,"supporters_lw":13},"computedt":"2019-04-23T13:53:34.254Z","next":"2019-04-23T13:55:34.254Z","cacheTimeSeconds":120}`
+#### Request
+
+`https://facebook.tracking.exposed/api/v2/statistics/counter`
+
+#### Response
+
+```
+{
+  "content":
+    {
+      "impressions":15614360,
+      "impressions_lw":162084,
+      "aggregated":2673,
+      "aggregated_lw":140,
+      "labels":87946,
+      "labels_lw":87946,
+      "semantics":625307,
+      "semantics_lw":625307,
+      "anomalies":0,
+      "anomalies_lw":0,
+      "summary":1741653,
+      "summary_lw":89911,
+      "errors":52708,
+      "errors_lw":52708,
+      "metadata":1747629,
+      "metadata_lw":89938,
+      "htmls":9767659,
+      "htmls_lw":110072,
+      "accesses":215408,
+      "accesses_lw":974,
+      "timelines":1207216,
+      "timelines_lw":12826,
+      "supporters":3486,
+      "supporters_lw":13
+    },
+  "computedt":"2019-04-23T13:53:34.254Z",
+  "next":"2019-04-23T13:55:34.254Z",
+  "cacheTimeSeconds":120
+}
+```

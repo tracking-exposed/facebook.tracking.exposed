@@ -1,9 +1,10 @@
 ---
-title: Join us
+title: as open project, we need new people joining
+subtitle: We play over a concrete, actionable list of steps to challenge the biggest corporation of the world. Let's give a try?
 draft: false
 ---
 
-There are three degree you can be involved with the project, you'll be mentioned on the [about](/about) page when you reach the third.
+To simplify the volunteering onboarding process, there are three degree of effort you can do, to be involved in the project. You'll have agency and rensponsabilities at the third level, some tasks at the second. You'll be mentioned on the [about](/about) page when you reach the third.
 
 {{<colorblock text="First step: know as bit of us" >}}
 
