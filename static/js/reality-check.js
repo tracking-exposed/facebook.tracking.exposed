@@ -109,7 +109,7 @@ function showSpecificDay(day) {
                     topicsCount[term] = 1;
                 }
 
-                if (semanticIds[term]) {
+                if (semanticIds[term] && !semanticIds[term].includes(item.semanticId)) {
                     semanticIds[term].push(item.semanticId);
                 } else {
                     semanticIds[term] = [item.semanticId];
