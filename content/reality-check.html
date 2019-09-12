@@ -8,72 +8,103 @@ partial: "/javascripts"
 ---
 <link rel="stylesheet" href="/css/c3.min.css">
 <div id="reality-check" class="app">
+
     <div class="container pt-3">
+
         <div class="masthead row pt-3 pb-3 mb-3">
-            <div class="col-lg-2">
+            <div class="col-sm-4 col-lg-2">
                 <div class="avatar"></div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-sm-8 col-lg-6">
                 <h1>Reality Check</h1>
             </div>
-            <div class="col-lg-3">
-                    <a class="btn btn-block btn-light mt-3 mb-3" href="#how-it-works">
-                        How It Works
-                    </a>
-                    <a class="btn btn-block btn-facebook" href="#check-your-reality">
-                        Check Your Reality
-                    </a>
+            <div class="d-none col-sm-12 col-lg-4">
+                <a class="btn btn-block btn-light mt-3 mb-3" href="#how-it-works">
+                    How It Works
+                </a>
+                <a class="btn btn-block btn-facebook" href="#check-your-reality">
+                    Check Your Reality
+                </a>
             </div>
-            <div class="col-lg-1"></div>
         </div>
-        <div class="row">
-            <div class="col-lg-3 profile-filters mt-3">
-                <div class="mb-3">
-                    <h1 class="mb-0">Alice B. Carol</h1>
-                    <strong class="username">@alicebcarol</strong>
-                </div>
 
-                <div class="list-group list-group-flush mb-3">
-                    <span>Filters By</span>
-                    <button class="list-group-item list-group-item-action active" type="button" onclick="filterBy()">
-                        All Types
-                    </button>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.posts')">
-                        Posts
-                    </button>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.photo')">
-                        Pictures
-                    </button>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.videos')">
-                        Videos
-                    </button>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.groups')">
-                        Groups
-                    </button>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.events')">
-                        Events
-                    </button>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="filterBy('.advertisement')">
-                        Advertisements
-                    </button>
-                </div>
-                <div class="list-group mb-5">
-                    <span>Sort By</span>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="sortBy('date')">
-                        Date
-                    </button>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="sortBy('author')">
-                        Author
-                    </button>
-                   <button class="list-group-item list-group-item-action" type="button" onclick="sortBy('type')">
-                       Type
-                   </button>
-                    <button class="list-group-item list-group-item-action" type="button" onclick="sortBy()">
-                        Original
-                    </button>
-                </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="mb-0">Alice B. Carol</h1>
+                <strong class="username">@alicebcarol</strong>
             </div>
-            <div class="col-lg-9 graphs-feed">
+        </div>
+
+        <div class="row d-none">
+            <div class="col-lg-8">
+                <span>Filters By</span>
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item">
+                        <button type="button" onclick="filterBy()">
+                            All Types
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="filterBy('.posts')">
+                            Posts
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="filterBy('.photo')">
+                            Pictures
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="filterBy('.videos')">
+                            Videos
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="filterBy('.groups')">
+                            Groups
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="filterBy('.events')">
+                            Events
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="filterBy('.advertisement')">
+                            Advertisements
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <span>Sort By</span>
+                <ul class="list-group mb-5">
+                    <li class="list-group-item">
+                        <button type="button" onclick="sortBy('date')">
+                            Date
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="sortBy('author')">
+                            Author
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="sortBy('type')">
+                            Type
+                        </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" onclick="sortBy()">
+                            Original
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
                 <span>Your Recent Use</span>
                 <div class="container-c3 pt-3 pr-1 pb-3 pl-1 mb-3 row">
                     <div class="col-lg-1">
@@ -89,8 +120,11 @@ partial: "/javascripts"
                             </button>
                             <h2 class="float-left m-0"></h2>
                             <div class="clearfix"></div>
-                            <p>Your Facebook feedback showed you the following topics:</p>
-                            <div id="daily-specific-topics"></div>
+                            <p>Your Facebook feed showed the following topics:</p>
+                            <div class="row">
+                                <div id="daily-specific-topics" class="col-sm-6 col-lg-6"></div>
+                                <div id="daily-topic-posts" class="col-sm-6 col-lg-6"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-1">
@@ -99,6 +133,7 @@ partial: "/javascripts"
                         </button>
                     </div>
                 </div>
+
                 <div class="row">
                     <div id="summary" class="col-md-8">
                         <span>Real News Feed</span>
@@ -117,10 +152,11 @@ partial: "/javascripts"
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-
         <div class="clearfix"></div>
+
     </div>
 </div>
 <script src="/js/moment-with-locales.min.js"></script>
@@ -130,9 +166,8 @@ partial: "/javascripts"
 <script src="/js/reality-check.js"></script>
 <script>
 $(document).ready(function() {
-    initializeSummary();
+    //initializeSummary();
     //initializeStats();
     initializeDaily();
-
 });
 </script>

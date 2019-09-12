@@ -3,6 +3,8 @@ let $grid;
 /* in regards to the API used in this file, please consult
  * the file in content/api-documentation.md */
 
+const posts = {}
+
 function initializeToken() {
   const token = getToken();
   $('#token').text(token);
@@ -77,13 +79,191 @@ function initializeDaily() {
   });
 }
 
+function showSpecificDay(day) { 
+    const token = getToken();
+    const url = buildApiUrl(`/personal/${token}/daily/${day}`);
 
-function initializeSummary() {
+    let topicsCount = {}
+    let semanticIds = {}
+
+    $.getJSON(url, (data) => {
+        let dayViz = ''
+
+        $('#daily-overview').removeClass('d-flex flex-row').addClass('d-none');
+        $('#daily-specific').removeClass('d-none')
+            .find('h2').html('On ' + moment(day).format('LL'));
+
+        // Build topics
+        _.forEach(data, function(item, count) {
+            if (posts[day]) {
+                posts[day].push(item);
+            } else {
+                posts[day] = [item];
+            }
+
+            var uniqueTopics = _.uniq(item.l);
+            _.forEach(uniqueTopics, function(term, count) { 
+                if (topicsCount[term]) {
+                    topicsCount[term] = topicsCount[term] + 1;
+                } else {
+                    topicsCount[term] = 1;
+                }
+
+                if (semanticIds[term]) {
+                    semanticIds[term].push(item.semanticId);
+                } else {
+                    semanticIds[term] = [item.semanticId];
+                }
+            });
+        });
+
+        var counts = _.values(topicsCount);
+        var uniques = _.uniq(counts).sort(function(a, b){return b-a});
+
+        _.forEach(uniques, function(num) {
+            $('#daily-specific-topics').append(`<hr>
+            <div class="row">
+                <div class="col-3 text-center">
+                    <div class="daily-topic-count">${num}<span class="color-light">x</span></div>
+                    Occurences
+                </div>
+                <div class="col-9">
+                    <ul id="topics-${num}" class="list-unstyled">
+                    </ul>
+                </div>
+            </div>`);
+        });
+
+        _.forEach(topicsCount, function(count, term) {
+                $('#topics-' + count).append(`
+                <li class="mb-2">
+                    <a class="daily-topic-browse" href="#${term}">${term}</a>
+                </li>`);
+        });
+
+        // Update navs
+        var startDate = moment(day);
+        var pastDay = startDate.subtract(1, 'days').format('YYYY-MM-DD');
+        var addDay = startDate.add(2, 'days').format('YYYY-MM-DD');
+        $('#daily-past').data('date', pastDay);
+        $('#daily-future').data('date', addDay);
+
+        // Topic
+        $('.daily-topic-browse').on('click', function() {
+            var topic = $(this).attr('href').replace('#', '')
+            showPosts(day, topic, semanticIds[topic]);
+        });
+    });
+}
+
+function showPosts(day, topic, semanticIds) {
+    var data = posts[day];
+
+    $('#daily-topic-posts').html('').prepend(`<h3>${topic}</h3>`);
+
+    _.each(data, (item) => {
+        if (semanticIds.includes(item.semanticId)) {
+            let postDate = item.when,
+                datePre = '',
+                datePost = '';
+
+            if (item.summary.publicationTime) {
+                postDate = item.summary.publicationTime;
+            } 
+
+            const date = moment(postDate, moment.ISO_8601),
+              readableDate = date.format('MMMM Do YYYY, h:mm a'),
+              unixTimestamp = date.format('x'),
+              maxStringLength = 150;
+
+            let bgColorClass, entryType, selectedText, teaserText, hasText = false;
+            switch (item.summary.fblinktype) {
+              case 'photo':
+                bgColorClass = 'border-success';
+                entryType = 'picture';
+                break;
+              case 'videos':
+                bgColorClass = 'border-primary';
+                entryType = 'video';
+                break;
+              case 'groups':
+                bgColorClass = 'border-warning';
+                entryType = 'group';
+                break;
+              case 'events':
+                bgColorClass = 'border-info';
+                entryType = 'event';
+                break;
+              case 'posts':
+                bgColorClass = 'border-secondary';
+                entryType = 'post';
+                break;
+              default:
+                if (item.summary.nature == "sponsored") {
+                  bgColorClass = 'border-danger';
+                  entryType = 'advertisement'; 
+                  datePre = `Seen at`;
+                  datePost = `by
+                  <a class="text-link" href="${item.summary.sourceLink}">
+                    ${item.summary.source}
+                  </a>`;
+                } else {
+                    console.log(`unmanaged type: ${item.summary.nature}`)
+                }
+                break;
+            }
+
+            if (_.size(item.summary.texts) && _.some(item.summary.texts, _.size)) {
+              selectedText = _.first(_.orderBy(item.summary.texts, _.size));
+              teaserText = selectedText.length > maxStringLength
+                ? selectedText.substring(0, maxStringLength) + '…'
+                : selectedText
+              hasText = true;
+            }
+
+            let linkslot ="";
+            if (_.startsWith(item.summary.permaLink, '/')) {
+              linkslot = `<a href="https://facebook.com${item.summary.permaLink}" title="Original post" data-post_id="${item.summary.postId}" target="_blank" class="text-link">
+                Original post
+              </a>`;
+            }
+            else if (_.startsWith(item.summary.permaLink, 'https://')) {
+              linkslot = `<a href="${item.summary.permaLink}" title="Original post" data-post_id="${item.summary.postId}" target="_blank" class="text-link">
+                Original post
+              </a>`;
+            }
+
+            const gridItem = `
+              <div class="feed-item mb-3 p-2 ${item.summary.fblinktype || ''}">
+                <article class="content ${bgColorClass} d-flex flex-column">
+                  <header>${entryType || ''}</header>
+                  <section>
+                    <h4 class="author">${item.summary.source}</h4>
+                    ${hasText ? `<p class="mb-0">${teaserText}</p>` : ''}
+                  </section>
+                  <section class="footer">
+                    <span class="small">
+                    ${datePre}
+                    <span class="date" data-date="${unixTimestamp}">${readableDate}</span>
+                    ${datePost}
+                    ${linkslot}
+                    </span>
+                  </section>
+                </article>
+              </div>
+            `;
+
+            $('#daily-topic-posts').append(gridItem);
+        }
+    });
+};
+
+
+function initializeSummary(date, semanticIds) {
   const token = getToken();
   const url = buildApiUrl(`/personal/${token}/summary`);
 
   $.getJSON(url, (data) => {
-    console.log(`Retrived ${_.size(data)} objects`);
     _.each(data, (item) => {
 
       const date = moment(item.publicationTime, moment.ISO_8601),
@@ -156,7 +336,7 @@ function initializeSummary() {
           </article>
         </div>
       `;
-      $('#summary').append(gridItem);
+      $('#summary').append(gridItem); 
     });
     //initIsotope();
   });
@@ -178,71 +358,6 @@ function initIsotope() {
       author: '.author',
     }
   });
-}
-
-function showSpecificDay(day) { 
-    const token = getToken();
-    const url = buildApiUrl(`/personal/${token}/daily/${day}`);
-
-    $.getJSON(url, (data) => {
-        let dayViz = ''
-
-        $('#daily-overview').removeClass('d-flex flex-row').addClass('d-none');
-        $('#daily-specific').removeClass('d-none')
-            .find('h2').html('On ' + moment(day).format('LL'));
-
-        // Build topics
-        let topics = {}
-        _.forEach(data, function(item, count) {
-            _.forEach(item.l, function(term, count) {
-                if (topics[term]) {
-                    topics[term] = topics[term] + 1
-                } else {
-                    topics[term] = 1
-                }            
-            });
-        });
-
-        var counts = _.values(topics);
-        var uniques = _.uniq(counts).sort(function(a, b){return b-a});
-
-        _.forEach(uniques, function(num) {
-            if (num > 1) {
-            $('#daily-specific-topics').append(`<hr>
-            <div class="row">
-                <div class="col-3 text-center">
-                    <h2>${num}<span class="color-light">x</span></h2>
-                    Items
-                </div>
-                <div class="col-9">
-                    <ul id="topics-${num}" class="list-unstyled">
-                    </ul>
-                </div>
-            </div>`);
-            }
-        });
-
-        _.forEach(topics, function(count, term) {
-            if (count > 1) {
-                $('#topics-' + count).append(`
-                <li class="mb-3">
-                    <a class="daily-topic-browse" href="#${term}">${term}</a>
-                </li>`);
-            }
-        })
-
-        // Update navs
-        var startDate = moment(day);
-        var pastDay = startDate.subtract(1, 'days').format('YYYY-MM-DD');
-        var addDay = startDate.add(2, 'days').format('YYYY-MM-DD');
-        $('#daily-past').data('date', pastDay)
-        $('#daily-future').data('date', addDay)
-
-        // Topic
-        $('.daily-topic-browse').on('click', function() {
-            alert('Show topic: ' + $(this).attr('href'));
-        });
-    });
 }
 
 function makeChartStacked() {
