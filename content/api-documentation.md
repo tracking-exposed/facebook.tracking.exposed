@@ -13,7 +13,7 @@ The base URL to access our API is:
 There are some variables you need to have to perform a successful HTTP GET:
 
 `paging` defines the number of entries that are retrieved by the API, as well as the number of entries to skip. For example, if you call `/200-50` at the end of a "Summary" query, you will get 200 entries and skip the 50 most recent ones. If you call `/2000-0` you will just get the 2000 most recent entries.
-(_It is rate-limited, you can't download all the data with just one query_).
+(_It is capped, you can't download all the data with just one query_).
 
 # Personal API
 
@@ -172,7 +172,7 @@ Returns a summary of personal data of an user. `$YOUR_TOKEN` is your userToken, 
     <td>[
       "\"Estoy jodido, este es el final de mi presidencia\". Es la frase que dijo Trump cuando Robert Mueller se puso a investigar su presunta conexión con Rusia. En sus conclusiones, el fiscal especial recoge esta cita y sus intentos por torpedear la investigación, pero no ve delito",
       "El informe sobre la trama rusa revela los intentos de Trump por torpedear la investigación",
-      "Estoy jodido, este es el final de mi presidencia , dijo el mandatario tras el nombramiento de un fiscal especial, según el documento de Robert S. Mueller, hecho público este jueves"
+      "Estoy jodido, este es el final de mi presidencia, dijo el mandatario tras el nombramiento de un fiscal especial, según el documento de Robert S. Mueller, hecho público este jueves"
       ]</td>
   </tr>
   <tr>
@@ -215,13 +215,13 @@ Returns a summary of personal data of an user. `$YOUR_TOKEN` is your userToken, 
     <td>WOW</td>
     <td>Number of surprised reactions.</td>
     <td>integer</td>
-    <td>0</td>
+  <td>0</td>
   </tr>
 </table>
 
 #### Request
 
-`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/summary/1-0`
+`https://facebook.tracking.exposed/api/v2/personal/thisisaworkingtokenusablewhenperformtest/summary/1-0`
 
 #### Response
 
@@ -236,7 +236,7 @@ Returns a summary of personal data of an user. `$YOUR_TOKEN` is your userToken, 
   "isValid": true,
   "siteName": "elpais.com",
   "title": "El informe sobre la trama rusa revela los intentos de Trump por torpedear la investigación",
-  "description": "Estoy jodido, este es el final de mi presidencia , dijo el mandatario tras el nombramiento de un fiscal especial, según el documento de Robert S. Mueller, hecho público este jueves"
+  "description": "Estoy jodido, este es el final de mi presidencia, dijo el mandatario tras el nombramiento de un fiscal especial, según el documento de Robert S. Mueller, hecho público este jueves"
 },
 "user": "taco-tuna-tomato",
 "timeline": "pepper-flour-shitake",
@@ -328,40 +328,38 @@ Returns a list of timelines for the user, including a count for the number of im
 
 ```
 {
-    "storedTimelines": 31,
-    "served": {
-        "amount": 1,
-        "skip": 1
+  "storedTimelines": 31,
+  "served": {
+    "amount": 1,
+    "skip": 1
+  },
+  "content": [
+    {
+      "startTime": "2019-05-02T08:33:40.000Z",
+      "geoip": "UK",
+      "impressionOrder": 1,
+      "impressionTime": "2019-05-02T08:33:40.000Z",
+      "htmlId": "83489349sdfsfas907395923502352332",
+      "timelineId": "ac11229201721912aa129128192aa",
+      "summary": []
     },
-    "content": [
-        {
-            "startTime": "2019-05-02T08:33:40.000Z",
-            "geoip": "UK",
-            "impressionOrder": 1,
-            "impressionTime": "2019-05-02T08:33:40.000Z",
-            "htmlId": "83489349sdfsfas907395923502352332",
-            "timelineId": "ac11229201721912aa129128192aa",
-            "summary": []
-        },
-        {
-            "startTime": "2019-05-02T08:33:40.000Z",
-            "geoip": "UK",
-            "impressionOrder": 2,
-            "impressionTime": "2019-05-02T08:33:40.000Z",
-            "htmlId": "83489349sdfsfas907395923502352332",
-            "timelineId": "ac11229201721912aa129128192aa",
-            "summary": []
-        }
-    ],
-    "timelines": {
-        "ac11229201721912aa129128192aa": 12
+    {
+      "startTime": "2019-05-02T08:33:40.000Z",
+      "geoip": "UK",
+      "impressionOrder": 2,
+      "impressionTime": "2019-05-02T08:33:40.000Z",
+      "htmlId": "83489349sdfsfas907395923502352332",
+      "timelineId": "ac11229201721912aa129128192aa",
+      "summary": []
     }
+  ],
+  "timelines": {
+    "ac11229201721912aa129128192aa": 12
+  }
 }
 ```
 
-
 ****
-
 ## <a name="csv"></a>Personal CSV
 
 #### URL
@@ -475,7 +473,7 @@ Returns a comma-separated-values file containing personal data of an user. `$YOU
 
 #### Request
 
-`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/csv/1-0`
+`https://facebook.tracking.exposed/api/v2/personal/thisisaworkingtokenusablewhenperformtest/csv/1-0`
 
 #### Response, in CSV format:
 
@@ -500,7 +498,7 @@ TBD
 
 #### Request
 
-`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/enrich/`
+`https://facebook.tracking.exposed/api/v2/personal/thisisaworkingtokenusablewhenperformtest/enrich/`
 
 #### Response
 
@@ -521,7 +519,7 @@ Returns all the data you own on our platform. `$YOUR_TOKEN` is your userToken.
 TBD
 
 #### Request
-    `https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/exporter/`
+    `https://facebook.tracking.exposed/api/v2/personal/thisisaworkingtokenusablewhenperformtest/exporter/`
 
 #### Response
 
@@ -543,7 +541,7 @@ TBD
 
 #### Request
 
-`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/remove/5`
+`https://facebook.tracking.exposed/api/v2/personal/thisisaworkingtokenusablewhenperformtest/remove/5`
 
 #### Response
 
@@ -562,7 +560,7 @@ Aggregated daily statistics on individual usage. It is used by realityCheck at t
 
 #### Request
 
-`https://facebook.tracking.exposed/api/v2/personal/1111a1aa1aa111a11a1a1aa1111a111111a1a1a1/daily/0-2`
+`https://facebook.tracking.exposed/api/v2/personal/thisisaworkingtokenusablewhenperformtest/daily/0-2`
 
 #### Response
 
@@ -606,8 +604,8 @@ General statistics on facebook.tracking.exposed. Contains global and last week's
 This API take as input all the _database collections_, and simply count the amount of objects contained.
 for example: _impressions_ produced two fields:
 
-  * impression: it is the count of the whole collection. all the impressions collected in the system
-  * impression_lw: it is the count of the impression recorded in the **l**ast **w**eek.
+  * impressions: it is the count of the whole collection. all the impressions collected in the system
+  * impressions**_lw**: it is the count of the impression recorded in the **l**ast **w**eek.
 
 #### Request
 
