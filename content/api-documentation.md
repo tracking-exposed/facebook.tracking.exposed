@@ -89,7 +89,7 @@ Returns a summary of personal data of an user. `$YOUR_TOKEN` is your userToken, 
   </tr>
   <tr>
     <td>semanticId</td>
-    <td>Unique Id for the impression collected, it's the same in other API feeds such as "semantic".</td>
+    <td>Unique Id about the semantic content. Posts that share the same semanticId have the same text (and therefore the same semantic analysis, which is the list of topics), you can use the semanticId in the <a href="#semantic">semantic query API</a>.</td>
     <td>string</td>
     <td>"7cd2480750f1cdb23215da6da4186b30cbe2f424"</td>
   </tr>
@@ -647,3 +647,6 @@ for example: _impressions_ produced two fields:
   "cacheTimeSeconds":120
 }
 ```
+## <a name="semantic"></a>Semantic Query APIs
+
+Initially specified here: https://github.com/tracking-exposed/facebook/issues/128 then extended with this: https://github.com/tracking-exposed/facebook/commit/05502bb7817860495c08f5876c184d55da8c9785
