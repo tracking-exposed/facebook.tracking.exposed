@@ -1,0 +1,63 @@
+---
+title: "Test"
+date: 2019-04-03T22:04:22Z
+draft: false
+type: "fullscreen"
+permalink: /test/
+partial: "/javascripts"
+---
+<link rel="stylesheet" href="/css/c3.min.css">
+<div id="reality-check" class="app">
+    <div class="container pt-3">
+        <div class="masthead row pt-3 pb-3 mb-3">
+            <div class="col-lg-2">
+              <div class="avatar"></div>
+            </div>
+            <div class="col-lg-6">
+              <h1>Test -- Reality Check</h1>
+            </div>
+            <div class="col-lg-3">
+              <a class="btn btn-block btn-light mt-3 mb-3" href="#how-it-works">
+                How It Works
+              </a>
+              <a class="btn btn-block btn-facebook" href="#check-your-reality">
+                Check Your Reality
+              </a>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+
+        <table id="fbtrexContent">
+          <thead>
+            <th class="col-2"> day </th>
+            <th class="col-6"> what (<a href="#" id="display">display text</a>)</th>
+            <th class="col-4"> from where </th>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+<script src="/js/moment-with-locales.min.js"></script>
+<script src="/js/d3.min.js"></script>
+<script src="/js/c3.min.js"></script>
+<script src="/js/global.js"></script>
+<script src="/js/test-post-expansion.js"></script>
+<script>
+$(document).ready(function() {
+
+    testPostExpansion();
+
+    let visible = false;
+    $( "#display" ).click(function() {
+        if(visible)
+          $('.textdump').hide();
+        else
+          $('.textdump').show();
+
+        visible = !visible;
+    });
+
+});
+</script>
