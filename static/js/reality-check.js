@@ -16,8 +16,8 @@ function initializeDaily() {
 
   $.getJSON(url, (data) => {
     let daily = ''
+ 
     _.forEach(data, function(item, count) {
-        console.log(item.nature)
         let hasBorder = '';
         if (count > 0 ) {
             hasBorder = 'graph-day-border'
@@ -30,9 +30,6 @@ function initializeDaily() {
             <div id="daily-pie-${count}" class="daily-pie"></div>
             <p><span class="posts">${item.npost}</span><br>
             Posts Read</p>
-            <a class="daily-details btn btn-light btn-block" href="#${item.day}">
-                See Details
-            </a>
         </div>`;
         $('#daily-overview').append(daily)
 
@@ -58,205 +55,109 @@ function initializeDaily() {
                 width: 180
             }
         });
+
+        showSpecificDay(item.day);
     });
 
-    // Add details events
-    $('.daily-details').on('click', function() {
-        console.log('will show details for: ' + $(this).attr('href'))
-        showSpecificDay($(this).attr('href').replace('#', ''));
+    $('#dailyTab a').on('click', function(e) {
+        e.preventDefault()
+        console.log($(this));
     });
-
-    $('.daily-nav').on('click', function() {
-        alert('Browse ' + $(this).data('direction') + ' to: ' + $(this).data('date'))  
-    });
-
-    $('#daily-back').on('click', function() {
-        $('#daily-overview').removeClass('d-none').addClass('d-flex flex-row');
-        $('#daily-specific-topics').html('');
-        $('#daily-specific').addClass('d-none').find('h2').html('');
-    });
-
   });
 }
 
 function showSpecificDay(day) { 
-    const token = getToken();
-    const url = buildApiUrl(`/personal/${token}/daily/${day}`);
+    day = day.replace('-06-', '-09-');
 
-    let topicsCount = {}
-    let semanticIds = {}
+    const token = getToken();
+    const url = buildApiUrl(`/personal/${token}/enrich/${day}`);
 
     $.getJSON(url, (data) => {
         let dayViz = ''
+        const semanticIds = {};
+        const htmlDay = `
+            <div class="row mb-3 bg-light">
+                <div class="col-lg-12">
+                    <h3>On ${moment(day).format('LL')}</h3>
+                </div>
+            </div>
+        `;
 
-        $('#daily-overview').removeClass('d-flex flex-row').addClass('d-none');
-        $('#daily-specific').removeClass('d-none')
-            .find('h2').html('On ' + moment(day).format('LL'));
+        $('#daily-timeline').append(htmlDay); 
 
-        // Build topics
+        // build topics
         _.forEach(data, function(item, count) {
-            if (posts[day]) {
-                posts[day].push(item);
-            } else {
-                posts[day] = [item];
+            if (item.labels != undefined) {
+
+                // depending on occurence
+                if (semanticIds[item.semanticId]) {
+                    semanticIds[item.semanticId] = semanticIds[item.semanticId] + 1;
+                    $('#daily-seen-' + item.semanticId).html('Seen ' + semanticIds[item.semanticId] + 'x');
+                } else {
+                    semanticIds[item.semanticId] = 1;
+
+                    let isAd = '';
+                    let seenCount = 'Seen once';
+                    let topicsCount = {}
+
+                    _.forEach(item.labels, function(topic, count) { 
+                        if (topicsCount[topic]) {
+                            topicsCount[topic] = topicsCount[topic] + 1;
+                        } else {
+                            topicsCount[topic] = 1;
+                        }        
+                    });
+
+                    // topics
+                    let htmlTopic = `<ul class="list-inline">`;
+                    _.forEach(topicsCount, function(count, topic) {
+                        if (count > 1) {
+                            htmlTopic += `<li class="list-inline-item">
+                                <span class="bg-dark text-light">${count}</span> ${topic}
+                            </li>`;
+                        } else {
+                            htmlTopic += `<li clas="list-inline-item">${topic}</li>`;
+                        }
+                    });
+
+                    // post
+                    if (item.nature == 'sponsored') {
+                        isAd = '(Advertisement)';
+                    }
+
+                    const htmlPost = `
+                        <p>${item.texts[0]}</p>
+                        See <a href="https://facebook.com${item.permaLink}">Original</a>
+                    `;
+
+                    const htmlItem = `
+                    <div id="daily-${day}-${item.semanticId}" class="row">
+                        <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-lg-3">
+                            <strong>Topics</strong>
+                            ${htmlTopic}
+                        </div>
+                        <div id="daily-post-${day}-${item.semanticId}" class="col-sm-8 col-lg-9">
+                            <strong class="float-left">
+                                <a href="${item.sourceLink}">
+                                    ${item.source}
+                                </a>
+                                ${isAd}
+                            </strong>
+                            <span id="daily-seen-${item.semanticId}" class="float-right text-muted">
+                                ${seenCount}
+                            </span>
+                            <div class="clearfix"></div>
+                            ${htmlPost}
+                        </div>
+                    </div>
+                    <hr>`;
+
+                    $('#daily-timeline').append(htmlItem); 
+                }
             }
-
-            var uniqueTopics = _.uniq(item.l);
-            _.forEach(uniqueTopics, function(term, count) { 
-                if (topicsCount[term]) {
-                    topicsCount[term] = topicsCount[term] + 1;
-                } else {
-                    topicsCount[term] = 1;
-                }
-
-                if (semanticIds[term] && !semanticIds[term].includes(item.semanticId)) {
-                    semanticIds[term].push(item.semanticId);
-                } else {
-                    semanticIds[term] = [item.semanticId];
-                }
-            });
-        });
-
-        var counts = _.values(topicsCount);
-        var uniques = _.uniq(counts).sort(function(a, b){return b-a});
-
-        _.forEach(uniques, function(num) {
-            $('#daily-specific-topics').append(`<hr>
-            <div class="row">
-                <div class="col-3 text-center">
-                    <div class="daily-topic-count">${num}<span class="color-light">x</span></div>
-                    Occurences
-                </div>
-                <div class="col-9">
-                    <ul id="topics-${num}" class="list-unstyled">
-                    </ul>
-                </div>
-            </div>`);
-        });
-
-        _.forEach(topicsCount, function(count, term) {
-                $('#topics-' + count).append(`
-                <li class="mb-2">
-                    <a class="daily-topic-browse" href="#${term}">${term}</a>
-                </li>`);
-        });
-
-        // Update navs
-        var startDate = moment(day);
-        var pastDay = startDate.subtract(1, 'days').format('YYYY-MM-DD');
-        var addDay = startDate.add(2, 'days').format('YYYY-MM-DD');
-        $('#daily-past').data('date', pastDay);
-        $('#daily-future').data('date', addDay);
-
-        // Topic
-        $('.daily-topic-browse').on('click', function() {
-            var topic = $(this).attr('href').replace('#', '')
-            showPosts(day, topic, semanticIds[topic]);
         });
     });
 }
-
-function showPosts(day, topic, semanticIds) {
-    var data = posts[day];
-
-    $('#daily-topic-posts').html('').prepend(`<h3>${topic}</h3>`);
-
-    _.each(data, (item) => {
-        if (semanticIds.includes(item.semanticId)) {
-            let postDate = item.when,
-                datePre = '',
-                datePost = '';
-
-            if (item.summary.publicationTime) {
-                postDate = item.summary.publicationTime;
-            } 
-
-            const date = moment(postDate, moment.ISO_8601),
-              readableDate = date.format('MMMM Do YYYY, h:mm a'),
-              unixTimestamp = date.format('x'),
-              maxStringLength = 150;
-
-            let bgColorClass, entryType, selectedText, teaserText, hasText = false;
-            switch (item.summary.fblinktype) {
-              case 'photo':
-                bgColorClass = 'border-success';
-                entryType = 'picture';
-                break;
-              case 'videos':
-                bgColorClass = 'border-primary';
-                entryType = 'video';
-                break;
-              case 'groups':
-                bgColorClass = 'border-warning';
-                entryType = 'group';
-                break;
-              case 'events':
-                bgColorClass = 'border-info';
-                entryType = 'event';
-                break;
-              case 'posts':
-                bgColorClass = 'border-secondary';
-                entryType = 'post';
-                break;
-              default:
-                if (item.summary.nature == "sponsored") {
-                  bgColorClass = 'border-danger';
-                  entryType = 'advertisement'; 
-                  datePre = `Seen at`;
-                  datePost = `by
-                  <a class="text-link" href="${item.summary.sourceLink}">
-                    ${item.summary.source}
-                  </a>`;
-                } else {
-                    console.log(`unmanaged type: ${item.summary.nature}`)
-                }
-                break;
-            }
-
-            if (_.size(item.summary.texts) && _.some(item.summary.texts, _.size)) {
-              selectedText = _.first(_.orderBy(item.summary.texts, _.size));
-              teaserText = selectedText.length > maxStringLength
-                ? selectedText.substring(0, maxStringLength) + '…'
-                : selectedText
-              hasText = true;
-            }
-
-            let linkslot ="";
-            if (_.startsWith(item.summary.permaLink, '/')) {
-              linkslot = `<a href="https://facebook.com${item.summary.permaLink}" title="Original post" data-post_id="${item.summary.postId}" target="_blank" class="text-link">
-                Original post
-              </a>`;
-            }
-            else if (_.startsWith(item.summary.permaLink, 'https://')) {
-              linkslot = `<a href="${item.summary.permaLink}" title="Original post" data-post_id="${item.summary.postId}" target="_blank" class="text-link">
-                Original post
-              </a>`;
-            }
-
-            const gridItem = `
-              <div class="feed-item mb-3 p-2 ${item.summary.fblinktype || ''}">
-                <article class="content ${bgColorClass} d-flex flex-column">
-                  <header>${entryType || ''}</header>
-                  <section>
-                    <h4 class="author">${item.summary.source}</h4>
-                    ${hasText ? `<p class="mb-0">${teaserText}</p>` : ''}
-                  </section>
-                  <section class="footer">
-                    <span class="small">
-                    ${datePre}
-                    <span class="date" data-date="${unixTimestamp}">${readableDate}</span>
-                    ${datePost}
-                    ${linkslot}
-                    </span>
-                  </section>
-                </article>
-              </div>
-            `;
-
-            $('#daily-topic-posts').append(gridItem);
-        }
-    });
-};
 
 
 function initializeSummary(date, semanticIds) {
