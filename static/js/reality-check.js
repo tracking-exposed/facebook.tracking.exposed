@@ -16,7 +16,7 @@ function initializeDaily() {
 
   $.getJSON(url, (data) => {
     let daily = ''
- 
+
     _.forEach(data, function(item, count) {
         let hasBorder = '';
         if (count > 0 ) {
@@ -61,7 +61,13 @@ function initializeDaily() {
 
     $('#dailyTab a').on('click', function(e) {
         e.preventDefault()
-        console.log($(this));
+        var goToTab = $(this)[0].hash.replace('#daily-', '');
+        console.log('switch to: ' + goToTab);
+        if (goToTab == 'timeline') {
+            $('#daily-overview').removeClass('d-flex flex-row').addClass('d-none');
+        } else {
+            $('#daily-overview').removeClass('d-none').addClass('d-flex flex-row');
+        }
     });
   });
 }
@@ -74,11 +80,15 @@ function showSpecificDay(day) {
 
     $.getJSON(url, (data) => {
         let dayViz = ''
+
+        $('#profile-name').html(data[0].user.replace(/-/gi, ' '));
+        $('#profile-username').html('@' + data[0].user);
+
         const semanticIds = {};
         const htmlDay = `
             <div class="row mb-3 bg-light">
                 <div class="col-lg-12">
-                    <h3>On ${moment(day).format('LL')}</h3>
+                    <h4>${moment(day).format('LL')}</h4>
                 </div>
             </div>
         `;
@@ -97,28 +107,40 @@ function showSpecificDay(day) {
                     semanticIds[item.semanticId] = 1;
 
                     let isAd = '';
+                    let isHidden = '';
+                    let showAllLink = '';
                     let seenCount = 'Seen once';
-                    let topicsCount = {}
+                    let topicsCount = [];
 
-                    _.forEach(item.labels, function(topic, count) { 
-                        if (topicsCount[topic]) {
-                            topicsCount[topic] = topicsCount[topic] + 1;
+                    // topics
+                    _.forEach(item.labels, function(topic, index) { 
+                        var exists = _.find(topicsCount, { 'topic':  topic });
+                        if (exists) {
+                            exists.count = exists.count + 1;
                         } else {
-                            topicsCount[topic] = 1;
+                            topicsCount.push({
+                                topic: topic,
+                                count: 1
+                            });
                         }        
                     });
 
-                    // topics
-                    let htmlTopic = `<ul class="list-inline">`;
-                    _.forEach(topicsCount, function(count, topic) {
-                        if (count > 1) {
-                            htmlTopic += `<li class="list-inline-item">
-                                <span class="bg-dark text-light">${count}</span> ${topic}
-                            </li>`;
-                        } else {
-                            htmlTopic += `<li clas="list-inline-item">${topic}</li>`;
-                        }
+                    let topicsOrdered =_.orderBy(topicsCount, ['count'], ['desc']);
+                    let htmlTopic = '';
+                    _.forEach(topicsOrdered, function(item, index) {
+                        if (index > 4) { isHidden = 'd-none'; }
+                        htmlTopic += `
+                        <li class="list-item mb-2 ${isHidden}">
+                            <span class="topic-count num-${item.count}">${item.count}</span>
+                            ${item.topic}
+                        </li>`;
                     });
+
+                    if (topicsOrdered.length > 4) {
+                        showAllLink = `<a class="text-muted" href="show-topics-${item.semanticId}">
+                            ...
+                        </a>`;
+                    }
 
                     // post
                     if (item.nature == 'sponsored') {
@@ -134,7 +156,10 @@ function showSpecificDay(day) {
                     <div id="daily-${day}-${item.semanticId}" class="row">
                         <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-lg-3">
                             <strong>Topics</strong>
-                            ${htmlTopic}
+                            <ul class="list m-0 p-0">
+                                ${htmlTopic}
+                            </ul>
+                            ${showAllLink}
                         </div>
                         <div id="daily-post-${day}-${item.semanticId}" class="col-sm-8 col-lg-9">
                             <strong class="float-left">

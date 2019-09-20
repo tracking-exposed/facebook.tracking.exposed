@@ -7,17 +7,17 @@ permalink: /reality-check/
 partial: "/javascripts"
 ---
 <link rel="stylesheet" href="/css/c3.min.css">
-<div id="reality-check" class="app">
-
+<div id="reality-check">
     <div class="container pt-3">
-
-        <div class="masthead row pt-3 pb-3 mb-3">
-            <div class="col-sm-4 col-lg-2">
+        <div class="masthead row mb-1">
+            <div class="col-sm-4 col-md-4 col-lg-2">
                 <div class="avatar"></div>
             </div>
-            <div class="col-sm-8 col-lg-6">
+            <div class="col-sm-8 col-md-8 col-lg-10">
                 <h1>Reality Check</h1>
-                <p>Understand how Zuck & Co. think you should see reality</p>
+                <p class="text-muted">
+                    Understand how Zuck & Co. think you should see reality
+                </p>
             </div>
             <div class="d-none col-sm-12 col-lg-4">
                 <a class="btn btn-block btn-light mt-3 mb-3" href="#how-it-works">
@@ -29,110 +29,95 @@ partial: "/javascripts"
             </div>
         </div>
 
-        <div class="row">
+        <div class="profile row">
             <div class="col-lg-12">
-                <h1 class="mb-0">Alice B. Carol</h1>
-                <strong class="username">@alicebcarol</strong>
+                <h1 id="profile-name" class="mb-0"></h1>
+                <strong id="profile-username" class="username"></strong>
+                <a class="ml-2" href="#"
+                    title="This is the pseudonym we anonymize your Facebook data with">
+                    <span class="icon-info-circle"></span>
+                </a>
             </div>
         </div>
 
-        <div class="row d-none">
-            <div class="col-lg-8">
-                <span>Filters By</span>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item">
-                        <button type="button" onclick="filterBy()">
-                            All Types
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="filterBy('.posts')">
-                            Posts
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="filterBy('.photo')">
-                            Pictures
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="filterBy('.videos')">
-                            Videos
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="filterBy('.groups')">
-                            Groups
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="filterBy('.events')">
-                            Events
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="filterBy('.advertisement')">
-                            Advertisements
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-lg-3">
-                <span>Sort By</span>
-                <ul class="list-group mb-5">
-                    <li class="list-group-item">
-                        <button type="button" onclick="sortBy('date')">
-                            Date
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="sortBy('author')">
-                            Author
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="sortBy('type')">
-                            Type
-                        </button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" onclick="sortBy()">
-                            Original
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <span>Your Recent Use</span>
-                <div class="container-c3 pt-3 pr-1 pb-3 pl-1 mb-3">
-                    <ul class="nav nav-tabs" id="dailyTab">
-                        <li class="nav-item">
-                           <a class="nav-link active" id="overview-tab"
-                              data-toggle="tab" href="#daily-overview"
-                              role="tab" aria-controls="overview" aria-selected="true">
-                                Overview
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="timeline-tab"
-                                data-toggle="tab"  href="#daily-timeline"
-                                role="tab" aria-controls="timeline">
-                                Timeline
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="dailyTabContent">
-                        <div class="tab-pane fade show active d-flex flex-row"
-                             id="daily-overview" role="tabpanel" aria-labelledby="home-tab">
+        <div class="pt-3 pb-3 mb-3">
+            <ul class="nav nav-tabs" id="dailyTab">
+                <li class="nav-item">
+                   <a class="nav-link active" id="overview-tab"
+                      data-toggle="tab" href="#daily-overview"
+                      role="tab" aria-controls="overview" aria-selected="true">
+                        Overview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="timeline-tab"
+                        data-toggle="tab"  href="#daily-timeline"
+                        role="tab" aria-controls="timeline">
+                        Timeline
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content bg-white " id="dailyTabContent">
+                <div class="tab-pane fade show active d-flex flex-row pt-4 pr-3
+                pl-3"
+                     id="daily-overview" role="tabpanel"
+                     aria-labelledby="overview-tab">
+                </div>
+                <div class="tab-pane fade p-3"
+                     id="daily-timeline" role="tabpanel"
+                     aria-labelledby="timeline-tab">
+                    <div class="row mb-3">
+                        <div class="col-lg-8">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" onclick="filterBy()">
+                                        All Types
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="filterBy('.organic')">
+                                        Organic
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="filterBy('.advertisement')">
+                                        Advertisements
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="tab-pane fade p-3"
-                             id="daily-timeline" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="col-lg-4">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" onclick="sortBy('date')">
+                                        Date
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="sortBy('author')">
+                                        Author
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="sortBy('type')">
+                                        Type
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="sortBy()">
+                                        Original
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+
                 </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-lg-12">
             </div>
         </div>
         <div class="clearfix"></div>
