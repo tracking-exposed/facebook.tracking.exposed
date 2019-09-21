@@ -1,31 +1,23 @@
-const dev = true
 
 let url_feed = "https://testing.tracking.exposed/feeds/0"
-if (dev) {
-    url_feed = "https://testing.tracking.exposed/feeds/0"
-}
 
 var getToken = function() {
-  if (dev) {
+  /*
     let token = "testing-token"
     return token;
-  } else {
-    let token = _.find(window.location.pathname.split('/'), function(e) {
-        return _.size(e) == 40;
-    });
-    if (!token) {
-      console.log("Wrong token length in the URL");
-      return "";
-    }
+  */
+  const token = window.location.href.split('/').pop().substr(1, 40);
+  if (_.size(token) != 40 ) {
+    console.log("Wrong token length in the URL");
+    return "";
   }
+  return token;
 }
 
 var buildApiUrl = function(end) {
   let api_path = "/api/v2"
-  if (dev) {
-    api_path = "/fixtures"
-  	end = end + ".json"
-  }
-  console.log(`double check: URL composed ${window.location.origin}${api_path}${end}`);
-  return `${window.location.origin}${api_path}${end}`
+  const host = 'https://testing.tracking.exposed' // window.location.origin;
+  const ret = `${host}${api_path}${end}`
+  console.log(`double check: URL composed ${ret}`);
+  return ret;
 }
