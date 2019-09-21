@@ -322,8 +322,8 @@ draft: false
 {{<resource
   kind="event"
   when="September"
-  title="Cyber Resistence in 2016 consist into algorithm reversing and not into encryption anymore"
+  title="Cyber Resistance in 2016 consist in doing algorithm reversing!"
   description="The first appearance record in the public!"
   href="https://www.youtube.com/watch?v=ayZeNKjX4i4"
   authors="Claudio Agosti"
-  description="This is the project inception to the public! but the very birthday was here: https://moca.olografix.org/en/moca-en/" >}}
+  description="This is the project inception to the public! The original title was complete by saying 'not encryption anymore', but might sounds misleading. Encryption is a fundamental element for protection, simply is not just that. Despite this is first appearance of the project in public, the very first birthday was here: https://moca.olografix.org/en/moca-en/" >}}
