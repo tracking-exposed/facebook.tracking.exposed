@@ -27,7 +27,8 @@ draft: false
   kind="link"
   description="a dozen of scholars try to measure how YouTube algorithm personalize the 'related' video list"
   href="https://data-activism.net/2019/07/youtube-algorithm-exposed-dmi-summer-school-project-week-1/"
-  resources="https://docs.google.com/document/d/1zZC7_GG6IFGnHtfk6cjqIDjDlYphZlds71ZeKMD2S9Y" >}}
+  resource1="Final report"
+  resource1href="https://docs.google.com/document/d/1zZC7_GG6IFGnHtfk6cjqIDjDlYphZlds71ZeKMD2S9Y" >}}
 
 {{<resource
   kind="link"
@@ -37,7 +38,8 @@ draft: false
   author="DATACTIVE"
   authorLink="https://data-activism.net/"
   description="The statement on the EU19 tracking exposed project website portrays why academic research should not be delimited by corporate conditions for research only;  we should engage in independent critical research to platforms that important for our online public democratic spaces."
-  link="https://data-activism.net/2019/05/fbtrex-reaction-to-facebook-collaboration/"
+  resource1="ALEX blogpost"
+  resource1href="https://data-activism.net/2019/05/fbtrex-reaction-to-facebook-collaboration/"
   href="https://eu19.tracking.exposed/page/data-activism/" >}}
 
 {{<resource
@@ -87,14 +89,14 @@ draft: false
   authors="Stefania Milan and Claudio Agosti"
   href="https://policyreview.info/articles/news/personalisation-algorithms-and-elections-breaking-free-filter-bubble/1385" >}}
 
-
 {{<resource
   kind="video"
   title="Transmediale: Affects Ex-Machina: Unboxing Social Data Algorithms"
   when="February"  
   description="Conventional media have long filtered information and influenced public opinion. In the age of social media, this process has become algorithmic and targeted, separating the whole of society into thousands of small filter bubbles that construct collective orientations and pilot viral phenomena. This panel examines how machine learning and obscure algorithms analyze and manipulate individual affects into political sentiments, eventually amplifying class, gender, and racial bias ― with Claudio Agosti, Ariana Dongus, Nayantara Ranganathan, Caroline Sinders. Organized by KIM | HfG Karlsruhe"
   href="https://transmediale.de/content/affects-ex-machina-unboxing-social-data-algorithms"
-  video="https://vimeo.com/322250610" >}}
+  resource1="Video"
+  resource1hrefvideo="https://vimeo.com/322250610" >}}
 
 {{<resource
   kind="event"
@@ -109,7 +111,8 @@ draft: false
   when="January"
   description="Coordinated by TacticalTech. ― There is a growing body of research into data-driven elections world-wide and the international nature of the data and elections industry has been highlighted: from international platforms, to strategists in one country advising political groups in another, to paid targeted ads across borders. ― Ailidh Callander, Claudio Agosti, Paul Bernal, Victoria Peuvrelle"
   href="https://www.cpdpconferences.org/cpdp-panels/data-and-elections-an-international-problem-with-no-international-solution"
-  video="https://vimeo.com/317686100">}}
+  resource1href="https://vimeo.com/317686100"
+  resource1="Video" >}}
 
 {{<resource
   kind="event"
@@ -120,11 +123,12 @@ draft: false
 
 {{<resource
   kind="link"
-  link="https://eu19.tracking.exposed"
+  href="https://eu19.tracking.exposed"
   when="January"
   title="Facebook algorithm analysis during the European Election: a campaign"
   description="Our goal and experiment were to build a replicable campaign. Researchers or activist are invited to reach out to us; we can help in replicate the campaign in times of conflicts, electoral campaign, or general observation on how forces distort the perception of the public debate."
-  pdf="https://github.com/tracking-exposed/presentation/blob/master/European%20Election%20action%20plan%20-%20v1.3.pdf" >}}
+  resource1="Action plan wrote in November 2018"
+  resource1href="https://github.com/tracking-exposed/presentation/blob/master/European%20Election%20action%20plan%20-%20v1.3.pdf" >}}
 
 {{<resource
   kind="event"
@@ -132,7 +136,8 @@ draft: false
   description="An experiment with a dozen of scholars, in keeping bots alive, test algorithm, see and play with data"
   authors="Giovanni Rossetti, Bilel Benbouzid, Davide Beraldo, Giulia Corona, Leonardo Sanna, Iain Emsley, Fatma Yalgin, Hannah Vischer, Victor Pak, Mathilde Simon, Victor Bouwmeester, Yao Chen, Sophia Melanson, Hanna Jemmer, Patrick Kapsch, Claudio Agosti, Jeroen de Vos"
   href="https://data-activism.net/2019/01/alex-dmi-winterschool/"
-  resource="https://github.com/tracking-exposed/presentation/blob/master/Facebook%20Algorithm%20Exposed%20(UvA%20WinterSchool%202019).pdf" >}}
+  resource1="slides"
+  resource1href="https://github.com/tracking-exposed/presentation/blob/master/Facebook%20Algorithm%20Exposed%20(UvA%20WinterSchool%202019).pdf" >}}
 
 {{<resource
    language="French"
@@ -148,12 +153,14 @@ draft: false
 
 {{<resource
   kind="video"
-  title="CCC - Analyze the Facebook algorithm and reclaim algorithm sovereignty"
+  title="CCC — Analyze the Facebook algorithm and reclaim algorithm sovereignty"
   when="December"
   description="Facebook monopoly is an issue, but looking for replacements it is not enough. We want to develop critical judgment on algorithms, on why data politics matter and educate, raise awareness for a broad audience."
-  resources="https://github.com/tracking-exposed/presentation/blob/master/Analyzing%20the%20Facebook%20algorithm%20-%201.1%20-%2035c3.pdf"
+  resource1href="https://github.com/tracking-exposed/presentation/blob/master/Analyzing%20the%20Facebook%20algorithm%20-%201.1%20-%2035c3.pdf"
+  resource1="slides"
   href="https://fahrplan.events.ccc.de/congress/2018/Fahrplan/events/9797.html"
-  video="https://media.ccc.de/v/35c3-9797-analyze_the_facebook_algorithm_and_reclaim_data_sovereignty" >}}
+  resource2="video"
+  resource2href="https://media.ccc.de/v/35c3-9797-analyze_the_facebook_algorithm_and_reclaim_data_sovereignty" >}}
 
 {{<resource
   kind="paper"
@@ -161,27 +168,28 @@ draft: false
   title="Fairness in online social network timelines: Measurements, models and mechanism design"
   description="(PEVA) Performance Evaluation 2018. DOI:10.1016/j.peva.2018.09.009"
   href="https://arxiv.org/pdf/1809.05530.pdf"
-  authors="Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman"
-  pdf="https://eduardohargreaves.files.wordpress.com/2018/11/fairness_arxiv.pdf" >}}
+  authors="Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman" >}}
 
 {{<resource
   kind="paper"
   when="October"
   title="Biases in the Facebook News Feed: a Case Study on the Italian Elections"
   description="Fosint-SI 2018, in conjunction with ASONAM 2018, Proceedings of the 2018 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining"
-  pdf="https://arxiv.org/pdf/1807.08346.pdf"
-  resources="DOI:10.1109/ASONAM.2018.8508659"
+  href="https://arxiv.org/pdf/1807.08346.pdf"
+  resource1="DOI"
+  resource1href="https://doi.org/10.1109/ASONAM.2018.8508659"
   authors="Eduardo Hargreaves, Claudio Agosti, Daniel Menasche, Giovanni Neglia, Alexandre Reiffers-Masson, and Eitan Altman" >}}
 
 {{<resource
   kind="paper"
   when="July"
-  language="Brasilian"
+  language="Brazilian"
   title="Visibilidade no Facebook: Modelos, Medições e Implicações"
   description="Proceedings of the Brazilian Workshop on Social Network Analysis and Mining"
-  href="https://eduardohargreaves.files.wordpress.com/2018/07/visibilidade-facebook-modelos-7.pdf"
   authors="Brasnam, Eduardo Hargreaves, Daniel Sadoc Menasché, Giovanni Neglia, and Claudio Agosti"
-  link="http://portaldeconteudo.sbc.org.br/index.php/brasnam/article/view/3591)">}}
+  resource1="Paper"
+  resource1href="https://eduardohargreaves.files.wordpress.com/2018/07/visibilidade-facebook-modelos-7.pdf"
+  href="http://portaldeconteudo.sbc.org.br/index.php/brasnam/article/view/3591)">}}
 
 {{<resource
   kind="paper"
@@ -189,7 +197,8 @@ draft: false
   title="Italian political election and digital propaganda"
   description="TacticalTech publish a report written by Claudio Agosti and Fabio Chiusi"
   href="https://ourdataourselves.tacticaltech.org/posts/overview-italy/)"
-  link="https://github.com/tracking-exposed/experiments-data/tree/master/e18" >}}
+  resource1="Open data"
+  resource1hreflink="https://github.com/tracking-exposed/experiments-data/tree/master/e18" >}}
 
 {{<resource
   kind="paper"
@@ -200,7 +209,8 @@ draft: false
   authors="Renata Ávila, Juan Ortiz Freuler and Craig Fagan. Claudio Agosti and the Facebook Tracking Exposed team"
   title="The invisible curation of content | Facebook’s News Feed and our information diets"
   description="WebFoundation released a report produced by a joint collaboration; We performed a test in Argentina, release open data and analysis of six profiles run by us. The experiment was meant to measure the algorithm influence on the perception of public debate."
-  resources="Open data: https://github.com/tracking-exposed/experiments-data/tree/master/wto"
+  resource1="Open data"
+  resource1href="https://github.com/tracking-exposed/experiments-data/tree/master/wto"
   href="https://webfoundation.org/research/the-invisible-curation-of-content-facebooks-news-feed-and-our-information-diets/" >}}
 
 {{<resource
@@ -210,8 +220,7 @@ draft: false
   authors="Federico Sarchi, Claudio Agosti, Costantino Carugno, Barbara Gianessi, Riccardo Coluccini, Raffaele Angus, Laura Boschi, Gianluca Oldani, Umberto Boschi, Manuel d’Orso"
   title="Italian election 2018, our research output"
   description="An original analysis with profiles under our control. A fascinating series of discovery on how to measure the algorithm space. This is the same analysis we will talk about in the following 10 months page, because iconic, insightful, and pretty hard to coordinate."
-  href="https://elezioni.tracking.exposed"
-  link="https://elezioni.tracking.exposed" >}}
+  href="https://elezioni.tracking.exposed" >}}
 
 ## 2017
 
@@ -220,7 +229,8 @@ draft: false
   when="November"
   kind="event"
   href="https://www.coe.int/en/web/world-forum-democracy/2017-lab-bursting-social-media-eco-chambers"
-  resources="http://rm.coe.int/wfd-2017-report-lab-7-bursting-social-media-eco-chambers/16807701f8"
+  resource1="Laboratory: two pages final report"
+  resource1href="http://rm.coe.int/wfd-2017-report-lab-7-bursting-social-media-eco-chambers/16807701f8"
   title="World Forum Democracy — Bursting social media eco chambers" >}}
 
 {{<resource
@@ -236,7 +246,8 @@ draft: false
   title="SHA2017 — Exposing what Facebook wants you to see"
   when="July"
   description="A talk about our early version of fbTREX, after 1 year of existence"
-  resources="https://github.com/tracking-exposed/presentation/blob/master/FBTREX-SHA-2017.pdf" >}}
+  resource1="Slides"
+  resource1href="https://github.com/tracking-exposed/presentation/blob/master/FBTREX-SHA-2017.pdf" >}}
 
 {{<resource
   kind="article"
@@ -263,11 +274,12 @@ draft: false
   when="April"
   title="Panel discussion \"exposing what Facebook wants you to see\""
   authors="Renata Avila, Federico Sarchi, Claudio Agosti"
-  resources="https://www.youtube.com/watch?v=wpnmDz9Os50" >}}
+  resource1="Video"
+  resource1href="https://www.youtube.com/watch?v=wpnmDz9Os50" >}}
 
 {{<resource
   kind="article"
-  hreF="https://www.oneworld.nl/achtergrond/deze-tool-checkt-facebook-echt-de-verkiezingen-beinvloedt/"
+  href="https://www.oneworld.nl/achtergrond/deze-tool-checkt-facebook-echt-de-verkiezingen-beinvloedt/"
   language="Dutch"
   when="March"
   nature="external"
@@ -290,8 +302,9 @@ draft: false
   kind="event"
   title="facebook.tracking.exposed project announcement"
   description="At c-base, Berlin, one of the first video of fbTREX in the wild, when the beta version was beginning"
-  video="https://vimeo.com/189842857"
-  href="/legacy/talks-netzpolitischer054/"
+  resource1="Web slides"
+  resource1href="/legacy/talks-netzpolitischer054/"
+  href="https://vimeo.com/189842857"
   when="November"
   authors="Claudio Agosti" >}}
 
@@ -322,6 +335,7 @@ draft: false
 {{<resource
   kind="event"
   when="September"
+  language="Italian"
   title="Cyber Resistance in 2016 consist in doing algorithm reversing!"
   description="The first appearance record in the public!"
   href="https://www.youtube.com/watch?v=ayZeNKjX4i4"
