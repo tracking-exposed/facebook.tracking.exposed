@@ -64,13 +64,22 @@ draft: false
   href="https://privacyinternational.org/examples/data-exploitation-italian-elections" >}}
 
 {{<resource
+  kind="link"
+  title="Datathon organized with berlin Data Science Social Good"
+  nature="external"
+  author="Berlin DSSG"
+  authorLink="https://dssg-berlin.org/"
+  description="data scientists analyzing one year of fbtrex data. We did a privacy assessment and defined minimization and confidentiality agreement, as collaborator of the project for the time of the experiment. They "
+  href="https://blog.dssg-berlin.org/dssg-datathon-2019-ein-ganzes-wochenende-lang-datenanalyse-f%C3%BCrs-gemeinwohl-4ec6ffa95aec" >}}
+
+{{<resource
   kind="article"
   when="April"
   author="Paola Pietrandrea"
   nature="external"
   title="Devoiler Les Algorithmes Pour Sortir De Nos Bulles"
   language="French"
-  description="The personalization algorithms used by social networks induce a segregation effect. In this post, the journalist assemble and analyze few articles of ours, and integrate with answers from Claudio Agosti, Umberto Boschi, Stefania Milan and Federico Sarchi."
+  description="The personalization algorithms used by social networks induce a segregation effect. In this post, the journalist assemble and analyze few articles of ours, and integrate with answers from Claudio, Umberto, Stefania and Federico."
   href="https://blogs.mediapart.fr/edition/europeennes-des-elections-sous-surveillance/article/110419/devoiler-les-algorithmes-pour-sortir-de-nos-bulles" >}}
 
 {{<resource
@@ -305,8 +314,13 @@ draft: false
   resource1="Web slides"
   resource1href="/legacy/talks-netzpolitischer054/"
   href="https://vimeo.com/189842857"
-  when="November"
-  authors="Claudio Agosti" >}}
+  when="November" >}}
+
+{{<resource
+  kind="event"
+  title="We got the first logo(s)"
+  description="Luca Corsato built opensensorsdata (OSD) with Andrea Raimondi and Simone Cortesi. They been the first very sponsor of Tracking Exposed. Among other helps, the day before the presentation Luca sent the first logo. Yet already declined for Twitter and Youtube."
+  href="https://tracking.exposed/news/2019-09-23-thanks-osd" >}}
 
 {{<resource
   kind="event"
@@ -315,6 +329,14 @@ draft: false
   description="At the C-Base Hack'n'Tell, when Alberto won the monthly price, our new web-extension was released!"
   href="https://docs.google.com/presentation/d/e/2PACX-1vR1Tz-G2fm9Nu0oe8lrAoG8aYCamT2kpZAn98B-AHP-ZNli88A4u5hOKrp-UMBDP4Iq2NP3Bl3xY0C5/pub?start=false&loop=false&slide=id.p"
   resources="we won a price but we lost the evidence!" >}}
+
+{{<resource
+  kind="event"
+  when="October"
+  title="facebook.tracking.exposed (project pitch)"
+  description="At PyData the very first presentation of Alberto, when he started to develop the new web-extension"
+  href="https://docs.google.com/presentation/d/1uDd2oNxWSOJPfm-Jrm0k-4SBS2BNAomfhF6Ef_609So/edit#slide=id.p"
+  authors="Alberto Granzotto" >}}
 
 {{<resource
   kind="video"
@@ -326,18 +348,10 @@ draft: false
 
 {{<resource
   kind="event"
-  when="October"
-  title="facebook.tracking.exposed (project pitch)"
-  description="At PyData the very first presentation of Alberto, when he started to develop the new web-extension"
-  href="https://docs.google.com/presentation/d/1uDd2oNxWSOJPfm-Jrm0k-4SBS2BNAomfhF6Ef_609So/edit#slide=id.p"
-  authors="Alberto Granzotto" >}}
-
-{{<resource
-  kind="event"
   when="September"
   language="Italian"
   title="Cyber Resistance in 2016 consist in doing algorithm reversing!"
   description="The first appearance record in the public!"
   href="https://www.youtube.com/watch?v=ayZeNKjX4i4"
   authors="Claudio Agosti"
-  description="This is the project inception to the public! The original title was complete by saying 'not encryption anymore', but might sounds misleading. Encryption is a fundamental element for protection, simply is not just that. Despite this is first appearance of the project in public, the very first birthday was here: https://moca.olografix.org/en/moca-en/" >}}
+  description="This is the project inception to the public! The original title was complete by saying 'not encryption anymore', but might sounds misleading. Encryption is a fundamental element for protection, simply, the impact of social media in our perception of reality is unmeasured, subtle, and potentially scaring. But is not for fear this call, is because, with centralization, we lose as individual the ability to control our own algorithm. P.S. Despite this is first appearance of the project in public, the very first birthday was here: https://moca.olografix.org/en/moca-en/ !" >}}
