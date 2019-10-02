@@ -5,70 +5,95 @@ let $grid;
 
 const posts = {}
 
-function initializeToken() {
+function initializeReality() {
   const token = getToken();
-  $('#token').text(token);
+  if (token) {
+    $('#token').text(token);
+    initializeDaily(token);   
+  } else {
+    $('#get-started').removeClass('d-none');
+  }
 }
 
-function initializeDaily() {
-  const token = getToken();
+function initializeDaily(token) {
+  $('#loading-data').removeClass('d-none');
   const url = buildApiUrl(`/personal/${token}/daily/0-3`);
 
   $.getJSON(url, (data) => {
     let daily = ''
 
-    _.forEach(data, function(item, count) {
-        let hasBorder = '';
-        if (count > 0 ) {
-            hasBorder = 'graph-day-border'
-        }
-
-        daily = `<div class="graph-day flex-fill pl-3 pr-3 ${hasBorder}">
-            <span class="text-muted">${moment(item.day).format('LL')}</span><br>
-            <span class="seconds">${Math.round(item.totalSeconds / 60)}</span><br>
-            Minutes Spent<br>
-            <div id="daily-pie-${count}" class="daily-pie"></div>
-            <p><span class="posts">${item.npost}</span><br>
-            Posts Read</p>
-        </div>`;
-        $('#daily-overview').append(daily)
-
-        let pieId = `#daily-pie-${count}`;
-        let pieChart = c3.generate({
-            bindto: pieId,
-            data: {
-                columns: [
-                    ['organic', item.nature.organic],
-                    ['ads', item.nature.sponsored]
-                ],
-                type: 'pie',
-                labels: false
-            },
-            color: {
-                pattern: ['#3b5898', '#d9d9d9']
-            },
-            legend: {
-                show: false
-            },
-            size: {
-                height: 180,
-                width: 180
-            }
+    if (data.length > 0) {
+        var hasNature = _.find(data, function(item) {
+            return Object.keys(item.nature).length > 0; 
         });
 
-        showSpecificDay(item.day);
-    });
+        if (hasNature != undefined) {
+            _.forEach(data, function(item, count) { 
+                let hasBorder = '';
+                if (count > 0 ) {
+                    hasBorder = 'graph-day-border'
+                }
 
-    $('#dailyTab a').on('click', function(e) {
-        e.preventDefault()
-        var goToTab = $(this)[0].hash.replace('#daily-', '');
-        console.log('switch to: ' + goToTab);
-        if (goToTab == 'timeline') {
-            $('#daily-overview').removeClass('d-flex flex-row').addClass('d-none');
+                daily = `<div class="graph-day flex-fill pl-3 pr-3 ${hasBorder}">
+                    <span class="text-muted">${moment(item.day).format('LL')}</span><br>
+                    <span class="seconds">${Math.round(item.totalSeconds / 60)}</span><br>
+                    Minutes Spent<br>
+                    <div id="daily-pie-${count}" class="daily-pie"></div>
+                    <p><span class="posts">${item.npost}</span><br>
+                    Posts Read</p>
+                </div>`;
+                $('#daily-overview').append(daily)
+
+                let pieId = `#daily-pie-${count}`;
+                let pieChart = c3.generate({
+                    bindto: pieId,
+                    data: {
+                        columns: [
+                            ['organic', item.nature.organic],
+                            ['ads', item.nature.sponsored]
+                        ],
+                        type: 'pie',
+                        labels: false
+                    },
+                    color: {
+                        pattern: ['#3b5898', '#d9d9d9']
+                    },
+                    legend: {
+                        show: false
+                    },
+                    size: {
+                        height: 180,
+                        width: 180
+                    }
+                });
+
+                showSpecificDay(item.day);
+            });
+
+            $('#dailyTab a').on('click', function(e) {
+                e.preventDefault()
+                var goToTab = $(this)[0].hash.replace('#daily-', '');
+                console.log('switch to: ' + goToTab);
+                if (goToTab == 'timeline') {
+                    $('#daily-overview').removeClass('d-flex flex-row').addClass('d-none');
+                } else {
+                    $('#daily-overview').removeClass('d-none').addClass('d-flex flex-row');
+                }
+            });
+
+            $('#loading-data').addClass('d-none');
+            $('#profile').removeClass('d-none');
+            $('#visualization').removeClass('d-none');
         } else {
-            $('#daily-overview').removeClass('d-none').addClass('d-flex flex-row');
+            // where api has data but item.nature is empty object
+            $('#loading-fetching').addClass('d-none');
+            $('#loading-empty').removeClass('d-none');
         }
-    });
+    } else {
+       // where the api has no objects at all returned 
+       $('#loading-fetching').addClass('d-none');
+       $('#loading-empty').removeClass('d-none');
+    }
   });
 }
 

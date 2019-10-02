@@ -9,29 +9,75 @@ partial: "/javascripts"
 <link rel="stylesheet" href="/css/c3.min.css">
 <div id="reality-check">
     <div class="container pt-3">
-        <div class="masthead row mb-1">
+        <div class="masthead row mb-1 pt-2 pb-2">
             <div class="col-sm-4 col-md-4 col-lg-2">
-                <div class="avatar"></div>
+                <div class="logo"></div>
             </div>
             <div class="col-sm-8 col-md-8 col-lg-10">
-                <h1>Reality Check</h1>
+                <h1 class="mt-4">Reality Check</h1>
                 <p class="text-muted">
-                    Understand how Zuck & Co. think you should see reality
+                    Understanding the topics Facebook chooses to show you
                 </p>
             </div>
             <div class="d-none col-sm-12 col-lg-4">
-                <a class="btn btn-block btn-light mt-3 mb-3" href="#how-it-works">
-                    How It Works
-                </a>
-                <a class="btn btn-block btn-facebook" href="#check-your-reality">
-                    Check Your Reality
-                </a>
             </div>
         </div>
 
-        <div class="profile row">
-            <div class="col-lg-12">
-                <h1 id="profile-name" class="mb-0"></h1>
+        <div id="get-started" class="row mt-3 mb-5 container-fb d-none">
+            <div class="col-lg-6 p-5">
+                <h2>Welcome</h2>
+                <p>
+                    Do you feel like a lab rat being emotionally manipulated
+                    when you use Facebook simply to hear about things going on
+                    with your friends and in the world?
+                </p>
+                <p>
+                    If you are interested in understanding how Zuck & Co. at 1
+                    Hacker Way think you want to be seeing the world, Reality 
+                    Check is for you! 
+                </p>
+            </div>
+            <div class="col-lg-6 p-5">
+                <div class="mt-5">
+                    <a class="btn btn-block btn-facebook" href="#check-your-reality">
+                        Check Your Reality
+                    </a>
+                </div>
+                <div>
+                    <a class="btn btn-block btn-light mt-3 mb-3" href="/background/ethics">
+                        Learn How It Works
+                    </a>
+                </div>
+            </div>
+        </div>
+ 
+        <div id="loading-data" class="row mt-3 mb-5 d-none container-fb">
+            <div id="loading-fetching" class="col-12 text-center p-5">
+                <img src="/images/preloader.gif" class="mt-3 mb-3">
+                <h3 class="text-muted">
+                    Loading...
+                </h3>
+                <p class="text-muted">
+                    Fetching your data from our server
+                </p>
+            </div>
+            <div id="loading-empty" class="col-12 text-center p-5 d-none">
+                <h3>Not Enough Data</h3>
+                <p>We have not been able to save enough data from Facebook to do
+                show you an analysis of anything yet. To see results, please
+                contonue to browse Facebook normally while our extension is
+                installed.</p>
+            </div>
+        </div>
+
+        <div id="profile" class="profile row mt-3 mb-3 d-none">
+            <div class="col-lg-1 pl-0">
+                <div class="avatar text-center p-2">
+                    <img src="/images/no-profile-picture.png">
+                </div>
+            </div>
+            <div class="col-lg-11">
+                <h1 id="profile-name" class="mb-0 no-name"></h1>
                 <strong id="profile-username" class="username"></strong>
                 <a class="ml-2" href="#"
                     title="This is the pseudonym we anonymize your Facebook data with">
@@ -40,7 +86,7 @@ partial: "/javascripts"
             </div>
         </div>
 
-        <div class="pt-3 pb-3 mb-3">
+        <div id="visualization" class="pt-3 pb-3 mb-3 d-none">
             <ul class="nav nav-tabs" id="dailyTab">
                 <li class="nav-item">
                    <a class="nav-link active" id="overview-tab"
@@ -131,8 +177,6 @@ partial: "/javascripts"
 <script src="/js/reality-check.js"></script>
 <script>
 $(document).ready(function() {
-    //initializeSummary();
-    //initializeStats();
-    initializeDaily();
+    initializeReality();
 });
 </script>
