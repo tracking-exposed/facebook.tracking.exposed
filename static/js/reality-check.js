@@ -4,9 +4,9 @@ let $grid;
  * the file in content/api-documentation.md */
 
 const posts = {}
+const token = getToken();
 
 function initializeReality() {
-  const token = getToken();
   if (token) {
     $('#token').text(token);
     initializeDaily(token);   
@@ -28,7 +28,7 @@ function initializeDaily(token) {
         });
 
         if (hasNature != undefined) {
-            _.forEach(data, function(item, count) { 
+            _.forEach(_.reverse(data), function(item, count) { 
                 let hasBorder = '';
                 if (count > 0 ) {
                     hasBorder = 'graph-day-border'
@@ -162,7 +162,8 @@ function showSpecificDay(day) {
                     });
 
                     if (topicsOrdered.length > 4) {
-                        showAllLink = `<a class="text-muted" href="show-topics-${item.semanticId}">
+                        showAllLink = `
+                        <a class="show-topics text-muted" data-semid="${item.semanticId}" title="Show all topics" href="#${token}">
                             ...
                         </a>`;
                     }
@@ -181,7 +182,7 @@ function showSpecificDay(day) {
                     <div id="daily-${day}-${item.semanticId}" class="row">
                         <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-lg-3">
                             <strong>Topics</strong>
-                            <ul class="list m-0 p-0">
+                            <ul id="topics-${item.semanticId}" class="list m-0 p-0">
                                 ${htmlTopic}
                             </ul>
                             ${showAllLink}
@@ -206,6 +207,11 @@ function showSpecificDay(day) {
                 }
             }
         });
+
+        $('.show-topics').on('click', function(e) {
+            e.preventDefault();
+            $('#topics-' + $(this).data('semid')).find('.list-item').removeClass('d-none')
+        }); 
     });
 }
 
