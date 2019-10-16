@@ -10,10 +10,24 @@ The API here documented are implemented in our [AGPL3 code](https://github.com/t
 The base URL to access our API is:
 `https://facebook.tracking.exposed/api/v2/`.
 
-There are some variables you need to have to perform a successful HTTP GET:
+#### Paging
 
-`paging` defines the number of entries that are retrieved by the API, as well as the number of entries to skip. For example, if you call `/200-50` at the end of a "Summary" query, you will get 200 entries and skip the 50 most recent ones. If you call `/2000-0` you will just get the 2000 most recent entries.
+There are some variables you need to have to perform a successful HTTP GET.
+The `$paging` variable defines the number of entries that are retrieved by the API, as well
+as the number of entries to skip. Some examples of `$paging` are: 
+
+- `/3-0/` - Get 3 items (minimum result) and skip 0 items
+- `/3-2/` - Get 3 items and skip the most recent 2
+- `/5-3/` - Get 5 items and skipping the most recent 3
+
+If you call `/2000-0` you will just get the 2000 most recent entries.
+For example, if you call `/200-50` at the end of a "Summary" query
+
+- `/200-50` - Get 200 items and skip the most recent 50
+
 (_It is capped, you can't download all the data with just one query_).
+
+---
 
 # Personal API
 
@@ -554,19 +568,18 @@ TBD
 `https://facebook.tracking.exposed/api/v2/persona/daily/$PAGING`
 <br>
 #### Description
-Aggregated daily statistics on individual usage. It is used by realityCheck at the first visualization.
+Aggregated daily statistics on individual usage. It is used by [Reality Check](/reality-check/) at the first visualization.
 
 #### Data Specifics
 
 #### Request
 
-`https://facebook.tracking.exposed/api/v2/personal/thisisaworkingtokenusablewhenperformtest/daily/0-2`
+`https://facebook.tracking.exposed/api/v2/personal/thisisaworkingtokenusablewhenperformtest/daily/0-3`
 
 #### Response
 
-TBD
+TBD...
 
-****
 
 # Node API
 
