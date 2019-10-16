@@ -17,7 +17,7 @@ function initializeReality() {
 
 function initializeDaily(token) {
   $('#loading-data').removeClass('d-none');
-  const url = buildApiUrl(`/personal/${token}/daily/0-3`);
+  const url = buildApiUrl(`/personal/${token}/daily/3-0`);
 
   $.getJSON(url, (data) => {
     let daily = ''
@@ -26,7 +26,7 @@ function initializeDaily(token) {
         var hasNature = _.find(data, function(item) {
             return Object.keys(item.nature).length > 0; 
         });
-
+const days = [];
         if (hasNature != undefined) {
             _.forEach(_.reverse(data), function(item, count) { 
                 let hasBorder = '';
@@ -67,7 +67,22 @@ function initializeDaily(token) {
                     }
                 });
 
-                showSpecificDay(item.day);
+                days.push(item.day)
+            });
+
+            // fetch + render 'timeline'
+            _.forEach(_.reverse(days), function(day) {
+                const htmlDay = `
+                <div id="timeline-day-${day}">
+                    <div class="row mb-3 bg-light">
+                        <div class="col-lg-12">
+                            <h4>${moment(day).format('LL')}</h4>
+                        </div>
+                    </div>
+                `;
+
+                $('#daily-timeline').append(htmlDay); 
+                showSpecificDay(day);
             });
 
             $('#dailyTab a').on('click', function(e) {
@@ -98,9 +113,6 @@ function initializeDaily(token) {
 }
 
 function showSpecificDay(day) { 
-    day = day.replace('-06-', '-09-');
-
-    const token = getToken();
     const url = buildApiUrl(`/personal/${token}/enrich/${day}`);
 
     $.getJSON(url, (data) => {
@@ -110,20 +122,10 @@ function showSpecificDay(day) {
         $('#profile-username').html('@' + data[0].user);
 
         const semanticIds = {};
-        const htmlDay = `
-            <div class="row mb-3 bg-light">
-                <div class="col-lg-12">
-                    <h4>${moment(day).format('LL')}</h4>
-                </div>
-            </div>
-        `;
-
-        $('#daily-timeline').append(htmlDay); 
 
         // build topics
         _.forEach(data, function(item, count) {
             if (item.labels != undefined) {
-
                 // depending on occurence
                 if (semanticIds[item.semanticId]) {
                     semanticIds[item.semanticId] = semanticIds[item.semanticId] + 1;
@@ -150,7 +152,7 @@ function showSpecificDay(day) {
                         }        
                     });
 
-                    let topicsOrdered =_.orderBy(topicsCount, ['count'], ['desc']);
+                    let topicsOrdered = _.orderBy(topicsCount, ['count'], ['desc']);
                     let htmlTopic = '';
                     _.forEach(topicsOrdered, function(item, index) {
                         if (index > 4) { isHidden = 'd-none'; }
@@ -177,7 +179,6 @@ function showSpecificDay(day) {
                         <p>${item.texts[0]}</p>
                         See <a href="https://facebook.com${item.permaLink}">Original</a>
                     `;
-
                     const htmlItem = `
                     <div id="daily-${day}-${item.semanticId}" class="row">
                         <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-lg-3">
@@ -194,7 +195,9 @@ function showSpecificDay(day) {
                                 </a>
                                 ${isAd}
                             </strong>
-                            <span id="daily-seen-${item.semanticId}" class="float-right text-muted">
+                            <span id="daily-seen-${item.semanticId}" 
+                                  class="float-right text-muted"
+                                  title="Seen at ${moment(item.impressionTime).format('h:mm a')}">
                                 ${seenCount}
                             </span>
                             <div class="clearfix"></div>
@@ -203,7 +206,7 @@ function showSpecificDay(day) {
                     </div>
                     <hr>`;
 
-                    $('#daily-timeline').append(htmlItem); 
+                    $('#timeline-day-' + day).append(htmlItem); 
                 }
             }
         });
