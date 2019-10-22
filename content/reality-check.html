@@ -89,27 +89,37 @@ partial: "/javascripts"
             <ul class="nav nav-tabs" id="dailyTab">
                 <li class="nav-item">
                    <a class="nav-link active" id="overview-tab"
-                      data-toggle="tab" href="#daily-overview"
+                      data-toggle="tab" href="#daily-overview-pane"
                       role="tab" aria-controls="overview" aria-selected="true">
                         Overview
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="timeline-tab"
-                        data-toggle="tab"  href="#daily-timeline"
+                        data-toggle="tab"  href="#daily-timeline-pane"
                         role="tab" aria-controls="timeline">
                         Timeline
                     </a>
                 </li>
             </ul>
             <div class="tab-content bg-white " id="dailyTabContent">
-                <div class="tab-pane fade show active d-flex flex-row pt-4 pr-3
-                pl-3"
-                     id="daily-overview" role="tabpanel"
+                <div class="tab-pane fade show active d-flex flex-row pt-4 pl-3 pb-4 pr-3"
+                     id="daily-overview-pane" role="tabpanel"
                      aria-labelledby="overview-tab">
+                    <div class="col-1 text-left">
+                        <button class="btn-overview-paginate" data-direction="back">
+                            <
+                        </button>
+                    </div>
+                    <div id="daily-overview" class="col-10 d-flex flex-row"></div> 
+                    <div class="col-1">
+                        <button class="btn-overview-paginate" data-direction="next">
+                            >
+                        </button>
+                    </div>
                 </div>
                 <div class="tab-pane fade p-3"
-                     id="daily-timeline" role="tabpanel"
+                     id="daily-timeline-pane" role="tabpanel"
                      aria-labelledby="timeline-tab">
                     <div class="row mb-3">
                         <div class="col-lg-8">
@@ -156,7 +166,7 @@ partial: "/javascripts"
                             </ul>
                         </div>
                     </div>
-
+                    <div id="daily-timeline"></div>
                 </div>
             </div>
         </div>
@@ -176,6 +186,6 @@ partial: "/javascripts"
 <script src="/js/reality-check.js"></script>
 <script>
 $(document).ready(function() {
-    initializeReality();
+    initializeReality('3-0');
 });
 </script>

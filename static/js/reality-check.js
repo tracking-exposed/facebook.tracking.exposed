@@ -5,6 +5,8 @@ let $grid;
 
 const posts = {}
 const token = getToken();
+const overviewCount = 3;
+let overviewPlace = 0;
 
 function initializeReality() {
   if (token) {
@@ -15,9 +17,11 @@ function initializeReality() {
   }
 }
 
-function initializeDaily(token) {
+function initializeDaily(token, page) {
   $('#loading-data').removeClass('d-none');
-  const url = buildApiUrl(`/personal/${token}/daily/3-0`);
+  $('#daily-overview').html('');
+  $('#daily-timeline').html('');
+  let url = buildApiUrl(`/personal/${token}/daily/${page}`);
 
   $.getJSON(url, (data) => {
     let daily = ''
@@ -26,7 +30,8 @@ function initializeDaily(token) {
         var hasNature = _.find(data, function(item) {
             return Object.keys(item.nature).length > 0; 
         });
-const days = [];
+
+        const days = [];
         if (hasNature != undefined) {
             _.forEach(_.reverse(data), function(item, count) { 
                 let hasBorder = '';
@@ -42,6 +47,7 @@ const days = [];
                     <p><span class="posts">${item.npost}</span><br>
                     Posts Read</p>
                 </div>`;
+
                 $('#daily-overview').append(daily)
 
                 let pieId = `#daily-pie-${count}`;
@@ -70,13 +76,13 @@ const days = [];
                 days.push(item.day)
             });
 
-            // fetch + render 'timeline'
+            // fetch + render 'Topic Timeline'
             _.forEach(_.reverse(days), function(day) {
                 const htmlDay = `
                 <div id="timeline-day-${day}">
-                    <div class="row mb-3 bg-light">
+                    <div class="row mb-3 bg-facebook border rounded">
                         <div class="col-lg-12">
-                            <h4>${moment(day).format('LL')}</h4>
+                            <h5 class="mt-2">${moment(day).format('LL')}</h5>
                         </div>
                     </div>
                 `;
@@ -89,10 +95,10 @@ const days = [];
                 e.preventDefault()
                 var goToTab = $(this)[0].hash.replace('#daily-', '');
                 console.log('switch to: ' + goToTab);
-                if (goToTab == 'timeline') {
-                    $('#daily-overview').removeClass('d-flex flex-row').addClass('d-none');
+                if (goToTab == 'timeline-pane') {
+                    $('#daily-overview-pane').removeClass('d-flex flex-row').addClass('d-none');
                 } else {
-                    $('#daily-overview').removeClass('d-none').addClass('d-flex flex-row');
+                    $('#daily-overview-pane').removeClass('d-none').addClass('d-flex flex-row');
                 }
             });
 
@@ -111,6 +117,24 @@ const days = [];
     }
   });
 }
+
+// paginate buttons
+$('.btn-overview-paginate').on('click', function() {
+    var updatePage = function() {
+        var newPlace = overviewCount + '-' + overviewPlace;
+        initializeDaily(token, newPlace);
+    }
+
+    if ($(this).data('direction') == 'back') {
+        overviewPlace = overviewPlace + 1;
+        updatePage();
+    } else if ($(this).data('direction') == 'next' && overviewPlace > 0) {
+        overviewPlace = overviewPlace - 1;
+        updatePage();
+    } else {
+        console.log('err invalid pagination update')
+    }
+});
 
 function showSpecificDay(day) { 
     const url = buildApiUrl(`/personal/${token}/enrich/${day}`);
@@ -213,7 +237,8 @@ function showSpecificDay(day) {
 
         $('.show-topics').on('click', function(e) {
             e.preventDefault();
-            $('#topics-' + $(this).data('semid')).find('.list-item').removeClass('d-none')
+            $('#topics-' + $(this).data('semid')).find('.list-item').removeClass('d-none');
+            $(this).remove();
         }); 
     });
 }
