@@ -3,108 +3,86 @@ let $grid;
 /* in regards to the API used in this file, please consult
  * the file in content/api-documentation.md */
 
-const posts = {}
+const posts = {};
 const token = getToken();
-const overviewCount = 3;
+let days = [];
+let overviewCount = 3;
 let overviewPlace = 0;
 
-function initializeReality() {
+function initializeReality(page) {
   if (token) {
     $('#token').text(token);
-    initializeDaily(token);   
+    initializeDaily(token, page);
   } else {
     $('#get-started').removeClass('d-none');
   }
 }
 
-function initializeDaily(token, page) {
-  $('#loading-data').removeClass('d-none');
-  $('#daily-overview').html('');
-  $('#daily-timeline').html('');
-  let url = buildApiUrl(`/personal/${token}/daily/${page}`);
+function renderDay(item, count) {
+    daily = `<div id="day-${item.day}" class="graph-day flex-fill pl-3 pr-3 graph-day-border">
+        <span class="text-muted">${moment(item.day).format('LL')}</span><br>
+        <span class="seconds">${Math.round(item.totalSeconds / 60)}</span><br>
+        Minutes Spent<br>
+        <div id="daily-pie-${count}" class="daily-pie"></div>
+        <p><span class="posts">${item.npost}</span><br>
+        Posts Read</p>
+    </div>`;
 
-  $.getJSON(url, (data) => {
-    let daily = ''
+    if (count == 0) {
+        $('#daily-overview').prepend(daily)
+    } else if (count > 0) {
+        $('#daily-overview').append(daily)
+    } else {
+        console.log('weird count in renderDay');
+    }
 
+    let pieId = `#daily-pie-${count}`;
+    let pieChart = c3.generate({
+        bindto: pieId,
+        data: {
+            columns: [
+                ['organic', item.nature.organic],
+                ['ads', item.nature.sponsored]
+            ],
+            type: 'pie',
+            labels: false
+        },
+        color: {
+            pattern: ['#3b5898', '#d9d9d9']
+        },
+        legend: {
+            show: false
+        },
+        size: {
+            height: 180,
+            width: 180
+        }
+    });
+}
+
+function renderTimeline(days) {
+    _.forEach(_.reverse(days), function(day) {
+        const htmlDay = `
+        <div id="timeline-day-${day}">
+            <div class="row mb-3 bg-facebook border rounded">
+                <div class="col-lg-12">
+                    <h5 class="mt-2">${moment(day).format('LL')}</h5>
+                </div>
+            </div>
+        `;
+
+        $('#daily-timeline').append(htmlDay); 
+        renderTimelineDay(day);
+    });
+}
+
+function determineState(data) {
     if (data.length > 0) {
         var hasNature = _.find(data, function(item) {
             return Object.keys(item.nature).length > 0; 
         });
-
-        const days = [];
         if (hasNature != undefined) {
-            _.forEach(_.reverse(data), function(item, count) { 
-                let hasBorder = '';
-                if (count > 0 ) {
-                    hasBorder = 'graph-day-border'
-                }
-
-                daily = `<div class="graph-day flex-fill pl-3 pr-3 ${hasBorder}">
-                    <span class="text-muted">${moment(item.day).format('LL')}</span><br>
-                    <span class="seconds">${Math.round(item.totalSeconds / 60)}</span><br>
-                    Minutes Spent<br>
-                    <div id="daily-pie-${count}" class="daily-pie"></div>
-                    <p><span class="posts">${item.npost}</span><br>
-                    Posts Read</p>
-                </div>`;
-
-                $('#daily-overview').append(daily)
-
-                let pieId = `#daily-pie-${count}`;
-                let pieChart = c3.generate({
-                    bindto: pieId,
-                    data: {
-                        columns: [
-                            ['organic', item.nature.organic],
-                            ['ads', item.nature.sponsored]
-                        ],
-                        type: 'pie',
-                        labels: false
-                    },
-                    color: {
-                        pattern: ['#3b5898', '#d9d9d9']
-                    },
-                    legend: {
-                        show: false
-                    },
-                    size: {
-                        height: 180,
-                        width: 180
-                    }
-                });
-
-                days.push(item.day)
-            });
-
-            // fetch + render 'Topic Timeline'
-            _.forEach(_.reverse(days), function(day) {
-                const htmlDay = `
-                <div id="timeline-day-${day}">
-                    <div class="row mb-3 bg-facebook border rounded">
-                        <div class="col-lg-12">
-                            <h5 class="mt-2">${moment(day).format('LL')}</h5>
-                        </div>
-                    </div>
-                `;
-
-                $('#daily-timeline').append(htmlDay); 
-                showSpecificDay(day);
-            });
-
-            $('#dailyTab a').on('click', function(e) {
-                e.preventDefault()
-                var goToTab = $(this)[0].hash.replace('#daily-', '');
-                console.log('switch to: ' + goToTab);
-                if (goToTab == 'timeline-pane') {
-                    $('#daily-overview-pane').removeClass('d-flex flex-row').addClass('d-none');
-                } else {
-                    $('#daily-overview-pane').removeClass('d-none').addClass('d-flex flex-row');
-                }
-            });
-
-            $('#loading-data').addClass('d-none');
-            $('#profile').removeClass('d-none');
-            $('#visualization').removeClass('d-none');
+            return true;
         } else {
             // where api has data but item.nature is empty object
             $('#loading-fetching').addClass('d-none');
@@ -115,28 +93,104 @@ function initializeDaily(token, page) {
        $('#loading-fetching').addClass('d-none');
        $('#loading-empty').removeClass('d-none');
     }
-  });
+    return false;
+}
+
+function initializeDaily(token, page) {
+    $('#loading-data').removeClass('d-none');
+    $('#daily-overview').html('');
+    $('#daily-timeline').html('');
+    let url = buildApiUrl(`/personal/${token}/daily/${page}`);
+
+    $.getJSON(url, (data) => {
+        let daily = '';
+        if (determineState(data)) {
+            _.forEach(_.reverse(data), function(item, count) { 
+                renderDay(item, count);
+                days.push(item.day);
+            });
+
+            renderTimeline(days);
+
+            if (data.length == 3) {
+                var btnBack = $('.btn-overview-inactive')[0];
+                $(btnBack).removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
+                paginateButtons();            
+            }
+
+
+            $('#dailyTab a').on('click', function(e) {
+                e.preventDefault()
+                var goToTab = $(this)[0].hash.replace('#daily-', '');
+                if (goToTab == 'timeline-pane') {
+                    $('#daily-overview-pane').removeClass('d-flex flex-row').addClass('d-none');
+                } else {
+                    $('#daily-overview-pane').removeClass('d-none').addClass('d-flex flex-row');
+                }
+            });
+
+            $('#loading-data').addClass('d-none');
+            $('#profile').removeClass('d-none');
+            $('#visualization').removeClass('d-none');
+        }
+    });
+}
+
+var updateRenders = function(overviewPlace, viewCount, itemCount) {
+    var page = overviewCount + '-' + overviewPlace;
+    let url = buildApiUrl(`/personal/${token}/daily/${page}`);
+    $.getJSON(url, (data) => {
+      let daily = '';
+
+      if (data.length > 0) {
+        var hasNature = _.find(data, function(item) {
+            return Object.keys(item.nature).length > 0; 
+        });
+
+        if (hasNature != undefined) {
+            renderDay(data[itemCount], viewCount);
+
+            _.forEach(data, function(item, count) {
+                days.push(item.day)
+            });
+            console.log(days)
+            renderTimeline(_.reverse(days));
+        }
+      }
+    });
 }
 
 // paginate buttons
-$('.btn-overview-paginate').on('click', function() {
-    var updatePage = function() {
-        var newPlace = overviewCount + '-' + overviewPlace;
-        initializeDaily(token, newPlace);
-    }
+var paginateButtons = function() {
+    $('.btn-overview-paginate').on('click', function() {
+        days = [];
+        $('#daily-timeline').html('');
 
-    if ($(this).data('direction') == 'back') {
-        overviewPlace = overviewPlace + 1;
-        updatePage();
-    } else if ($(this).data('direction') == 'next' && overviewPlace > 0) {
-        overviewPlace = overviewPlace - 1;
-        updatePage();
-    } else {
-        console.log('err invalid pagination update')
-    }
-});
+        console.log($('#daily-overview').children().length)
 
-function showSpecificDay(day) { 
+        // back / next
+        if ($(this).data('direction') == 'back') {
+            $('#daily-overview').children()[2].remove();
+            overviewPlace = overviewPlace + 1;
+            updateRenders(overviewPlace, 0, 2);
+        } else if ($(this).data('direction') == 'next' && overviewPlace > 0) {
+            $('#daily-overview').children()[0].remove();
+            overviewPlace = overviewPlace - 1;
+            updateRenders(overviewPlace, 2, 0);
+        } else {
+            console.log('err invalid pagination update');
+        }
+
+        // activate btns
+        var btnsPage = $('.btn-overview-inactive');
+        if (btnsPage.length > 0) {
+            $(btnsPage).removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
+            paginateButtons();
+        }
+    });
+}
+
+function renderTimelineDay(day) { 
     const url = buildApiUrl(`/personal/${token}/enrich/${day}`);
 
     $.getJSON(url, (data) => {
@@ -330,12 +384,12 @@ function initializeSummary(date, semanticIds) {
 
 function initIsotope() {
   $grid = $('.grid').isotope({
-    // set itemSelector so .grid-sizer is not used in layout
     itemSelector: '.feed-item',
     percentPosition: true,
-    masonry: {
-      // use element for option
-      columnWidth: '.grid-sizer'
+    layoutMode: 'vertical',
+    vertical: {
+        //align to center
+        horizontalAlignment: 0.5
     },
     getSortData: {
       postId: '[data-post-id parseInt]',
