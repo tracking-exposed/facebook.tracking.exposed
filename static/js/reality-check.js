@@ -60,22 +60,6 @@ function renderDay(item, count) {
     });
 }
 
-function renderTimeline(days) {
-    _.forEach(_.reverse(days), function(day) {
-        const htmlDay = `
-        <div id="timeline-day-${day}">
-            <div class="row mb-3 bg-facebook border rounded">
-                <div class="col-lg-12">
-                    <h5 class="mt-2">${moment(day).format('LL')}</h5>
-                </div>
-            </div>
-        `;
-
-        $('#daily-timeline').append(htmlDay); 
-        renderTimelineDay(day);
-    });
-}
-
 function determineState(data) {
     if (data.length > 0) {
         var hasNature = _.find(data, function(item) {
@@ -118,13 +102,15 @@ function initializeDaily(token, page) {
                 paginateButtons();            
             }
 
-
             $('#dailyTab a').on('click', function(e) {
                 e.preventDefault()
                 var goToTab = $(this)[0].hash.replace('#daily-', '');
                 if (goToTab == 'timeline-pane') {
                     $('#daily-overview-pane').removeClass('d-flex flex-row').addClass('d-none');
+                    $('#daily-timeline-pane').addClass('d-block');
+                    initIsotope();
                 } else {
+                    $('#daily-timeline-pane').removeClass('d-block').addClass('d-none');
                     $('#daily-overview-pane').removeClass('d-none').addClass('d-flex flex-row');
                 }
             });
@@ -153,7 +139,6 @@ var updateRenders = function(overviewPlace, viewCount, itemCount) {
             _.forEach(data, function(item, count) {
                 days.push(item.day)
             });
-            console.log(days)
             renderTimeline(_.reverse(days));
         }
       }
@@ -166,8 +151,6 @@ var paginateButtons = function() {
         days = [];
         $('#daily-timeline').html('');
 
-        console.log($('#daily-overview').children().length)
-
         // back / next
         if ($(this).data('direction') == 'back') {
             $('#daily-overview').children()[2].remove();
@@ -178,7 +161,7 @@ var paginateButtons = function() {
             overviewPlace = overviewPlace - 1;
             updateRenders(overviewPlace, 2, 0);
         } else {
-            console.log('err invalid pagination update');
+            console.log('invalid pagination update');
         }
 
         // activate btns
@@ -187,6 +170,12 @@ var paginateButtons = function() {
             $(btnsPage).removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
             paginateButtons();
         }
+    });
+}
+
+function renderTimeline(days) {
+    _.forEach(_.reverse(days), function(day) {
+        renderTimelineDay(day);
     });
 }
 
@@ -233,58 +222,68 @@ function renderTimelineDay(day) {
                     let topicsOrdered = _.orderBy(topicsCount, ['count'], ['desc']);
                     let htmlTopic = '';
                     _.forEach(topicsOrdered, function(item, index) {
-                        if (index > 4) { isHidden = 'd-none'; }
+                        let topicText = item.topic;
+                        if (item.topic.length > 27) {
+                            topicText = `<span title="${item.topic}">
+                                ${item.topic.substring(0, 27)}...
+                            </span>`;
+                        }
+                        if (index >= 4) {
+                            isHidden = 'd-none';
+                        }
                         htmlTopic += `
                         <li class="list-item mb-2 ${isHidden}">
-                            <span class="topic-count num-${item.count}">${item.count}</span>
-                            ${item.topic}
+                            <span class="topic-count num-${item.count}">
+                                ${item.count}
+                            </span>
+                            ${topicText}
                         </li>`;
                     });
 
-                    if (topicsOrdered.length > 4) {
+                    if (topicsOrdered.length >= 4) {
                         showAllLink = `
                         <a class="show-topics text-muted" data-semid="${item.semanticId}" title="Show all topics" href="#${token}">
                             ...
                         </a>`;
                     }
 
-                    // post
                     if (item.nature == 'sponsored') {
-                        isAd = '(Advertisement)';
+                        isAd = '(Sponsored)';
                     }
 
                     const htmlPost = `
-                        <p>${item.texts[0]}</p>
-                        See <a href="https://facebook.com${item.permaLink}">Original</a>
+                        <div class="mt-2 mb-3">${item.texts[0]}</div>
+                        <a href="https://facebook.com${item.permaLink}">
+                            Original Post
+                        </a>
+                        on <span class="date">${moment(day).format('LL')}</span>
                     `;
                     const htmlItem = `
-                    <div id="daily-${day}-${item.semanticId}" class="row">
-                        <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-lg-3">
+                    <li id="daily-${day}-${item.semanticId}" class="row table-item ${item.nature}">
+                        <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-md-4 col-lg-3 pl-0">
                             <strong>Topics</strong>
-                            <ul id="topics-${item.semanticId}" class="list m-0 p-0">
+                            <ul id="topics-${item.semanticId}" class="list m-0 mt-2 p-0">
                                 ${htmlTopic}
                             </ul>
                             ${showAllLink}
                         </div>
-                        <div id="daily-post-${day}-${item.semanticId}" class="col-sm-8 col-lg-9">
-                            <strong class="float-left">
-                                <a href="${item.sourceLink}">
+                        <div id="daily-post-${day}-${item.semanticId}" class="col-sm-8 col-md-8 col-lg-9 pr-0">
+                            <strong class="float-left ">
+                                <a class="username" href="${item.sourceLink}">
                                     ${item.source}
                                 </a>
                                 ${isAd}
                             </strong>
-                            <span id="daily-seen-${item.semanticId}" 
-                                  class="float-right text-muted"
+                            <span id="daily-seen-${item.semanticId}" class="float-right text-muted"
                                   title="Seen at ${moment(item.impressionTime).format('h:mm a')}">
                                 ${seenCount}
                             </span>
                             <div class="clearfix"></div>
                             ${htmlPost}
                         </div>
-                    </div>
-                    <hr>`;
+                    </li>`;
 
-                    $('#timeline-day-' + day).append(htmlItem); 
+                    $('#daily-timeline').append(htmlItem); 
                 }
             }
         });
@@ -297,114 +296,33 @@ function renderTimelineDay(day) {
     });
 }
 
-
-function initializeSummary(date, semanticIds) {
-  const token = getToken();
-  const url = buildApiUrl(`/personal/${token}/summary`);
-
-  $.getJSON(url, (data) => {
-    _.each(data, (item) => {
-
-      const date = moment(item.publicationTime, moment.ISO_8601),
-        readableDate = date.format('MMMM Do YYYY, hh:mm a'),
-        unixTimestamp = date.format('x'),
-        maxStringLength = 150;
-
-      let bgColorClass, entryType, selectedText, teaserText, hasText = false;
-      switch (item.fblinktype) {
-        case 'photo':
-          bgColorClass = 'border-success';
-          entryType = 'picture';
-          break;
-        case 'videos':
-          bgColorClass = 'border-primary';
-          entryType = 'video';
-          break;
-        case 'groups':
-          bgColorClass = 'border-warning';
-          entryType = 'group';
-          break;
-        case 'events':
-          bgColorClass = 'border-info';
-          entryType = 'event';
-          break;
-        case 'posts':
-          bgColorClass = 'border-secondary';
-          entryType = 'post';
-          break;
-        default:
-          if (item.nature == "sponsored") {
-            bgColorClass = 'border-danger';
-            entryType = 'advertisement';
-          } else {
-              console.log("unmanaged type: ")
-              console.log(item);
-          }
-          break;
-      }
-
-      if (_.size(item.texts) && _.some(item.texts, _.size)) {
-        /* are sure the texts[].text is order by the longest */
-        selectedText = _.first(_.orderBy(item.texts, _.size));
-        teaserText = selectedText.length > maxStringLength
-          ? selectedText.substring(0, maxStringLength) + '…'
-          : selectedText
-        hasText = true;
-      }
-
-      let linkslot ="";
-      if (_.startsWith(item.permaLink, '/')) {
-        linkslot = `<a href="https://facebook.com${item.permaLink}" title="Original post" data-post_id="${item.postId}" target="_blank" class="small text-link">Original post</a>`;
-      }
-      else if (_.startsWith(item.permaLink, 'https://')) {
-        linkslot = `<a href="${item.permaLink}" title="Original post" data-post_id="${item.postId}" target="_blank" class="small text-link">Original post</a>`;
-      }
-
-      const gridItem = `
-        <div class="feed-item mb-3 p-2 ${item.fblinktype || ''}">
-          <article class="content ${bgColorClass} d-flex flex-column">
-            <header>${entryType || ''}</header>
-            <section>
-              <h4 class="author">${item.source}</h4>
-              ${hasText ? `<p class="mb-0">${teaserText}</p>` : ''}
-            </section>
-            <section class="footer">
-              <span class="small date" data-date="${unixTimestamp}">${readableDate}</span>
-              ${linkslot}
-            </section>
-          </article>
-        </div>
-      `;
-      $('#summary').append(gridItem); 
-    });
-    //initIsotope();
-  });
-};
-
-
 function initIsotope() {
-  $grid = $('.grid').isotope({
-    itemSelector: '.feed-item',
-    percentPosition: true,
+console.log('inside initIsotyope')
+  var $timeline = $('.table-like').isotope({
+    itemSelector: '.table-item',
     layoutMode: 'vertical',
-    vertical: {
-        //align to center
-        horizontalAlignment: 0.5
-    },
+    sortAscending: false,
     getSortData: {
-      postId: '[data-post-id parseInt]',
-      date: '[data-date parseInt]',
-      author: '.author',
+      author: '.username',
+      date: '.date'
     }
   });
-}
 
-function filterBy(filter = '*') {
-  $grid.isotope({ filter });
-}
+  $('.filter-by').on('click', function() {
+    var filter = $(this).data('filter');
+    console.log('filterBy: ' + filter);
+    $timeline.isotope({ filter: filter });
+    $('.filter-by').removeClass('active');
+    $(this).addClass('active');
+  });
 
-function sortBy(value = 'original-order') {
-  $grid.isotope({ sortBy: value });
+  $('.sort-by').on('click', function() {
+    var sort = $(this).data('sort');
+    console.log('sortBy: ' + sort);
+    $timeline.isotope({ sortBy: sort });
+    $('.sort-by').removeClass('active');
+    $(this).addClass('active');
+  });
 }
 
 function downloadCSV() {
@@ -413,52 +331,6 @@ function downloadCSV() {
   console.log("downloadCSV from: ", url);
   window.open(url);
 }
-
-/* stats page */
-function newTimelineRow(timeline, impressionNumbers, n, totalT) {
-    const rel = moment.duration(moment(timeline.impressionTime) - moment()).humanize();
-    const when = moment(timeline.impressionTime).format("YYYY-MM-DD HH:mm");
-    const url_csv = buildApilUrl(`/timeline/${timeline.timelineId}/csv`);
-
-    return `<tr class="timeline">
-        <td>${when}<br>#${n}/${totalT}</td>
-        <td><a href="${url_csv}">${rel} ago <br>↓ link to .csv</a></td>
-        <td>${impressionNumbers} impressions</td>
-        <td></td>
-        <td></td>
-    </tr>`;
-};
-
-function composeImpression(impression, n, totalI) {
-    /* PRIVATE IMPRESSION, NOT COLLECTED */
-    if(!impression.htmlId) {
-        return `<tr class="private alert-warning">
-            <td>${impression.impressionOrder} of ${totalI}</td>
-            <td>private</td>
-            <td></td>
-            <td></td>
-        </tr>`;
-    }
-    /* OUR PARSERS BROKEN */
-    if(!_.size(impression.summary)) {
-        return `<tr class="unprocessed">
-            <td>${impression.impressionOrder} of ${totalI}</td>
-            <td>not processed?</td>
-            <td></td>
-            <td></td>
-        </tr>`;
-    }
-
-    /* DEFAUT ROW */
-    let info = _.size(impression.summary[0].displaySource) ? impression.summary[0].displaySource : '❌';
-    console.log(info);
-    return `<tr>
-        <td>${impression.impressionOrder} of ${totalI}</td>
-        <td>${impression.summary[0].nature}</td>
-        <td>${impression.summary[0].source}</td>
-        <td>${info}</td>
-    </tr>`;
-};
 
 function initializeStats() {
   const token = getToken();

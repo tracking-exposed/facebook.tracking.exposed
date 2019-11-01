@@ -86,7 +86,7 @@ partial: "/javascripts"
         </div>
 
         <div id="visualization" class="pt-3 pb-3 mb-3 d-none">
-            <ul class="nav nav-tabs" id="dailyTab">
+            <ul class="nav nav-tabs justify-content-end" id="dailyTab">
                 <li class="nav-item">
                    <a class="nav-link active" id="overview-tab"
                       data-toggle="tab" href="#daily-overview-pane"
@@ -106,7 +106,7 @@ partial: "/javascripts"
                 <div class="tab-pane fade show active d-flex flex-row pt-4 pl-3 pb-4 pr-3"
                      id="daily-overview-pane" role="tabpanel"
                      aria-labelledby="overview-tab">
-                    <div class="col-1 text-left">
+                    <div class=" col-1 text-left">
                         <button class="btn-overview-inactive" data-direction="back">
                             <
                         </button>
@@ -122,66 +122,66 @@ partial: "/javascripts"
                      id="daily-timeline-pane" role="tabpanel"
                      aria-labelledby="timeline-tab">
                     <div class="row mb-3">
-                        <div class="col-lg-8">
+                        <div class="col-md-6 col-lg-7">
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
-                                    <a class="nav-link active" onclick="filterBy()">
-                                        All Types
+                                    <a class="nav-link" href="#">Show</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link filter-by active"
+                                        data-filter="*">
+                                        All
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" onclick="filterBy('.organic')">
+                                    <a class="nav-link filter-by"
+                                        data-filter=".organic">
                                         Organic
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" onclick="filterBy('.advertisement')">
-                                        Advertisements
+                                    <a class="nav-link filter-by"
+                                        data-filter=".sponsored">
+                                        Sponsored
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-lg-4">
-                            <ul class="nav nav-pills">
+                        <div class="col-md-6 col-lg-5">
+                            <ul class="nav nav-pills float-right">
                                 <li class="nav-item">
-                                    <a class="nav-link active" onclick="sortBy('date')">
+                                    <a class="nav-link" href="#">Sort</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link sort-by active" data-sort="date">
                                         Date
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" onclick="sortBy('author')">
+                                    <a class="nav-link sort-by" data-sort="author">
                                         Author
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" onclick="sortBy('type')">
-                                        Type
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" onclick="sortBy()">
-                                        Original
-                                    </a>
-                                </li>
                             </ul>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
-                    <div id="daily-timeline"></div>
+                    <hr>
+                    <ul id="daily-timeline" class="table-like list-unstyled"></ul>
                 </div>
             </div>
         </div>
-
         <div class="row mb-5">
             <div class="col-lg-12">
             </div>
         </div>
         <div class="clearfix"></div>
-
     </div>
 </div>
 <script src="/js/moment-with-locales.min.js"></script>
 <script src="/js/d3.min.js"></script>
 <script src="/js/c3.min.js"></script>
+<script src="/js/isotope.pkgd.min.js"></script>
 <script src="/js/global.js"></script>
 <script src="/js/reality-check.js"></script>
 <script>
