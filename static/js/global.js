@@ -1,4 +1,6 @@
 
+const url_feed = '/feeds/0'
+
 var getToken = function() {
   const token = window.location.href.split('/').pop().substr(1, 40);
   if (_.size(token) != 40 ) {
