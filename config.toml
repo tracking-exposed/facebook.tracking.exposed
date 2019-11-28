@@ -138,8 +138,14 @@ canonifyURLs = true
     url = "/background/ethics"
     weight = -100
  [[menu.footer]]
-    page = "get-the-extension"
-    identifier = "get-the-extension"
-    name = "Join us!"
-    url = "/join"
+    page = "know-more"
+    identifier = "know-more"
+    name = "Know more"
+    url = "https://tracking.exposed/connect/"
     weight = -90
+ [[menu.footer]]
+    page = "git"
+    identifier = "git"
+    name = "Git repositories"
+    url = "https://github.com/tracking-exposed/"
+    weight = -80
