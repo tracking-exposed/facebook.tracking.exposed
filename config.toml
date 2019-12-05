@@ -79,7 +79,7 @@ canonifyURLs = true
     identifier = "what-we-collect"
     name = "What We Collect"
     parent = "more"
-    url = "/what-we-collect/"
+    url = "/privacy/"
     weight = -150
 
  [[menu.featured]]
