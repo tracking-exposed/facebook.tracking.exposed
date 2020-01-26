@@ -205,7 +205,7 @@ draft: false
   when="July"
   title="Italian political election and digital propaganda"
   description="TacticalTech publish a report written by Claudio Agosti and Fabio Chiusi"
-  href="https://ourdataourselves.tacticaltech.org/posts/overview-italy/)"
+  href="https://ourdataourselves.tacticaltech.org/posts/overview-italy/"
   resource1="Open data"
   resource1hreflink="https://github.com/tracking-exposed/experiments-data/tree/master/e18" >}}
 

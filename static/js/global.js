@@ -1,5 +1,6 @@
 
-const url_feed = '/feeds/0'
+const url_feed = 'https://facebook.tracking.exposed/feeds/0';
+/* this URL is included in the produced feeds URL */
 
 var getToken = function() {
   const token = window.location.href.split('/').pop().substr(1, 40);
