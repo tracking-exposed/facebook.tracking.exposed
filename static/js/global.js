@@ -11,10 +11,18 @@ var getToken = function() {
   return token;
 }
 
-var buildApiUrl = function(end) {
-  let api_path = "/api/v2"
-  const host = window.location.origin;
-  const ret = `${host}${api_path}${end}`
-  console.log(`buildApiUrl composed ${ret}`);
-  return ret;
+var buildApiUrl = function(apiName) {
+    const SERVER = 'http://localhost:8000';
+    let option = null; 
+    let apiv =2;
+    let rv = null;
+    const api_path = apiv ? `/api/v${apiv}` : "/api/v1";
+    if (window.location.origin.match(/localhost/)) {
+        rv = option ? `${SERVER}${api_path}${apiName}/${option}` : `${SERVER}${api_path}${apiName}`;
+        console.log(`Builing URL by hardcoded domains (development) URL composed ${rv}`);
+    } else {
+        rv = option ? `${api_path}${apiName}/${option}` : `${api_path}/${apiName}`;
+        console.log(`Building URL by window...href (production) URL composed ${rv}`);
+    }
+    return rv;
 }

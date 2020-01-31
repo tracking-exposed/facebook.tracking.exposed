@@ -89,7 +89,7 @@ function initializeDaily(token, page) {
     $.getJSON(url, (data) => {
         let daily = '';
         if (determineState(data)) {
-            _.forEach(_.reverse(data), function(item, count) { 
+            _.each(_.reverse(data), function(item, count) { 
                 renderDay(item, count);
                 days.push(item.day);
             });
@@ -136,7 +136,7 @@ var updateRenders = function(overviewPlace, viewCount, itemCount) {
         if (hasNature != undefined) {
             renderDay(data[itemCount], viewCount);
 
-            _.forEach(data, function(item, count) {
+            _.each(data, function(item, count) {
                 days.push(item.day)
             });
             renderTimeline(_.reverse(days));
@@ -153,7 +153,10 @@ var paginateButtons = function() {
 
         // back / next
         if ($(this).data('direction') == 'back') {
-            $('#daily-overview').children()[2].remove();
+            console.log( $('#daily-overview') );
+            if( $('#daily-overview').children() && $('#daily-overview').children().length )
+                $('#daily-overview').children()[2].remove();
+
             overviewPlace = overviewPlace + 1;
             updateRenders(overviewPlace, 0, 2);
         } else if ($(this).data('direction') == 'next' && overviewPlace > 0) {
@@ -174,7 +177,7 @@ var paginateButtons = function() {
 }
 
 function renderTimeline(days) {
-    _.forEach(_.reverse(days), function(day) {
+    _.each(_.reverse(days), function(day) {
         renderTimelineDay(day);
     });
 }
@@ -185,14 +188,17 @@ function renderTimelineDay(day) {
     $.getJSON(url, (data) => {
         let dayViz = ''
 
-        $('#profile-name').html(data[0].user.replace(/-/gi, ' '));
-        $('#profile-username').html('@' + data[0].user);
+        if(data[0] && data[0].user) { 
+            $('#profile-name').html(data[0].user.replace(/-/gi, ' '));
+            $('#profile-username').html('@' + data[0].user);
+        }
 
         const semanticIds = {};
 
         // build topics
-        _.forEach(data, function(item, count) {
-            if (item.labels != undefined) {
+        _.each(data, function(item, count) {
+            console.log(item, count);
+            if (item.labels != undefined || true) {
                 // depending on occurence
                 if (semanticIds[item.semanticId]) {
                     semanticIds[item.semanticId] = semanticIds[item.semanticId] + 1;
@@ -207,7 +213,7 @@ function renderTimelineDay(day) {
                     let topicsCount = [];
 
                     // topics
-                    _.forEach(item.labels, function(topic, index) { 
+                    _.each(item.labels, function(topic, index) { 
                         var exists = _.find(topicsCount, { 'topic':  topic });
                         if (exists) {
                             exists.count = exists.count + 1;
@@ -221,7 +227,7 @@ function renderTimelineDay(day) {
 
                     let topicsOrdered = _.orderBy(topicsCount, ['count'], ['desc']);
                     let htmlTopic = '';
-                    _.forEach(topicsOrdered, function(item, index) {
+                    _.each(topicsOrdered, function(item, index) {
                         let topicText = item.topic;
                         if (item.topic.length > 27) {
                             topicText = `<span title="${item.topic}">
@@ -297,7 +303,6 @@ function renderTimelineDay(day) {
 }
 
 function initIsotope() {
-console.log('inside initIsotyope')
   var $timeline = $('.table-like').isotope({
     itemSelector: '.table-item',
     layoutMode: 'vertical',
