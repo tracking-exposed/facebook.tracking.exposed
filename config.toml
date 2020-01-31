@@ -8,8 +8,8 @@ canonifyURLs = true
     subtitle = "Facebook"
     openGraphSiteName = "Facebook Tracking Exposed"
     subsite = "facebook"
-    description = "Facebook Tracking Exposed is a web browser addon that collects the stories visible in your Facebook News feed and a website that aggregates that data from all the users who have the addon installed. Our vision is to increase transparency behind personalization algorithms"
-    tagline = "Individuals should be in control of their algorithm"
+    description = "Facebook Tracking Exposed is a web browser addon that collects the stories visible in your Facebook Newsfeed and a website that aggregates that data from all the users who have the addon installed. Our vision is to increase transparency behind personalization algorithms"
+    tagline = "Make accessible to everyone a framework for analyze Facebook' newsfeed algorithm"
 
 [permalinks]
     posts = "/:slug/"
@@ -89,7 +89,7 @@ canonifyURLs = true
     url = "/reality-check/"
     weight = -180
     pre = "/images/fb-reality-check.png"
-    post = "Check the reality Facebook thinks you should be seeing in your feed"
+    post = "What you can collect and how data can be analyzed"
  [[menu.featured]]
     page = "Zuckless News"
     identifier = "zuckless-news"
@@ -105,7 +105,7 @@ canonifyURLs = true
     url = "/analysis-and-publications/"
     weight = -160
     pre = "/images/fb-analysis-and-publications.png"
-    post = "Browse our analysis and publications on the Facebooks algorithm"
+    post = "Browse our analysis and publications, it covers also experiments on other platform"
 
  [[menu.footer]]
     page = "executive-summary"
