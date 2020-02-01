@@ -186,10 +186,13 @@ function renderTimelineDay(day) {
 
     $.getJSON(url, (data) => {
 
-        if(data[0] && data[0].user) { 
+        if(!_.size($('#profile-name').text()))
             $('#profile-name').html(data[0].user.replace(/-/gi, ' '));
-            $('#profile-username').html('@' + data[0].user);
-        }
+
+        $('#status-info').text(
+            _.size(data) + " impressions " +
+            moment(_.first(data).impressionTime).format('h:mm a') + ' — ' +
+            moment(_.last(data).impressionTime).format('h:mm a') );
 
         const semanticIds = {};
 
