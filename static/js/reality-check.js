@@ -84,7 +84,7 @@ function initializeDaily(token, page) {
     $('#loading-data').removeClass('d-none');
     $('#daily-overview').html('');
     $('#daily-timeline').html('');
-    let url = buildApiUrl(`/personal/${token}/daily/${page}`);
+    let url = buildApiUrl(`/personal/${token}/daily`, page, 2);
 
     $.getJSON(url, (data) => {
         let daily = '';
