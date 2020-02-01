@@ -140,10 +140,18 @@ partial: "/javascripts"
                     </a>
                 </li>
                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" id="timeline-tab"
                         data-toggle="tab"  href="#daily-timeline-pane"
                         role="tab" aria-controls="timeline">
                         Timeline
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="settings-tab"
+                        data-toggle="tab"  href="#daily-settings-pane"
+                        role="tab" aria-controls="settings">
+                        Settings & Download 
                     </a>
                 </li>
             </ul>
@@ -213,6 +221,21 @@ partial: "/javascripts"
                     </div>
                     <hr>
                     <ul id="daily-timeline" class="table-like list-unstyled"></ul>
+                </div>
+                <div class="tab-pane fade p-3"
+                     id="daily-settings-pane" role="tabpanel"
+                     aria-labelledby="settings-tab">
+                    <div class="p-3">
+                        <button onclick="downloadCSV()" class="btn btn-facebook">
+                            the CSV with your data
+                        </button>
+                    </div>
+                    <div class="p-3">
+                            <h2>Settings</h2>
+                            <p class="text-muted">TODO join a research group</p>
+                    </div>
+                    <hr>
+                    <ul id="daily-settings" class="table-like list-unstyled"></ul>
                 </div>
             </div>
         </div>

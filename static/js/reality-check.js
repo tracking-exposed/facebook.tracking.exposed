@@ -21,11 +21,17 @@ function initializeReality(page) {
 function renderDay(item, count) {
     daily = `<div id="day-${item.day}" class="graph-day flex-fill pl-3 pr-3 graph-day-border">
         <span class="text-muted">${moment(item.day).format('LL')}</span><br>
-        <span class="seconds">${Math.round(item.totalSeconds / 60)}</span><br>
-        Minutes Spent<br>
+        <p>
+            <br>
+            <span class="text-right align-right">${item.npost} Posts</span><br>
+            <span class="posts">${item.duration}</span>
+            <br>
+        </span></p>
         <div id="daily-pie-${count}" class="daily-pie"></div>
-        <p><span class="posts">${item.npost}</span><br>
-        Posts Read</p>
+        <p>
+            <span class="posts">${item.ntimelines}</span>
+            ${item.ntimelines > 1 ? "sessions" : "session"}
+        </p>
     </div>`;
 
     if (count == 0) {
@@ -66,14 +72,17 @@ function determineState(data) {
             return Object.keys(item.nature).length > 0; 
         });
         if (hasNature != undefined) {
+            console.log('timeline:', hasNature)
             return true;
         } else {
             // where api has data but item.nature is empty object
+            console.log("this actually happens", data);
             $('#loading-fetching').addClass('d-none');
             $('#loading-empty').removeClass('d-none');
         }
     } else {
        // where the api has no objects at all returned 
+       console.log("this looks like a sad day for the db");
        $('#loading-fetching').addClass('d-none');
        $('#loading-empty').removeClass('d-none');
     }
@@ -105,13 +114,20 @@ function initializeDaily(token, page) {
             $('#dailyTab a').on('click', function(e) {
                 e.preventDefault()
                 var goToTab = $(this)[0].hash.replace('#daily-', '');
+                console.log("double check: " + $(this)[0].hash );
                 if (goToTab == 'timeline-pane') {
-                    $('#daily-overview-pane').removeClass('d-flex flex-row').addClass('d-none');
+                    $('#daily-overview-pane').removeClass('d-block d-flex flex-row').addClass('d-none');
+                    $('#daily-settings-pane').removeClass('d-block d-flex flex-row').addClass('d-none');
                     $('#daily-timeline-pane').addClass('d-block');
                     initIsotope();
-                } else {
+                } else if(goToTab == 'overview-pane' ) {
                     $('#daily-timeline-pane').removeClass('d-block').addClass('d-none');
-                    $('#daily-overview-pane').removeClass('d-none').addClass('d-flex flex-row');
+                    $('#daily-settings-pane').removeClass('d-block').addClass('d-none');
+                    $('#daily-overview-pane').removeClass('d-none').addClass('d-block d-flex flex-row');
+                } else if(goToTab == 'settings-pane') {
+                    $('#daily-timeline-pane').removeClass('d-block d-flex flex-row').addClass('d-none');
+                    $('#daily-overview-pane').removeClass('d-block d-flex flex-row').addClass('d-none');
+                    $('#daily-settings-pane').removeClass('d-none').addClass('d-block flex-row');
                 }
             });
 
@@ -339,8 +355,7 @@ function initIsotope() {
 
 function downloadCSV() {
   const token = getToken();
-  const url = buildApiUrl(`/personal/${token}/csv`);
-  console.log("downloadCSV from: ", url);
+  const url = buildApiUrl(`/personal/${token}/csv`, null, 2);
   window.open(url);
 }
 
