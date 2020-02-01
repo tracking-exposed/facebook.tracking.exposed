@@ -16,17 +16,16 @@ draft: false
   kind="link"
   when="January"
   title="Youtube Tracking Exposed — DMI UvA Winter School project pitch"
-  author="Salvatore Romano"
-  description="Collective group work on polarization of the Brexit discussion seen through Youtube's personalization algorithm"
+  description="Collective group work on polarization of the Brexit discussion seen through Youtube's personalization algorithm, coordinated by Salvatore Romano and Davide Beraldo"
   href="https://docs.google.com/document/d/1EkeEa6vnIQI1QH8xEIZkAbI23vn3ChsjoJs3U6tkeqo/edit"
   resource1="Final project report"
   resource1href="https://wiki.digitalmethods.net/Dmi/YouTube"
-  resource2="Pitch proposal slides"
+  resource2="Project Pitch slides (on Prezi)"
   resource2href="https://prezi.com/view/AvoT0B1lnclMIq3k4LOU"
-  resource3="Final pitch presentation slides"
+  resource3="Final presentation slides"
   resource3href="https://drive.google.com/open?id=1bOSi6853za6CRDYF1xdc8Os0EUQOWgma">}}
   
-  {{<resource
+{{<resource
   kind="link"
   when="January"
   title="Youtube Tracking Exposed — DMI UvA Winter School Tutorial"
@@ -34,7 +33,6 @@ draft: false
   description="Tutorial to explain the possible uses of the ytTREX tool"
   resource1="Tutorial slides"
   resource1href="https://prezi.com/view/KqmfljOsE8HYvyT7TqGE">}}
-  
 
 ## 2019
 
@@ -42,10 +40,16 @@ draft: false
   kind="event"
   title="Assembly with the Amazon's workers of ADL Cobas grassroots trade union"
   when="December"  
-  author="Salvatore Romano"
-  description="An informal discussion with some Amazon's workers inscribed to the grassroots trade union **ADL Cobas Padova-Bassa Padovana** and American activists from the **Amazon Employees for Climate Justice** group. After a brief introduction about amTREX tool, we discussed how Amazon's app tracks employees, trying to identify strategies to reduce the amount of data extracted and reflecting on potential GDPR compliance used as a tool for trade union negotiations."
-   >}}
+  description="An informal discussion with some Amazon's workers inscribed to the grassroots trade union ADL Cobas Padova-Bassa Padovana and American activists from the Amazon Employees for Climate Justice group. After a brief introduction about amTREX tool, we discussed how Amazon's app tracks employees, trying to identify strategies to reduce the amount of data extracted and reflecting on potential GDPR compliance used as a tool for trade union negotiations. Partecipated by Salvatore Romano for trex." >}}
 
+{{<resource
+  kind="event"
+  title="RAI national television with amazon.tracking.exposed (Italian Documentary on Amazon)"
+  when="December"  
+  href="https://vimeo.com/378307005"
+  description="A long documentary on Amazon empire, and our original research on how Algorithm accountability tools might handy to infer personal data usage in personalization algorithms. Our research display and explain with the video on surveillance capitalism and tools for personal investigation. The report is quite basic and lack of the robustness of a large scale tool. -- Featuring Claudio Agosti, Riccardo Coluccini, Giulia Corona, Salvatore Romano. To see the video you have to write 'trex'"
+  resource1="Our new supported platform"
+  resource1href="https://amazon.tracking.exposed" >}}
 
 {{<resource
   kind="event"
