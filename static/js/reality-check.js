@@ -126,8 +126,6 @@ var updateRenders = function(overviewPlace, viewCount, itemCount) {
     var page = overviewCount + '-' + overviewPlace;
     let url = buildApiUrl(`/personal/${token}/daily/${page}`);
     $.getJSON(url, (data) => {
-      let daily = '';
-
       if (data.length > 0) {
         var hasNature = _.find(data, function(item) {
             return Object.keys(item.nature).length > 0; 
@@ -136,7 +134,7 @@ var updateRenders = function(overviewPlace, viewCount, itemCount) {
         if (hasNature != undefined) {
             renderDay(data[itemCount], viewCount);
 
-            _.each(data, function(item, count) {
+            _.each(data, function(item) {
                 days.push(item.day)
             });
             renderTimeline(_.reverse(days));
@@ -177,16 +175,16 @@ var paginateButtons = function() {
 }
 
 function renderTimeline(days) {
+    console.log("Rendering timelines", days);
     _.each(_.reverse(days), function(day) {
         renderTimelineDay(day);
     });
 }
 
 function renderTimelineDay(day) { 
-    const url = buildApiUrl(`/personal/${token}/enrich/${day}`);
+    const url = buildApiUrl(`/personal/${token}/enrich`, day, 2);
 
     $.getJSON(url, (data) => {
-        let dayViz = ''
 
         if(data[0] && data[0].user) { 
             $('#profile-name').html(data[0].user.replace(/-/gi, ' '));
@@ -197,19 +195,24 @@ function renderTimelineDay(day) {
 
         // build topics
         _.each(data, function(item, count) {
-            console.log(item, count);
-            if (item.labels != undefined || true) {
+            if (item.labels != undefined || true) { // remind Claudio you add this 'cos labels might miss
                 // depending on occurence
                 if (semanticIds[item.semanticId]) {
                     semanticIds[item.semanticId] = semanticIds[item.semanticId] + 1;
-                    $('#daily-seen-' + item.semanticId).html('Seen ' + semanticIds[item.semanticId] + 'x');
+                    $('#daily-seen-' + item.semanticId).html(
+                        'Seen at ' + 
+                        moment(item.impressionTime).format('h:mm a') + ' ' +
+                        semanticIds[item.semanticId] + 'x'
+                    );
                 } else {
                     semanticIds[item.semanticId] = 1;
 
                     let isAd = '';
                     let isHidden = '';
                     let showAllLink = '';
-                    let seenCount = 'Seen once';
+                    let seenCount = 'Seen at ' + 
+                        moment(item.impressionTime).format('h:mm a') 
+                        + ' Once';
                     let topicsCount = [];
 
                     // topics
@@ -275,13 +278,14 @@ function renderTimelineDay(day) {
                         </div>
                         <div id="daily-post-${day}-${item.semanticId}" class="col-sm-8 col-md-8 col-lg-9 pr-0">
                             <strong class="float-left ">
+                                <i class="impressionOrder">${item.impressionOrder}</i> —
                                 <a class="username" href="${item.sourceLink}">
                                     ${item.source}
                                 </a>
                                 ${isAd}
                             </strong>
                             <span id="daily-seen-${item.semanticId}" class="float-right text-muted"
-                                  title="Seen at ${moment(item.impressionTime).format('h:mm a')}">
+                                  title="Seen at ${moment(item.impressionTime).format()}">
                                 ${seenCount}
                             </span>
                             <div class="clearfix"></div>
