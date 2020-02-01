@@ -1,20 +1,22 @@
 ---
 title: "API Documentation"
+subtitle: "protect individuals ― expose phenomenon ― enable researchers"
+date: 2019-12-02T15:01:21+03:00
 draft: false
+description: "API documentation for a post-API world where researchers have to become independent third-party and do not fucking compromise themselves with corporate agreements"
 ---
 
 The API here documented are implemented in our [AGPL3 code](https://github.com/tracking.exposed/facebook).
 
 ### Shared concepts
 
-The base URL to access our API is:
-`https://facebook.tracking.exposed/api/v2/`.
+The base URL to access our API is: `https://facebook.tracking.exposed/api/v2/`.
 
 #### Paging
 
 There are some variables you need to have to perform a successful HTTP GET.
 The `$paging` variable defines the number of entries that are retrieved by the API, as well
-as the number of entries to skip. Some examples of `$paging` are: 
+as the number of entries to skip. Some examples of `$paging` are:
 
 - `/3-0/` - Get 3 items (minimum result) and skip 0 items
 - `/3-2/` - Get 3 items and skip the most recent 2
@@ -580,7 +582,6 @@ Aggregated daily statistics on individual usage. It is used by [Reality Check](/
 
 TBD...
 
-
 # Node API
 
 These APIs are not personal, they do not require $userToken and they can be queried by anyone.
@@ -615,10 +616,11 @@ General statistics on facebook.tracking.exposed. Contains global and last week's
 #### Data Specifics
 
 This API take as input all the _database collections_, and simply count the amount of objects contained.
+
 for example: _impressions_ produced two fields:
 
-  * impressions: it is the count of the whole collection. all the impressions collected in the system
-  * impressions**_lw**: it is the count of the impression recorded in the **l**ast **w**eek.
+  * impressions: it is the count of objects in the whole collection. all the impressions collected in the system
+  * impressions _lw_: stands for Last Week, it is the it is the count of the impression recorded in the last 7 days.
 
 #### Request
 

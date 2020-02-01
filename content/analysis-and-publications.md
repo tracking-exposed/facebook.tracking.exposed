@@ -12,6 +12,34 @@ draft: false
 </h3>
 
 {{<resource
+  kind="event"
+  title="Porno, Algoritmi e Tordimatti!"
+  when="November"  
+  description="A special event to annount pornhub.tracking.exposed! in Italian language. We tried a new format, looking forward to replicate."
+  href="https://pornhub.tracking.exposed/tordimatti" >}}
+
+{{<resource
+  kind="event"
+  title="KiKK - The resistance against algorithm monopoly"
+  when="October"  
+  description="How many of your information comes from Youtube or Facebook? Internet is born as a decentralized network of knowledge and technologies, but nowadays, two corporations become our cultural reality. This talk will try to make understand the power exerted by the online platforms.  As society, we are not following it, seeing it, fear it, and then regulate and adjudicated. Claudio Agosti will talk about tracking.exposed, a free software project means to enable people in understanding, play, and criticize how algorithms interfere with reality's perception."
+  href="https://www.kikk.be/2019/en/program/conferences-1/claudio-agosti-1" >}}
+
+{{<resource
+  kind="event"
+  title="World Forum Democracy"
+  when="October"  
+  description="Social media are at the core of information nowadays. This lab will tackle the pressing issue that is quality control of shared information in social media, through monitoring and accountability mechanism mainly. How can we use social media as an ally for critically assessing topical subjects? How do we hold them accountable for the information that goes through them? Is social media moderation and freedom of expression compatible? -- Leonardo Sanna has been a contract doctoral student at the University of Modena and Reggio Emilia (Italy) since November 2018, where he has been working on the analysis of Big Data from a semiotic perspective. His research focuses on a combination of quantitative and qualitative methods for social media analysis. Currently, he is studying, on Facebook, the two phenomena known as 'filter bubble' and 'echo chamber'. In particular, he works on the data of the FBTREX group."
+  href="https://www.coe.int/en/web/world-forum-democracy/lab-8-social-media-freedom-and-accountability" >}}
+
+{{<resource
+  kind="event"
+  title="Beyond Future design"
+  when="September"  
+  description="Accountability and AI"
+  href="https://www.beyond-festival.com/programm_2019.pdf" >}}
+
+{{<resource
   kind="article"
   title="Facebook's Algorithm Shapes Our Lives. This Hacker Wants to Find Out How."
   when="July"  

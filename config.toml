@@ -16,91 +16,66 @@ canonifyURLs = true
 
 [menu]
  [[menu.main]]
-    page = "Reality Check"
-    identifier = "reality-check"
     name= "Reality Check"
     url = "/reality-check/"
     weight = -180
  [[menu.main]]
-    page = "Zuckless News"
-    identifier = "zuckless-news"
     name = "Zuckless News"
     url = "/zuckless-news/"
     weight = -170
  [[menu.main]]
-    page = "Analysis & Publications"
-    identifier = "analysis-and-publications"
     name = "Analysis & Publications"
     url = "/analysis-and-publications/"
     weight = -160
+
  [[menu.main]]
-    page = "More"
-    identifier = "more"
     name = "More"
     url = "#"
     weight = -100
  [[menu.main]]
-    page = "About"
-    identifier = "about"
+    parent = "More"
     name = "About"
     url = "/about/"
-    parent = "more"
     weight = -110
  [[menu.main]]
-    page = "Data Activism"
-    identifier = "Data Activism"
-    parent = "more"
+    parent = "More"
     name = "Data Activism"
     url = "/data-activism/"
     weight = -120
  [[menu.main]]
-    page = "API Documentation"
-    identifier = "api-documentation"
-    parent = "more"
+    parent = "More"
     name = "API Documentation"
-    url = "/api-documentation/"
+    url = "/docs/"
     weight = -130
  [[menu.main]]
-    page = "Get Involved"
-    identifier = "get-involved"
     name = "Get Involved"
-    parent = "more"
+    parent = "More"
     url = "/get-involved/"
     weight = -140
  [[menu.main]]
-    page = "Impact"
-    identifier = "impact"
     name = "Impact"
-    parent = "more"
+    parent = "More"
     url = "/impact/"
     weight = -150
  [[menu.main]]
-    page = "What We Collect"
-    identifier = "what-we-collect"
     name = "What We Collect"
-    parent = "more"
-    url = "/what-we-collect/"
+    parent = "More"
+    url = "/privacy/"
     weight = -150
 
  [[menu.featured]]
-    page = "Reality Check"
-    identifier = "reality-check"
     name= "Reality Check"
     url = "/reality-check/"
     weight = -180
     pre = "/images/fb-reality-check.png"
     post = "What you can collect and how data can be analyzed"
  [[menu.featured]]
-    page = "Zuckless News"
-    identifier = "zuckless-news"
     name = "Zuckless News"
     url = "/zuckless-news/"
     weight = -170
     pre = "/images/fb-zuckless-news.png"
     post = "Create and read custom news feeds based on topics without the Zuck"
  [[menu.featured]]
-    page = "Analysis & Publications"
-    identifier = "analysis-and-publications"
     name = "Analysis & Publications"
     url = "/analysis-and-publications/"
     weight = -160
@@ -108,38 +83,30 @@ canonifyURLs = true
     post = "Browse our analysis and publications, it covers also experiments on other platform"
 
  [[menu.footer]]
-    page = "executive-summary"
-    identifier = "executive-summary"
     name = "Project Summary"
     url = "/background/executive-summaries"
     weight = -140
  [[menu.footer]]
-    page = "glossary"
-    identifier = "glossary"
     name = "Glossary"
     url = "/background/glossary"
     weight = -130
  [[menu.footer]]
-    page = "problem"
-    identifier = "problem"
     name = "Problem definition"
     url = "/background/problem"
     weight = -120
  [[menu.footer]]
-    page = "solution"
-    identifier = "solution"
     name = "Our solution and mandate"
     url = "/background/solution"
     weight = -110
  [[menu.footer]]
-    page = "ethics"
-    identifier = "ethics"
     name = "Ethics"
     url = "/background/ethics"
     weight = -100
  [[menu.footer]]
-    page = "get-the-extension"
-    identifier = "get-the-extension"
-    name = "Join us!"
-    url = "/join"
+    name = "Know more"
+    url = "https://tracking.exposed/connect/"
     weight = -90
+ [[menu.footer]]
+    name = "Git repositories"
+    url = "https://github.com/tracking-exposed/"
+    weight = -80
