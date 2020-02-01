@@ -361,31 +361,11 @@ function downloadCSV() {
 
 function initializeStats() {
   const token = getToken();
-  const url = buildApiUrl(`/personal/${token}/stats`);
-  console.log("timeline stats from: ", url);
+  const url = buildApiUrl(`/personal/${token}/stats`, '25-0', 2);
   $.getJSON(url, (data) => {
+      // TODO do candlesticks
     console.log(`Retrived ${_.size(data.content)} impressions, from ${_.size(data.timelines)} timelines, ${JSON.stringify(data.served)}, total stored: ${data.storedTimelines}`);
-    let lastT = { id: null, counter: 0 };
-
-    _.each(data.content, (impression) => {
-      if(lastT.id != impression.timelineId) {
-        lastT.id = impression.timelineId;
-        lastT.counter += 1;
-        let newtmln = newTimelineRow(
-          _.omit(impression, ['summary']),
-          _.get(data.timelines, impression.timelineId),
-          lastT.counter, _.size(data.timelines) );
-        $('#entries').append(newtmln);
-      }
-
-      let impre = composeImpression(impression, lastT.counter, _.get(data.timelines, impression.timelineId));
-      $('#entries').append(impre);
-
-    });
-    $('#closing').append(shapeClosingMessage(_.size(data.timelines), data.storedTimelines));
+    console.log(data);
   });
 };
 
-function shapeClosingMessage(avail, total) {
-    return `<p class="timeline">Load the remaining ${total-avail} timelines, of a total stored of ${total}<br><small>NO, NOT YET IMPLEMENMTED, CHECK THE APIs</small></p>`;
-}
