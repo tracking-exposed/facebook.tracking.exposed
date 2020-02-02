@@ -96,7 +96,6 @@ function initializeDaily(token, page) {
     let url = buildApiUrl(`/personal/${token}/daily`, page, 2);
 
     $.getJSON(url, (data) => {
-        let daily = '';
         if (determineState(data)) {
             _.each(_.reverse(data), function(item, count) { 
                 renderDay(item, count);
@@ -114,15 +113,14 @@ function initializeDaily(token, page) {
             $('#dailyTab a').on('click', function(e) {
                 e.preventDefault()
                 var goToTab = $(this)[0].hash.replace('#daily-', '');
-                console.log("double check: " + $(this)[0].hash );
                 if (goToTab == 'timeline-pane') {
                     $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
                     $('#daily-timeline-pane').removeClass('d-none').addClass('d-block');
                     $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
                     initIsotope();
                 } else if(goToTab == 'overview-pane' ) {
-                    $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
                     $('#daily-overview-pane').removeClass('d-none').addClass('d-block flex-row d-flex');
+                    $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
                     $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
                 } else if(goToTab == 'settings-pane') {
                     $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
@@ -279,7 +277,7 @@ function renderTimelineDay(day) {
                         isAd = '(Sponsored)';
                     }
 
-                    const textList = _.join(item.texts, '</br>')
+                    const textList = _.replace(item.fullText, '\n', '</br>')
                     const htmlPost = `
                         <div class="mt-2 mb-3">${textList}</div>
                         <a href="https://facebook.com${item.permaLink}">
@@ -287,6 +285,16 @@ function renderTimelineDay(day) {
                         </a>
                         on <span class="date">${moment(day).format('LL')}</span>
                     `;
+                    if(_.size(item.attributions) > 1)
+                        console.log(item);
+
+                    const displaySource = item.attributions && item.attributions[0] ? 
+                        item.attributions[0].display : "";
+                    const sourceLink = item.feed_id && item.feed_id.authorId ? 
+                        'https://facebook.com/' + item.feed_id.authorId : "#";
+                    const cleanSource = item.attributions && item.attributions[0] ? 
+                        item.attributions[0].content : "";
+
                     const htmlItem = `
                     <li id="daily-${day}-${item.semanticId}" class="row table-item ${item.nature}">
                         <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-md-4 col-lg-3 pl-0">
@@ -299,8 +307,8 @@ function renderTimelineDay(day) {
                         <div id="daily-post-${day}-${item.semanticId}" class="col-sm-8 col-md-8 col-lg-9 pr-0">
                             <strong class="float-left ">
                                 <i class="impressionOrder">${item.impressionOrder}</i> —
-                                <a class="username" href="${item.sourceLink}">
-                                    ${item.source}
+                                <a class="username" title="${displaySource}" href="${sourceLink}">
+                                    ${displaySource}
                                 </a>
                                 ${isAd}
                             </strong>
