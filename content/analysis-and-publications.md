@@ -13,7 +13,7 @@ draft: false
 </h3>
 
 {{<resource
-  kind="link"
+  kind="event"
   when="January"
   title="Youtube Tracking Exposed — DMI UvA Winter School project pitch"
   description="Collective group work on polarization of the Brexit discussion seen through Youtube's personalization algorithm, coordinated by Salvatore Romano and Davide Beraldo"
@@ -26,11 +26,11 @@ draft: false
   resource3href="https://drive.google.com/open?id=1bOSi6853za6CRDYF1xdc8Os0EUQOWgma">}}
   
 {{<resource
-  kind="link"
+  kind="article"
   when="January"
   title="Youtube Tracking Exposed — DMI UvA Winter School Tutorial"
-  author="Salvatore Romano"
-  description="Tutorial to explain the possible uses of the ytTREX tool"
+  authors="Salvatore Romano"
+  description="Tutorial to explain the possible uses of the ytTREX tool, try it at https://youtube.tracking.exposed"
   resource1="Tutorial slides"
   resource1href="https://prezi.com/view/KqmfljOsE8HYvyT7TqGE">}}
 
@@ -70,6 +70,7 @@ draft: false
   title="World Forum Democracy"
   when="October"  
   description="Social media are at the core of information nowadays. This lab will tackle the pressing issue that is quality control of shared information in social media, through monitoring and accountability mechanism mainly. How can we use social media as an ally for critically assessing topical subjects? How do we hold them accountable for the information that goes through them? Is social media moderation and freedom of expression compatible? -- Leonardo Sanna has been a contract doctoral student at the University of Modena and Reggio Emilia (Italy) since November 2018, where he has been working on the analysis of Big Data from a semiotic perspective. His research focuses on a combination of quantitative and qualitative methods for social media analysis. Currently, he is studying, on Facebook, the two phenomena known as 'filter bubble' and 'echo chamber'. In particular, he works on the data of the FBTREX group."
+  authors="Leonardo Senna"
   href="https://www.coe.int/en/web/world-forum-democracy/lab-8-social-media-freedom-and-accountability" >}}
 
 {{<resource
@@ -106,6 +107,7 @@ draft: false
   author="DATACTIVE"
   authorLink="https://data-activism.net/"
   description="The statement on the EU19 tracking exposed project website portrays why academic research should not be delimited by corporate conditions for research only;  we should engage in independent critical research to platforms that important for our online public democratic spaces."
+  authors="Claudio Agosti"
   resource1="ALEX blogpost"
   resource1href="https://data-activism.net/2019/05/fbtrex-reaction-to-facebook-collaboration/"
   href="https://eu19.tracking.exposed/page/data-activism/" >}}
@@ -129,6 +131,7 @@ draft: false
   author="Privacy International"
   authorLink="https://privacyinternational.org"
   description="An inclusion of our analysis into a collection of tools to asses misinformation in electoral campaigns"
+  authors="Fabio Chiusi, Claudio Agosti"
   href="https://privacyinternational.org/examples/data-exploitation-italian-elections" >}}
 
 {{<resource
@@ -316,6 +319,14 @@ draft: false
   href="https://www.opendemocracy.net/digitaliberties/claudio-agosti/could-populism-be-side-effect-of-personalized-algorithm"
   title="Could populism be a side effect of the Personalized Algorithm?"
   description="A rampant speculation in the title, and a more rational analysis on how to display impact of algorithms to social media users." >}}
+
+{{<resource
+  kind="article"
+  when="October"
+  href="https://blog.osd.tools/lalgoritmo-dell-algoritmo-5c3a052cc626"
+  title="OSD comments, interview and analysis on fbtrex (Italian)"
+  author="Luca Corsato"
+>}}
 
 {{<resource
   kind="video"
