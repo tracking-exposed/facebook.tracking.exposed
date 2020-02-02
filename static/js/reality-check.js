@@ -279,8 +279,9 @@ function renderTimelineDay(day) {
                         isAd = '(Sponsored)';
                     }
 
+                    const textList = _.join(item.texts, '</br>')
                     const htmlPost = `
-                        <div class="mt-2 mb-3">${item.texts[0]}</div>
+                        <div class="mt-2 mb-3">${textList}</div>
                         <a href="https://facebook.com${item.permaLink}">
                             Original Post
                         </a>
