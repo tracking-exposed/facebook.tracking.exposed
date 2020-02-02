@@ -116,18 +116,18 @@ function initializeDaily(token, page) {
                 var goToTab = $(this)[0].hash.replace('#daily-', '');
                 console.log("double check: " + $(this)[0].hash );
                 if (goToTab == 'timeline-pane') {
-                    $('#daily-overview-pane').removeClass('d-block d-flex flex-row').addClass('d-none');
-                    $('#daily-settings-pane').removeClass('d-block d-flex flex-row').addClass('d-none');
-                    $('#daily-timeline-pane').addClass('d-block');
+                    $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
+                    $('#daily-timeline-pane').removeClass('d-none').addClass('d-block');
+                    $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
                     initIsotope();
                 } else if(goToTab == 'overview-pane' ) {
-                    $('#daily-timeline-pane').removeClass('d-block').addClass('d-none');
-                    $('#daily-settings-pane').removeClass('d-block').addClass('d-none');
-                    $('#daily-overview-pane').removeClass('d-none').addClass('d-block d-flex flex-row');
+                    $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
+                    $('#daily-overview-pane').removeClass('d-none').addClass('d-block flex-row d-flex');
+                    $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
                 } else if(goToTab == 'settings-pane') {
-                    $('#daily-timeline-pane').removeClass('d-block d-flex flex-row').addClass('d-none');
-                    $('#daily-overview-pane').removeClass('d-block d-flex flex-row').addClass('d-none');
-                    $('#daily-settings-pane').removeClass('d-none').addClass('d-block flex-row');
+                    $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
+                    $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
+                    $('#daily-settings-pane').removeClass('d-none').addClass('d-block');
                 }
             });
 
@@ -140,7 +140,7 @@ function initializeDaily(token, page) {
 
 var updateRenders = function(overviewPlace, viewCount, itemCount) {
     var page = overviewCount + '-' + overviewPlace;
-    let url = buildApiUrl(`/personal/${token}/daily/${page}`);
+    let url = buildApiUrl(`/personal/${token}/daily/`, page, 2);
     $.getJSON(url, (data) => {
       if (data.length > 0) {
         var hasNature = _.find(data, function(item) {
