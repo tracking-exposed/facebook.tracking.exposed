@@ -25,7 +25,7 @@ partial: "/javascripts"
 
         <div id="get-started" class="row mt-3 mb-5 container-fb d-none">
             <div class="col-lg-6 p-5">
-                <h2>Welcome</h2>
+                <h3>Welcome! you should be a concerned Facebook user or researcher</h3>
                 <p>
                     Do you feel like a lab rat being emotionally manipulated
                     when you use Facebook simply to hear about things going on
@@ -38,6 +38,11 @@ partial: "/javascripts"
                 </p>
             </div>
             <div class="col-lg-6 p-5">
+                <div>
+                    <a class="btn btn-block btn-light mt-3 mb-3" href="#howdoesitwork">
+                        Learn How It Works
+                    </a>
+                </div>
                 <div class="mt-5">
                     <a class="btn btn-block btn-facebook" href="#check-your-reality">
                         Check Your Reality
@@ -45,9 +50,49 @@ partial: "/javascripts"
                 </div>
                 <div>
                     <a class="btn btn-block btn-light mt-3 mb-3" href="/background/ethics">
-                        Learn How It Works
+                        Privacy Safeguards
                     </a>
                 </div>
+            </div>
+            <div class="col-lg-12 p-5">
+                <hr>
+                <h3 id="howdoesitwork">Learn How It Works</h3>
+                <p>Algorithm accountability might be done, scientifically, in five methods. Considering the power structure of Facebook and our current access to their internal logic, only the black-box analysis is the viable solution left to us.</p>
+                <h4 class="text-center">First step: Collect evidence</h4>
+                {{< fb-extension >}}
+                <hr>
+                <h4 class="text-center">Second step: Consent on processing your data</h4>
+                <p>Actually, we won't need your consent by GDPR, because we do not profile nor give your personal data outside our organization, but we might extend this list with all the optional form of data-reuse, if there would be an update you'll see a new popup asking consent, and just to remember, our extension:<br>
+                    <b> α </b> Analyzes the stories visible in your Facebook Newsfeed<br>
+                    <b> β </b> fbtrex only collects posts that are flagged as “Public” on Facebook, meaning anyone in the world could view these posts, even if they do not have a Facebook account. <br>  
+                    <b> γ </b> You have the right to delete what you record, we don't take copy<br>
+                    <b> δ </b> You have exclusive access to it, and our analysis consider you anonymously and don't perform analysis meant to profile anyone. We look for phenomenas of algorithmic manipulation.<br> 
+                </p> 
+                {{< bord-img href="/images/consent.png">}}
+                <hr>
+                <h4 class="text-center">Third step: Navigate on Facebook</h4>
+                {{< bord-img href="/images/collection-example.png">}}
+                <p>The banner above can be disabled if annoys you. If the post is not collected, because it is seen as <b>Custom Audience</b>/<b>'s Only</b>/<b>Closed Group</b>, you'll see a different graphics:</p>
+                {{< bord-img href="/images/rejection-example.png">}}
+                <p>In such cases, the extension records "the presence of an impression" but nothing about the content.</p>
+                <hr>
+                <h4 class="text-center">Fourth step: Access to fbtrex</h4>
+                <p>From the extension you can get a <b>Unique Link</b>, by clickon on <i>Reality-Check</i>. Do not share such link.<p>
+                {{< bord-img href="/images/access-example.png">}}
+                <hr>
+                <h4 class="text-center">Five step: Play with our tool</h4>
+                <p>The page show the evidence collected, and this is nothing unusual for you! In the end, it is only a sub-group of what you saw on your Facebook. How can this be used?<br>
+                    <b> α </b> To show to other people how you are getting informed. Download your data in CSV and play with our <a href="https://github.com/tracking-exposed/dashboard" target=_blank>data analysis dashboard, in python</a>.<br>
+                    <b> β </b> To compare with other people how you know differently a topic, what instruction below.<br>  
+                    <b> γ </b> To coordinate tests with people: be creative! we've to write an article about this.<br>
+                </p> 
+            </div>
+            <div class="col-lg-12 p-5">
+                <hr>
+                <h3 id="check-your-reality">Check Your Reality</h3>
+                <p>
+
+                </p>
             </div>
         </div>
  
@@ -77,7 +122,7 @@ partial: "/javascripts"
             </div>
             <div class="col-lg-11">
                 <h1 id="profile-name" class="mb-0 no-name"></h1>
-                <strong id="profile-username" class="username"></strong>
+                <strong id="status-info" class="username"></strong>
                 <a class="ml-2" href="#"
                     title="This is the pseudonym we anonymize your Facebook data with">
                     <span class="icon-info-circle"></span>
@@ -95,10 +140,18 @@ partial: "/javascripts"
                     </a>
                 </li>
                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" id="timeline-tab"
                         data-toggle="tab"  href="#daily-timeline-pane"
                         role="tab" aria-controls="timeline">
                         Timeline
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="settings-tab"
+                        data-toggle="tab"  href="#daily-settings-pane"
+                        role="tab" aria-controls="settings">
+                        Settings & Download 
                     </a>
                 </li>
             </ul>
@@ -118,7 +171,7 @@ partial: "/javascripts"
                         </button>
                     </div>
                 </div>
-                <div class="tab-pane fade p-3"
+                <div class="tab-pane fade p-3 d-none"
                      id="daily-timeline-pane" role="tabpanel"
                      aria-labelledby="timeline-tab">
                     <div class="row mb-3">
@@ -169,6 +222,21 @@ partial: "/javascripts"
                     <hr>
                     <ul id="daily-timeline" class="table-like list-unstyled"></ul>
                 </div>
+                <div class="tab-pane fade p-3 d-none"
+                     id="daily-settings-pane" role="tabpanel"
+                     aria-labelledby="settings-tab">
+                    <div class="p-3">
+                        <button onclick="downloadCSV()" class="btn btn-facebook">
+                            Download the CSV with your data
+                        </button>
+                    </div>
+                    <div class="p-3">
+                            <h2>Settings</h2>
+                            <p class="text-muted">TODO join a research group</p>
+                    </div>
+                    <hr>
+                    <ul id="daily-settings" class="table-like list-unstyled"></ul>
+                </div>
             </div>
         </div>
         <div class="row mb-5">
@@ -187,5 +255,6 @@ partial: "/javascripts"
 <script>
 $(document).ready(function() {
     initializeReality('3-0');
+    // initializeStats();
 });
 </script>

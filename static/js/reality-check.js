@@ -21,11 +21,17 @@ function initializeReality(page) {
 function renderDay(item, count) {
     daily = `<div id="day-${item.day}" class="graph-day flex-fill pl-3 pr-3 graph-day-border">
         <span class="text-muted">${moment(item.day).format('LL')}</span><br>
-        <span class="seconds">${Math.round(item.totalSeconds / 60)}</span><br>
-        Minutes Spent<br>
+        <p>
+            <br>
+            <span class="text-right align-right">${item.npost} Posts</span><br>
+            <span class="posts">${item.duration}</span>
+            <br>
+        </span></p>
         <div id="daily-pie-${count}" class="daily-pie"></div>
-        <p><span class="posts">${item.npost}</span><br>
-        Posts Read</p>
+        <p>
+            <span class="posts">${item.ntimelines}</span>
+            ${item.ntimelines > 1 ? "sessions" : "session"}
+        </p>
     </div>`;
 
     if (count == 0) {
@@ -66,14 +72,17 @@ function determineState(data) {
             return Object.keys(item.nature).length > 0; 
         });
         if (hasNature != undefined) {
+            console.log('timeline:', hasNature)
             return true;
         } else {
             // where api has data but item.nature is empty object
+            console.log("this actually happens", data);
             $('#loading-fetching').addClass('d-none');
             $('#loading-empty').removeClass('d-none');
         }
     } else {
        // where the api has no objects at all returned 
+       console.log("this looks like a sad day for the db");
        $('#loading-fetching').addClass('d-none');
        $('#loading-empty').removeClass('d-none');
     }
@@ -84,12 +93,11 @@ function initializeDaily(token, page) {
     $('#loading-data').removeClass('d-none');
     $('#daily-overview').html('');
     $('#daily-timeline').html('');
-    let url = buildApiUrl(`/personal/${token}/daily/${page}`);
+    let url = buildApiUrl(`/personal/${token}/daily`, page, 2);
 
     $.getJSON(url, (data) => {
-        let daily = '';
         if (determineState(data)) {
-            _.forEach(_.reverse(data), function(item, count) { 
+            _.each(_.reverse(data), function(item, count) { 
                 renderDay(item, count);
                 days.push(item.day);
             });
@@ -106,12 +114,18 @@ function initializeDaily(token, page) {
                 e.preventDefault()
                 var goToTab = $(this)[0].hash.replace('#daily-', '');
                 if (goToTab == 'timeline-pane') {
-                    $('#daily-overview-pane').removeClass('d-flex flex-row').addClass('d-none');
-                    $('#daily-timeline-pane').addClass('d-block');
+                    $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
+                    $('#daily-timeline-pane').removeClass('d-none').addClass('d-block');
+                    $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
                     initIsotope();
-                } else {
-                    $('#daily-timeline-pane').removeClass('d-block').addClass('d-none');
-                    $('#daily-overview-pane').removeClass('d-none').addClass('d-flex flex-row');
+                } else if(goToTab == 'overview-pane' ) {
+                    $('#daily-overview-pane').removeClass('d-none').addClass('d-block flex-row d-flex');
+                    $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
+                    $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
+                } else if(goToTab == 'settings-pane') {
+                    $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
+                    $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
+                    $('#daily-settings-pane').removeClass('d-none').addClass('d-block');
                 }
             });
 
@@ -124,10 +138,8 @@ function initializeDaily(token, page) {
 
 var updateRenders = function(overviewPlace, viewCount, itemCount) {
     var page = overviewCount + '-' + overviewPlace;
-    let url = buildApiUrl(`/personal/${token}/daily/${page}`);
+    let url = buildApiUrl(`/personal/${token}/daily/`, page, 2);
     $.getJSON(url, (data) => {
-      let daily = '';
-
       if (data.length > 0) {
         var hasNature = _.find(data, function(item) {
             return Object.keys(item.nature).length > 0; 
@@ -136,7 +148,7 @@ var updateRenders = function(overviewPlace, viewCount, itemCount) {
         if (hasNature != undefined) {
             renderDay(data[itemCount], viewCount);
 
-            _.forEach(data, function(item, count) {
+            _.each(data, function(item) {
                 days.push(item.day)
             });
             renderTimeline(_.reverse(days));
@@ -153,7 +165,10 @@ var paginateButtons = function() {
 
         // back / next
         if ($(this).data('direction') == 'back') {
-            $('#daily-overview').children()[2].remove();
+            console.log( $('#daily-overview') );
+            if( $('#daily-overview').children() && $('#daily-overview').children().length )
+                $('#daily-overview').children()[2].remove();
+
             overviewPlace = overviewPlace + 1;
             updateRenders(overviewPlace, 0, 2);
         } else if ($(this).data('direction') == 'next' && overviewPlace > 0) {
@@ -174,40 +189,51 @@ var paginateButtons = function() {
 }
 
 function renderTimeline(days) {
-    _.forEach(_.reverse(days), function(day) {
+    console.log("Rendering timelines", days);
+    _.each(_.reverse(days), function(day) {
         renderTimelineDay(day);
     });
 }
 
 function renderTimelineDay(day) { 
-    const url = buildApiUrl(`/personal/${token}/enrich/${day}`);
+    const url = buildApiUrl(`/personal/${token}/enrich`, day, 2);
 
     $.getJSON(url, (data) => {
-        let dayViz = ''
 
-        $('#profile-name').html(data[0].user.replace(/-/gi, ' '));
-        $('#profile-username').html('@' + data[0].user);
+        if(!_.size($('#profile-name').text()))
+            $('#profile-name').html(data[0].user.replace(/-/gi, ' '));
+
+        $('#status-info').text(
+            _.size(data) + " impressions " +
+            moment(_.first(data).impressionTime).format('h:mm a') + ' — ' +
+            moment(_.last(data).impressionTime).format('h:mm a') );
 
         const semanticIds = {};
 
         // build topics
-        _.forEach(data, function(item, count) {
-            if (item.labels != undefined) {
+        _.each(data, function(item, count) {
+            if (item.labels != undefined || true) { // remind Claudio you add this 'cos labels might miss
                 // depending on occurence
                 if (semanticIds[item.semanticId]) {
                     semanticIds[item.semanticId] = semanticIds[item.semanticId] + 1;
-                    $('#daily-seen-' + item.semanticId).html('Seen ' + semanticIds[item.semanticId] + 'x');
+                    $('#daily-seen-' + item.semanticId).html(
+                        'Seen at ' + 
+                        moment(item.impressionTime).format('h:mm a') + ' ' +
+                        semanticIds[item.semanticId] + 'x'
+                    );
                 } else {
                     semanticIds[item.semanticId] = 1;
 
                     let isAd = '';
                     let isHidden = '';
                     let showAllLink = '';
-                    let seenCount = 'Seen once';
+                    let seenCount = 'Seen at ' + 
+                        moment(item.impressionTime).format('h:mm a') 
+                        + ' Once';
                     let topicsCount = [];
 
                     // topics
-                    _.forEach(item.labels, function(topic, index) { 
+                    _.each(item.labels, function(topic, index) { 
                         var exists = _.find(topicsCount, { 'topic':  topic });
                         if (exists) {
                             exists.count = exists.count + 1;
@@ -221,7 +247,7 @@ function renderTimelineDay(day) {
 
                     let topicsOrdered = _.orderBy(topicsCount, ['count'], ['desc']);
                     let htmlTopic = '';
-                    _.forEach(topicsOrdered, function(item, index) {
+                    _.each(topicsOrdered, function(item, index) {
                         let topicText = item.topic;
                         if (item.topic.length > 27) {
                             topicText = `<span title="${item.topic}">
@@ -251,13 +277,24 @@ function renderTimelineDay(day) {
                         isAd = '(Sponsored)';
                     }
 
+                    const textList = _.replace(item.fullText, '\n', '</br>')
                     const htmlPost = `
-                        <div class="mt-2 mb-3">${item.texts[0]}</div>
+                        <div class="mt-2 mb-3">${textList}</div>
                         <a href="https://facebook.com${item.permaLink}">
                             Original Post
                         </a>
                         on <span class="date">${moment(day).format('LL')}</span>
                     `;
+                    if(_.size(item.attributions) > 1)
+                        console.log(item);
+
+                    const displaySource = item.attributions && item.attributions[0] ? 
+                        item.attributions[0].display : "";
+                    const sourceLink = item.feed_id && item.feed_id.authorId ? 
+                        'https://facebook.com/' + item.feed_id.authorId : "#";
+                    const cleanSource = item.attributions && item.attributions[0] ? 
+                        item.attributions[0].content : "";
+
                     const htmlItem = `
                     <li id="daily-${day}-${item.semanticId}" class="row table-item ${item.nature}">
                         <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-md-4 col-lg-3 pl-0">
@@ -269,13 +306,14 @@ function renderTimelineDay(day) {
                         </div>
                         <div id="daily-post-${day}-${item.semanticId}" class="col-sm-8 col-md-8 col-lg-9 pr-0">
                             <strong class="float-left ">
-                                <a class="username" href="${item.sourceLink}">
-                                    ${item.source}
+                                <i class="impressionOrder">${item.impressionOrder}</i> —
+                                <a class="username" title="${displaySource}" href="${sourceLink}">
+                                    ${displaySource}
                                 </a>
                                 ${isAd}
                             </strong>
                             <span id="daily-seen-${item.semanticId}" class="float-right text-muted"
-                                  title="Seen at ${moment(item.impressionTime).format('h:mm a')}">
+                                  title="Seen at ${moment(item.impressionTime).format()}">
                                 ${seenCount}
                             </span>
                             <div class="clearfix"></div>
@@ -297,7 +335,6 @@ function renderTimelineDay(day) {
 }
 
 function initIsotope() {
-console.log('inside initIsotyope')
   var $timeline = $('.table-like').isotope({
     itemSelector: '.table-item',
     layoutMode: 'vertical',
@@ -327,38 +364,17 @@ console.log('inside initIsotyope')
 
 function downloadCSV() {
   const token = getToken();
-  const url = buildApiUrl(`/personal/${token}/csv`);
-  console.log("downloadCSV from: ", url);
+  const url = buildApiUrl(`/personal/${token}/csv`, null, 2);
   window.open(url);
 }
 
 function initializeStats() {
   const token = getToken();
-  const url = buildApiUrl(`/personal/${token}/stats`);
-  console.log("timeline stats from: ", url);
+  const url = buildApiUrl(`/personal/${token}/stats`, '25-0', 2);
   $.getJSON(url, (data) => {
+      // TODO do candlesticks
     console.log(`Retrived ${_.size(data.content)} impressions, from ${_.size(data.timelines)} timelines, ${JSON.stringify(data.served)}, total stored: ${data.storedTimelines}`);
-    let lastT = { id: null, counter: 0 };
-
-    _.each(data.content, (impression) => {
-      if(lastT.id != impression.timelineId) {
-        lastT.id = impression.timelineId;
-        lastT.counter += 1;
-        let newtmln = newTimelineRow(
-          _.omit(impression, ['summary']),
-          _.get(data.timelines, impression.timelineId),
-          lastT.counter, _.size(data.timelines) );
-        $('#entries').append(newtmln);
-      }
-
-      let impre = composeImpression(impression, lastT.counter, _.get(data.timelines, impression.timelineId));
-      $('#entries').append(impre);
-
-    });
-    $('#closing').append(shapeClosingMessage(_.size(data.timelines), data.storedTimelines));
+    console.log(data);
   });
 };
 
-function shapeClosingMessage(avail, total) {
-    return `<p class="timeline">Load the remaining ${total-avail} timelines, of a total stored of ${total}<br><small>NO, NOT YET IMPLEMENMTED, CHECK THE APIs</small></p>`;
-}

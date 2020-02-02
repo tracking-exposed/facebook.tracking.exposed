@@ -5,11 +5,51 @@ draft: false
 ---
 <h3
   style="text-align:center;padding-top:1em;padding-bottom:1em;" class="highlight secondary">
-    2019
+    2020
+    <a href="#2019">2019</a>
     <a href="#2018">2018</a>
     <a href="#2017">2017</a>
     <a href="#2016">2016</a>
 </h3>
+
+{{<resource
+  kind="link"
+  when="January"
+  title="Youtube Tracking Exposed — DMI UvA Winter School project pitch"
+  description="Collective group work on polarization of the Brexit discussion seen through Youtube's personalization algorithm, coordinated by Salvatore Romano and Davide Beraldo"
+  href="https://docs.google.com/document/d/1EkeEa6vnIQI1QH8xEIZkAbI23vn3ChsjoJs3U6tkeqo/edit"
+  resource1="Final project report"
+  resource1href="https://wiki.digitalmethods.net/Dmi/YouTube"
+  resource2="Project Pitch slides (on Prezi)"
+  resource2href="https://prezi.com/view/AvoT0B1lnclMIq3k4LOU"
+  resource3="Final presentation slides"
+  resource3href="https://drive.google.com/open?id=1bOSi6853za6CRDYF1xdc8Os0EUQOWgma">}}
+  
+{{<resource
+  kind="link"
+  when="January"
+  title="Youtube Tracking Exposed — DMI UvA Winter School Tutorial"
+  author="Salvatore Romano"
+  description="Tutorial to explain the possible uses of the ytTREX tool"
+  resource1="Tutorial slides"
+  resource1href="https://prezi.com/view/KqmfljOsE8HYvyT7TqGE">}}
+
+## 2019
+
+{{<resource
+  kind="event"
+  title="Assembly with the Amazon's workers of ADL Cobas grassroots trade union"
+  when="December"  
+  description="An informal discussion with some Amazon's workers inscribed to the grassroots trade union ADL Cobas Padova-Bassa Padovana and American activists from the Amazon Employees for Climate Justice group. After a brief introduction about amTREX tool, we discussed how Amazon's app tracks employees, trying to identify strategies to reduce the amount of data extracted and reflecting on potential GDPR compliance used as a tool for trade union negotiations. Partecipated by Salvatore Romano for trex." >}}
+
+{{<resource
+  kind="event"
+  title="RAI national television with amazon.tracking.exposed (Italian Documentary on Amazon)"
+  when="December"  
+  href="https://vimeo.com/378307005"
+  description="A long documentary on Amazon empire, and our original research on how Algorithm accountability tools might handy to infer personal data usage in personalization algorithms. Our research display and explain with the video on surveillance capitalism and tools for personal investigation. The report is quite basic and lack of the robustness of a large scale tool. -- Featuring Claudio Agosti, Riccardo Coluccini, Giulia Corona, Salvatore Romano. To see the video you have to write 'trex'"
+  resource1="Our new supported platform"
+  resource1href="https://amazon.tracking.exposed" >}}
 
 {{<resource
   kind="event"
@@ -97,7 +137,7 @@ draft: false
   nature="external"
   author="Berlin DSSG"
   authorLink="https://dssg-berlin.org/"
-  description="data scientists analyzing one year of fbtrex data. We did a privacy assessment and defined minimization and confidentiality agreement, as collaborator of the project for the time of the experiment. They "
+  description="data scientists analyzing one year of fbtrex data. We did a privacy assessment and defined minimization and confidentiality agreement, as collaborator of the project for the time of the experiment."
   href="https://blog.dssg-berlin.org/dssg-datathon-2019-ein-ganzes-wochenende-lang-datenanalyse-f%C3%BCrs-gemeinwohl-4ec6ffa95aec" >}}
 
 {{<resource
@@ -233,7 +273,7 @@ draft: false
   when="July"
   title="Italian political election and digital propaganda"
   description="TacticalTech publish a report written by Claudio Agosti and Fabio Chiusi"
-  href="https://ourdataourselves.tacticaltech.org/posts/overview-italy/)"
+  href="https://ourdataourselves.tacticaltech.org/posts/overview-italy/"
   resource1="Open data"
   resource1hreflink="https://github.com/tracking-exposed/experiments-data/tree/master/e18" >}}
 
