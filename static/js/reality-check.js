@@ -6,6 +6,7 @@ let $grid;
 const posts = {};
 const token = getToken();
 let days = [];
+let selectedDay = null;
 let overviewCount = 3;
 let overviewPlace = 0;
 
@@ -19,7 +20,7 @@ function initializeReality(page) {
 }
 
 function renderDay(item, count) {
-    daily = `<div id="day-${item.day}" class="graph-day flex-fill pl-3 pr-3 graph-day-border">
+    daily = `<div id="day-${item.day}" class="graph-day flex-fill pl-3 pr-3 graph-day-border" data-day="${item.day}">
         <span class="text-muted">${moment(item.day).format('LL')}</span><br>
         <p>
             <br>
@@ -67,6 +68,15 @@ function renderDay(item, count) {
 }
 
 function determineState(data) {
+
+    if(data.error) {
+        console.log(data, "error", data.message);
+        $('#loading-fetching').addClass('d-none');
+        $('#loading-error').removeClass('d-none');
+        $('#error-details').text(data.message);
+        return false;
+    }
+
     if (data.length > 0) {
         var hasNature = _.find(data, function(item) {
             return Object.keys(item.nature).length > 0; 
@@ -74,18 +84,14 @@ function determineState(data) {
         if (hasNature != undefined) {
             console.log('timeline:', hasNature)
             return true;
-        } else {
-            // where api has data but item.nature is empty object
-            console.log("this actually happens", data);
-            $('#loading-fetching').addClass('d-none');
-            $('#loading-empty').removeClass('d-none');
         }
-    } else {
-       // where the api has no objects at all returned 
-       console.log("this looks like a sad day for the db");
-       $('#loading-fetching').addClass('d-none');
-       $('#loading-empty').removeClass('d-none');
     }
+    // where the api has no objects at all returned 
+    // where api has data but item.nature is empty object
+    console.log("this looks like a sad day for the db");
+    $('#loading-fetching').addClass('d-none');
+    $('#loading-empty').removeClass('d-none');
+
     return false;
 }
 
@@ -93,46 +99,66 @@ function initializeDaily(token, page) {
     $('#loading-data').removeClass('d-none');
     $('#daily-overview').html('');
     $('#daily-timeline').html('');
+
+    $('#dailyTab a').on('click', function(e) {
+        e.preventDefault()
+        var goToTab = $(this)[0].hash.replace('#daily-', '');
+        if (goToTab == 'timeline-pane') {
+            console.log("click on timeline pane: selectedDay", selectedDay);
+            $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
+            $('#daily-timeline-pane').removeClass('d-none').addClass('d-block');
+            $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
+            renderTimelineDay(selectedDay);
+        } else if(goToTab == 'overview-pane' ) {
+            $('#daily-overview-pane').removeClass('d-none').addClass('d-block flex-row d-flex');
+            $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
+            $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
+        } else if(goToTab == 'settings-pane') {
+            $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
+            $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
+            $('#daily-settings-pane').removeClass('d-none').addClass('d-block');
+        }
+    });
+
+    $('#loading-data').addClass('d-none');
+    $('#profile').removeClass('d-none');
+    $('#visualization').removeClass('d-none');
+
     let url = buildApiUrl(`/personal/${token}/daily`, page, 2);
 
-    $.getJSON(url, (data) => {
-        if (determineState(data)) {
-            _.each(_.reverse(data), function(item, count) { 
+    $.getJSON(url, (dailyStats) => {
+        if (determineState(dailyStats.stats)) {
+
+            if(!_.size($('#profile-name').text()))
+                $('#profile-name').html(dailyStats.pseudo.replace(/-/gi, ' '));
+
+            _.each(_.reverse(dailyStats.stats), function(item, count) { 
                 renderDay(item, count);
-                days.push(item.day);
+
+                if(!selectedDay) {
+                    $(".graph-day").addClass('selected-day');
+                    selectedDay = $(".graph-day")[0].getAttribute('data-day');
+                    $("#timeline-tab").text("View posts of " + selectedDay);
+                }
             });
 
-            renderTimeline(days);
-
-            if (data.length == 3) {
+            if (dailyStats.stats.length == 3) {
                 var btnBack = $('.btn-overview-inactive')[0];
                 $(btnBack).removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
                 paginateButtons();            
             }
 
-            $('#dailyTab a').on('click', function(e) {
-                e.preventDefault()
-                var goToTab = $(this)[0].hash.replace('#daily-', '');
-                if (goToTab == 'timeline-pane') {
-                    $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
-                    $('#daily-timeline-pane').removeClass('d-none').addClass('d-block');
-                    $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
-                    initIsotope();
-                } else if(goToTab == 'overview-pane' ) {
-                    $('#daily-overview-pane').removeClass('d-none').addClass('d-block flex-row d-flex');
-                    $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
-                    $('#daily-settings-pane').addClass('d-none').removeClass('d-block');
-                } else if(goToTab == 'settings-pane') {
-                    $('#daily-overview-pane').addClass('d-none').removeClass('d-block flex-row d-flex');
-                    $('#daily-timeline-pane').addClass('d-none').removeClass('d-block');
-                    $('#daily-settings-pane').removeClass('d-none').addClass('d-block');
-                }
-            });
-
-            $('#loading-data').addClass('d-none');
-            $('#profile').removeClass('d-none');
-            $('#visualization').removeClass('d-none');
         }
+
+        $('.graph-day').on('click', function() {
+            console.log("clicked");
+            if(!$(this).hasClass('selected-day')) {
+                $('.selected-day').removeClass('selected-day');
+                $(this).addClass('selected-day');
+                selectedDay = $(this)[0].getAttribute('data-day');
+                $("#timeline-tab").text("View posts of " + selectedDay);
+            } else {console.log("bravo")}
+        })
     });
 }
 
@@ -188,20 +214,22 @@ var paginateButtons = function() {
     });
 }
 
+/*
 function renderTimeline(days) {
     console.log("Rendering timelines", days);
     _.each(_.reverse(days), function(day) {
         renderTimelineDay(day);
     });
 }
+*/
 
-function renderTimelineDay(day) { 
+function renderTimelineDay(day) {
+    // this is called when a new day is selected or when
+    // the label in the navigation tab is pressed.
+    // the callback resume the execution handling the flex-row shit
     const url = buildApiUrl(`/personal/${token}/enrich`, day, 2);
 
     $.getJSON(url, (data) => {
-
-        if(!_.size($('#profile-name').text()))
-            $('#profile-name').html(data[0].user.replace(/-/gi, ' '));
 
         $('#status-info').text(
             _.size(data) + " impressions " +
@@ -213,13 +241,11 @@ function renderTimelineDay(day) {
         // build topics
         _.each(data, function(item, count) {
             if (item.labels != undefined || true) { // remind Claudio you add this 'cos labels might miss
-                // depending on occurence
+                // depending on occurence count, update the 'Seen $x (times)' or 'Once' is default
                 if (semanticIds[item.semanticId]) {
                     semanticIds[item.semanticId] = semanticIds[item.semanticId] + 1;
                     $('#daily-seen-' + item.semanticId).html(
-                        'Seen at ' + 
-                        moment(item.impressionTime).format('h:mm a') + ' ' +
-                        semanticIds[item.semanticId] + 'x'
+                        'Seen ' + semanticIds[item.semanticId] + 'x'
                     );
                 } else {
                     semanticIds[item.semanticId] = 1;
@@ -227,9 +253,7 @@ function renderTimelineDay(day) {
                     let isAd = '';
                     let isHidden = '';
                     let showAllLink = '';
-                    let seenCount = 'Seen at ' + 
-                        moment(item.impressionTime).format('h:mm a') 
-                        + ' Once';
+                    let seenCount = 'Seen Once';
                     let topicsCount = [];
 
                     // topics
@@ -278,22 +302,20 @@ function renderTimelineDay(day) {
                     }
 
                     const textList = _.replace(item.fullText, '\n', '</br>')
-                    const htmlPost = `
-                        <div class="mt-2 mb-3">${textList}</div>
-                        <a href="https://facebook.com${item.permaLink}">
-                            Original Post
-                        </a>
-                        on <span class="date">${moment(day).format('LL')}</span>
-                    `;
-                    if(_.size(item.attributions) > 1)
-                        console.log(item);
+
+                    if(_.size(item.attributions) > 1) {
+                        console.log("multiple attribution wasn't happening since the shared post were working", item);
+                    }
 
                     const displaySource = item.attributions && item.attributions[0] ? 
                         item.attributions[0].display : "";
-                    const sourceLink = item.feed_id && item.feed_id.authorId ? 
-                        'https://facebook.com/' + item.feed_id.authorId : "#";
+                    const sourceLink = item.attributions && item.attributions[0] && _.size(item.attributions[0].fblink) ?
+                            item.attributions[0].fblink : 
+                                ( item.feed_id && item.feed_id.authorId ? 
+                                'https://facebook.com/' + item.feed_id.authorId : "#" );
                     const cleanSource = item.attributions && item.attributions[0] ? 
                         item.attributions[0].content : "";
+                    const permaLink = item.permaLink ? 'https://facebook.com' + item.permaLink : "#";
 
                     const htmlItem = `
                     <li id="daily-${day}-${item.semanticId}" class="row table-item ${item.nature}">
@@ -317,7 +339,13 @@ function renderTimelineDay(day) {
                                 ${seenCount}
                             </span>
                             <div class="clearfix"></div>
-                            ${htmlPost}
+                            <div class="mt-2 mb-3">${textList}</div>
+                            <a href="${permaLink}" class="${permaLink.length == 1 ? 'd-none' : ''}">
+                                Original Post
+                            </a>
+                            on <span class="date">
+                                ${moment(item.impressionTime).format('LLL')}
+                            </span>
                         </div>
                     </li>`;
 
@@ -331,6 +359,8 @@ function renderTimelineDay(day) {
             $('#topics-' + $(this).data('semid')).find('.list-item').removeClass('d-none');
             $(this).remove();
         }); 
+
+        initIsotope();
     });
 }
 
