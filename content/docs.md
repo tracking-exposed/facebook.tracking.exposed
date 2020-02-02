@@ -506,7 +506,7 @@ Returns a comma-separated-values file containing personal data of an user. `$YOU
 `https://facebook.tracking.exposed/api/v2/personal/$YOUR_TOKEN/enrich/$PAGING`
 <br>
 
-Returns the summary, enriched by semantic analysis, if available
+Returns the metadata, stripped of few fields, enriched by semantic analysis, if available.
 
 #### Data Specifics
 
@@ -518,7 +518,7 @@ TBD
 
 #### Response
 
-TBD
+It is the content fetched why reality-check when load a timeline.
 
 ****
 
@@ -567,7 +567,7 @@ TBD
 ## <a name="daily"></a>Daily aggregated Statistics
 
 #### URL
-`https://facebook.tracking.exposed/api/v2/persona/daily/$PAGING`
+`https://facebook.tracking.exposed/api/v2/personal/$YOUR_TOKEN/daily/$PAGING`
 <br>
 #### Description
 Aggregated daily statistics on individual usage. It is used by [Reality Check](/reality-check/) at the first visualization.
@@ -580,7 +580,13 @@ Aggregated daily statistics on individual usage. It is used by [Reality Check](/
 
 #### Response
 
-TBD...
+    {
+      'dayamount': 'by default 3, is the amount of day looked at',
+      'skipped': 'by default 0, number of day skipped before pick the amount requested',
+      'stats': 'actual json data with the few info used to paint pie charts',
+      'pseudo': 'supporter pseudonym',
+
+    }
 
 # Node API
 
