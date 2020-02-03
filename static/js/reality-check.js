@@ -105,6 +105,11 @@ function upsertRealityCheck(page) {
     $('#profile').removeClass('d-none');
     $('#visualization').removeClass('d-none');
 
+    upsertDailyPies(page);
+}
+
+function upsertDailyPies(page) {
+
     let url = buildApiUrl(`/personal/${token}/daily`, page, 2);
 
     $.getJSON(url, (dailyStats) => {
@@ -126,21 +131,44 @@ function upsertRealityCheck(page) {
         pieCharts = _.compact(_.map(_.reverse(dailyStats.stats), function(item, count) { 
             if(!item.npost)
                 return null;
-
-            renderDay(item, count);
-
-            if(!selectedDay) {
-                toggleSelected($('.graph-day')); 
-                // set the default, which is the oldest of the three days
-            }
+            return renderDay(item, count);
         }));
 
+        if(!selectedDay) {
+            toggleSelected($('.graph-day')[0]);
+            // set the default, the oldest of the three days
+        }
+
+        $('.btn-overview-inactive').removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
+        $('.btn-overview-paginate').on('click', handlePagination);
         if (_.size(pieCharts) < 3) {
-            var btnBack = $('.btn-overview-inactive')[0];
-            $(btnBack).removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
-            paginateButtons();            
+            $("[data-direction='back']").addClass('btn-overview-inactive').removeClass('btn-overview-paginate');
         }
     });
+}
+
+function handlePagination() {
+
+    // back / next
+    if ($(this).data('direction') == 'back') {
+        overviewPlace = overviewPlace + 3;
+    } else if ($(this).data('direction') == 'next' && overviewPlace > 0) {
+        overviewPlace = overviewPlace - 3;
+    } else {
+        console.log('invalid pagination update');
+        return;
+    }
+
+    pieCharts = _.compact(_.map(pieCharts, function(p, i) {
+        p.c3pie.destroy();
+        let id = $('#daily-overview').children()[0].id
+        $('#' + id).remove();
+        return null;
+    }));
+    selectedDay = null;
+
+    upsertDailyPies(overviewCount + '-' + overviewPlace);
+    console.log("Completed handlePagination");
 }
 
 function toggleSelected(targetE) {
@@ -152,56 +180,14 @@ function toggleSelected(targetE) {
     } /* else: it is alredy clicked */
 };
 
-function updateRenders(overviewPlace, viewCount, itemCount) {
-    var page = overviewCount + '-' + overviewPlace;
-    let url = buildApiUrl(`/personal/${token}/daily/`, page, 2);
-    $.getJSON(url, (data) => {
-        console.log("updateRenders", data);
-
-        if (data.npost > 0) {
-            renderDay(data[itemCount], viewCount);
-        }
-    });
-}
-
-function paginateButtons() {
-    $('.btn-overview-paginate').on('click', function() {
-
-        // back / next
-        if ($(this).data('direction') == 'back') {
-            overviewPlace = overviewPlace + 1;
-            let newstuff = updateRenders(overviewPlace, 0, 2);
-
-            console.log("newstuff in going back", newstuff)
-            if(newstuff) {
-                if( $('#daily-overview').children() && 
-                    $('#daily-overview').children().length == 3 )
-                    $('#daily-overview').children()[2].remove();
-            }
-
-        } else if ($(this).data('direction') == 'next' && overviewPlace > 0) {
-            overviewPlace = overviewPlace - 1;
-            let newstuff = updateRenders(overviewPlace, 2, 0);
-            console.log("newstuff in going forward", newstuff)
-
-            $('#daily-overview').children()[0].remove();
-        } else {
-            console.log('invalid pagination update');
-        }
-
-        // activate btns
-        var btnsPage = $('.btn-overview-inactive');
-        if (btnsPage.length > 0) {
-            $(btnsPage).removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
-            paginateButtons();
-        }
-    });
-}
-
 function renderTimelineDay(day) {
-    // this is called when a new day is selected or when
-    // the label in the navigation tab is pressed.
-    // the callback resume the execution handling the flex-row shit
+    // this is called when the tab label 'timeline of..' is pressed
+
+    // clean the existing timeline, if any
+    $('#daily-timeline').html("");
+
+    // fetch from the "personal enrich" API: 
+    // https://facebook.tracking.exposed/docs
     const url = buildApiUrl(`/personal/${token}/enrich`, day, 2);
 
     $.getJSON(url, (data) => {
