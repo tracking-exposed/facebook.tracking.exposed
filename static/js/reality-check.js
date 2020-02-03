@@ -3,20 +3,21 @@ let $grid;
 /* in regards to the API used in this file, please consult
  * the file in content/api-documentation.md */
 
-const posts = {};
-const token = getToken();
-let days = [];
+let token = null;
+let pieCharts = [];
 let selectedDay = null;
 let overviewCount = 3;
 let overviewPlace = 0;
 
 function initializeReality(page) {
-  if (token) {
-    $('#token').text(token);
-    initializeDaily(token, page);
-  } else {
-    $('#get-started').removeClass('d-none');
-  }
+    if(!token) token = getToken();
+
+    if(!token) {
+        console.log("TODO fill the example below with some examples");
+        $('#get-started').removeClass('d-none');
+    } else {
+        upsertRealityCheck(page);
+    }
 }
 
 function renderDay(item, count) {
@@ -43,8 +44,12 @@ function renderDay(item, count) {
         console.log('weird count in renderDay');
     }
 
+    $(`#day-${item.day}`).on('click', function() {
+        toggleSelected($(this));
+    });
+
     let pieId = `#daily-pie-${count}`;
-    let pieChart = c3.generate({
+    let c3pie = c3.generate({
         bindto: pieId,
         data: {
             columns: [
@@ -65,37 +70,13 @@ function renderDay(item, count) {
             width: 180
         }
     });
+    return {
+        c3pie, 
+        day: item.day,
+    }
 }
 
-function determineState(data) {
-
-    if(data.error) {
-        console.log(data, "error", data.message);
-        $('#loading-fetching').addClass('d-none');
-        $('#loading-error').removeClass('d-none');
-        $('#error-details').text(data.message);
-        return false;
-    }
-
-    if (data.length > 0) {
-        var hasNature = _.find(data, function(item) {
-            return Object.keys(item.nature).length > 0; 
-        });
-        if (hasNature != undefined) {
-            console.log('timeline:', hasNature)
-            return true;
-        }
-    }
-    // where the api has no objects at all returned 
-    // where api has data but item.nature is empty object
-    console.log("this looks like a sad day for the db");
-    $('#loading-fetching').addClass('d-none');
-    $('#loading-empty').removeClass('d-none');
-
-    return false;
-}
-
-function initializeDaily(token, page) {
+function upsertRealityCheck(page) {
     $('#loading-data').removeClass('d-none');
     $('#daily-overview').html('');
     $('#daily-timeline').html('');
@@ -127,80 +108,83 @@ function initializeDaily(token, page) {
     let url = buildApiUrl(`/personal/${token}/daily`, page, 2);
 
     $.getJSON(url, (dailyStats) => {
-        if (determineState(dailyStats.stats)) {
 
-            if(!_.size($('#profile-name').text()))
-                $('#profile-name').html(dailyStats.pseudo.replace(/-/gi, ' '));
-
-            _.each(_.reverse(dailyStats.stats), function(item, count) { 
-                renderDay(item, count);
-
-                if(!selectedDay) {
-                    $(".graph-day").addClass('selected-day');
-                    selectedDay = $(".graph-day")[0].getAttribute('data-day');
-                    $("#timeline-tab").text("View posts of " + selectedDay);
-                }
-            });
-
-            if (dailyStats.stats.length == 3) {
-                var btnBack = $('.btn-overview-inactive')[0];
-                $(btnBack).removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
-                paginateButtons();            
-            }
-
+        if(dailyStats.error) {
+            console.log(dailyStats, "error", dailyStats.message);
+            $('#loading-fetching').addClass('d-none');
+            $('#loading-error').removeClass('d-none');
+            $('#error-details').text(dailyStats.message);
+            return;
         }
 
-        $('.graph-day').on('click', function() {
-            console.log("clicked");
-            if(!$(this).hasClass('selected-day')) {
-                $('.selected-day').removeClass('selected-day');
-                $(this).addClass('selected-day');
-                selectedDay = $(this)[0].getAttribute('data-day');
-                $("#timeline-tab").text("View posts of " + selectedDay);
-            } else {console.log("bravo")}
-        })
+        $('#loading-fetching').addClass('d-none');
+        $('#loading-empty').removeClass('d-none');
+
+        if(!_.size($('#profile-name').text()))
+            $('#profile-name').html(dailyStats.pseudo.replace(/-/gi, ' '));
+
+        pieCharts = _.compact(_.map(_.reverse(dailyStats.stats), function(item, count) { 
+            if(!item.npost)
+                return null;
+
+            renderDay(item, count);
+
+            if(!selectedDay) {
+                toggleSelected($('.graph-day')); 
+                // set the default, which is the oldest of the three days
+            }
+        }));
+
+        if (_.size(pieCharts) < 3) {
+            var btnBack = $('.btn-overview-inactive')[0];
+            $(btnBack).removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
+            paginateButtons();            
+        }
     });
 }
 
-var updateRenders = function(overviewPlace, viewCount, itemCount) {
+function toggleSelected(targetE) {
+    if( !$(targetE).hasClass('selected-day')) {
+        $('.selected-day').removeClass('selected-day');
+        $(targetE).addClass('selected-day');
+        selectedDay = $(targetE)[0].getAttribute('data-day');
+        $("#timeline-tab").fadeOut(300).text("View posts of " + selectedDay).fadeIn(400);
+    } /* else: it is alredy clicked */
+};
+
+function updateRenders(overviewPlace, viewCount, itemCount) {
     var page = overviewCount + '-' + overviewPlace;
     let url = buildApiUrl(`/personal/${token}/daily/`, page, 2);
     $.getJSON(url, (data) => {
-      if (data.length > 0) {
-        var hasNature = _.find(data, function(item) {
-            return Object.keys(item.nature).length > 0; 
-        });
+        console.log("updateRenders", data);
 
-        if (hasNature != undefined) {
+        if (data.npost > 0) {
             renderDay(data[itemCount], viewCount);
-
-            _.each(data, function(item) {
-                days.push(item.day)
-            });
-            renderTimeline(_.reverse(days));
         }
-      }
     });
 }
 
-// paginate buttons
-var paginateButtons = function() {
+function paginateButtons() {
     $('.btn-overview-paginate').on('click', function() {
-        days = [];
-        $('#daily-timeline').html('');
 
         // back / next
         if ($(this).data('direction') == 'back') {
-            console.log( $('#daily-overview') );
-            if( $('#daily-overview').children() && $('#daily-overview').children().length )
-                $('#daily-overview').children()[2].remove();
-
             overviewPlace = overviewPlace + 1;
-            updateRenders(overviewPlace, 0, 2);
+            let newstuff = updateRenders(overviewPlace, 0, 2);
+
+            console.log("newstuff in going back", newstuff)
+            if(newstuff) {
+                if( $('#daily-overview').children() && 
+                    $('#daily-overview').children().length == 3 )
+                    $('#daily-overview').children()[2].remove();
+            }
+
         } else if ($(this).data('direction') == 'next' && overviewPlace > 0) {
-            $('#daily-overview').children()[0].remove();
             overviewPlace = overviewPlace - 1;
-            updateRenders(overviewPlace, 2, 0);
+            let newstuff = updateRenders(overviewPlace, 2, 0);
+            console.log("newstuff in going forward", newstuff)
+
+            $('#daily-overview').children()[0].remove();
         } else {
             console.log('invalid pagination update');
         }
@@ -214,15 +198,6 @@ var paginateButtons = function() {
     });
 }
 
-/*
-function renderTimeline(days) {
-    console.log("Rendering timelines", days);
-    _.each(_.reverse(days), function(day) {
-        renderTimelineDay(day);
-    });
-}
-*/
-
 function renderTimelineDay(day) {
     // this is called when a new day is selected or when
     // the label in the navigation tab is pressed.
@@ -231,10 +206,17 @@ function renderTimelineDay(day) {
 
     $.getJSON(url, (data) => {
 
-        $('#status-info').text(
-            _.size(data) + " impressions " +
-            moment(_.first(data).impressionTime).format('h:mm a') + ' — ' +
-            moment(_.last(data).impressionTime).format('h:mm a') );
+        if(data.error) {
+            $('#status-info').text(data.message);
+            return;
+        } else if(_.size(data) > 1) {
+            $('#status-info').text(
+                _.size(data) + " impressions " +
+                moment(_.last(data).impressionTime).format('h:mm a') + ' — ' +
+                moment(_.first(data).impressionTime).format('h:mm a') );
+        } else {
+            $('#status-info').text("Error? not enough posts (" + _.size(data) + ")");
+        }
 
         const semanticIds = {};
 
@@ -393,13 +375,11 @@ function initIsotope() {
 }
 
 function downloadCSV() {
-  const token = getToken();
   const url = buildApiUrl(`/personal/${token}/csv`, null, 2);
   window.open(url);
 }
 
 function initializeStats() {
-  const token = getToken();
   const url = buildApiUrl(`/personal/${token}/stats`, '25-0', 2);
   $.getJSON(url, (data) => {
       // TODO do candlesticks
