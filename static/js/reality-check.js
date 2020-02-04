@@ -159,12 +159,11 @@ function handlePagination() {
         return;
     }
 
-    pieCharts = _.compact(_.map(pieCharts, function(p, i) {
+    _.each(pieCharts, function(p, i) {
         p.c3pie.destroy();
-        let id = $('#daily-overview').children()[0].id
-        $('#' + id).remove();
-        return null;
-    }));
+    });
+    $('#daily-overview').html();
+    pieCharts = [];
     selectedDay = null;
 
     upsertDailyPies(overviewCount + '-' + overviewPlace);
