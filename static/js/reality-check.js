@@ -13,7 +13,7 @@ function initializeReality(page) {
     if(!token) token = getToken();
 
     if(!token) {
-        console.log("TODO fill the example below with some examples");
+        console.log("TODO fill the navbar mockup below, with some examples.");
         $('#get-started').removeClass('d-none');
     } else {
         upsertRealityCheck(page);
@@ -101,6 +101,9 @@ function upsertRealityCheck(page) {
         }
     });
 
+    /* allow back and forth clicking */
+    $('[data-direction]').on('click', handlePagination);
+
     $('#loading-data').addClass('d-none');
     $('#profile').removeClass('d-none');
     $('#visualization').removeClass('d-none');
@@ -140,14 +143,14 @@ function upsertDailyPies(page) {
         }
 
         $('.btn-overview-inactive').removeClass('btn-overview-inactive').addClass('btn-overview-paginate');
-        $('.btn-overview-paginate').on('click', handlePagination);
         if (_.size(pieCharts) < 3) {
             $("[data-direction='back']").addClass('btn-overview-inactive').removeClass('btn-overview-paginate');
         }
     });
 }
 
-function handlePagination() {
+function handlePagination(e) {
+    e.preventDefault();
 
     // back / next
     if ($(this).data('direction') == 'back') {
@@ -162,7 +165,7 @@ function handlePagination() {
     _.each(pieCharts, function(p, i) {
         p.c3pie.destroy();
     });
-    $('#daily-overview').html();
+    $('.graph-day').remove();
     pieCharts = [];
     selectedDay = null;
 
