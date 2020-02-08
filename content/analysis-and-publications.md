@@ -24,7 +24,7 @@ draft: false
   resource2href="https://prezi.com/view/AvoT0B1lnclMIq3k4LOU"
   resource3="Final presentation slides"
   resource3href="https://drive.google.com/open?id=1bOSi6853za6CRDYF1xdc8Os0EUQOWgma">}}
-  
+
 {{<resource
   kind="article"
   when="January"
@@ -141,7 +141,10 @@ draft: false
   author="Berlin DSSG"
   authorLink="https://dssg-berlin.org/"
   description="data scientists analyzing one year of fbtrex data. We did a privacy assessment and defined minimization and confidentiality agreement, as collaborator of the project for the time of the experiment."
-  href="https://blog.dssg-berlin.org/dssg-datathon-2019-ein-ganzes-wochenende-lang-datenanalyse-f%C3%BCrs-gemeinwohl-4ec6ffa95aec" >}}
+  href="https://blog.dssg-berlin.org/dssg-datathon-2019-ein-ganzes-wochenende-lang-datenanalyse-f%C3%BCrs-gemeinwohl-4ec6ffa95aec"
+  resource1="Final presentation (slides)"
+  resource1href="https://github.com/tracking-exposed/presentation/blob/master/Berlin%20DSSG%20-%20Datathon%20-%20fbtrex%20-%20slides.pdf"
+  >}}
 
 {{<resource
   kind="article"
