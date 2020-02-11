@@ -19,7 +19,7 @@ draft: false
   description="Collective group work on polarization of the Brexit discussion seen through Youtube's personalization algorithm, coordinated by Salvatore Romano and Davide Beraldo"
   href="https://docs.google.com/document/d/1EkeEa6vnIQI1QH8xEIZkAbI23vn3ChsjoJs3U6tkeqo/edit"
   resource1="Final project report"
-  resource1href="https://wiki.digitalmethods.net/Dmi/YouTube"
+  resource1href="https://wiki.digitalmethods.net/Dmi/WinterSchool2020youtube"
   resource2="Project Pitch slides (on Prezi)"
   resource2href="https://prezi.com/view/AvoT0B1lnclMIq3k4LOU"
   resource3="Final presentation slides"
