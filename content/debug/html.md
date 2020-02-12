@@ -4,7 +4,19 @@ draft: false
 ---
 
 # Info and details
-### details
+
+<div class="container">
+  <span class="col-1" id="shtml"></span>
+  <span class="col-1" id="smetadata"></span>
+  <span class="col-1" id="ssummary"></span>
+  <span class="col-1" id="serrors"></span>
+  <span class="col-1" id="simpression"></span>
+  <span class="col-1" id="stimeline"></span>
+
+  <div class="code" id="details"></div>
+</div>
+
+---
 
 ##### HTML
 

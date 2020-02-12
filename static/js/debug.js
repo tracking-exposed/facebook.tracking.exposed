@@ -20,9 +20,20 @@ function upsertHTML(token) {
 
     $.getJSON(url, (content) => {
 
-        $("#details").text(_.map(content, function(object, name) {
-            return `${name}: ${_.size(object)}`;
-        }));
+        _.map(content, function(object, name) {
+            const cname = `#s${name}`;
+            console.log( `${$(cname).text()} ${_.size(object)}` );
+            $(cname).html(`<button class="btn btn-secondary">
+                            ${name} ${_.size(object)}</button>`);
+            if(_.size(object)) {
+                $(cname).mouseover(function(e) {
+                    $("#details").html( 
+                    `<pre>${JSON.stringify(_.omit(object, ['html']), undefined, 2)}
+                        </pre>`
+                    );
+                });
+            }
+        });
 
         $("#html").text(indent.html(content.html.html, { indentHtmlTag: true, tabString: '  ' }));
         let escaped = $("#html").html();
