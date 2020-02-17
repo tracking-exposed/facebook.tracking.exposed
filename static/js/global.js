@@ -9,10 +9,12 @@ var getToken = function() {
   const token = window.location.href.split('/').pop().substr(1, 40);
   if (_.size(token) != 40 ) {
     console.log("Wrong token length in the URL");
-    return "";
+    return null;
   }
-  return token;
+  const check = token.match(/^[0-9a-f]{40}$/i);
+  return check ? token : null;
 }
+
 function buildApiUrl(apiName, option, apiv) {
 
     const SERVER = 'http://localhost:8000';
