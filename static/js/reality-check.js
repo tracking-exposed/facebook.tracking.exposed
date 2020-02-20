@@ -118,18 +118,27 @@ function upsertDailyPies(page) {
     $.getJSON(url, (dailyStats) => {
 
         if(dailyStats.error) {
-            console.log(dailyStats, "error", dailyStats.message);
+            console.log(dailyStats, "(managed error)", dailyStats.message);
             $('#loading-fetching').addClass('d-none');
             $('#loading-error').removeClass('d-none');
+            $('#loading-data').removeClass('d-none');
             $('#error-details').text(dailyStats.message);
+            return;
+        }
+
+        if(!_.size($('#profile-name').text()))
+            $('#profile-name').html(dailyStats.pseudo.replace(/-/gi, ' '));
+
+        if(!_.size(dailyStats.stats)) {
+            console.log(dailyStats, "(missing data)");
+            $('#loading-fetching').addClass('d-none');
+            $('#loading-empty').removeClass('d-none');
+            $('#loading-data').removeClass('d-none');
             return;
         }
 
         $('#loading-fetching').addClass('d-none');
         $('#loading-empty').removeClass('d-none');
-
-        if(!_.size($('#profile-name').text()))
-            $('#profile-name').html(dailyStats.pseudo.replace(/-/gi, ' '));
 
         pieCharts = _.compact(_.map(_.reverse(dailyStats.stats), function(item, count) { 
             if(!item.npost)
