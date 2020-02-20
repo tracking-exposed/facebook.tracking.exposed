@@ -29,7 +29,7 @@ function fetchLanguage(lang) {
     if (availableKeywords[lang]) {
         configureAutocomplete(lang);
     }
-    const url = buildApiUrl(`/keywords/${lang}`);
+    const url = buildApiUrl("keywords", lang, 2);
     $.getJSON(url, function(kwds) {
         availableKeywords[lang] = _.map(kwds, 'k');
         configureAutocomplete(lang);
@@ -72,7 +72,7 @@ function configureAutocomplete(lang) {
 function loadLanguages() {
     $(".hidden").toggle();
     $("#input-topic").val('')
-    const url = buildApiUrl(`/languages`);
+    const url = buildApiUrl(`languages`, null, 2);
     $.getJSON(url, function(langdesc) {
         // { available: { af: 2, ar: 73 }, { potential: { uk: "Ukrainian", no: "Norwegian" } }
         _.each(langdesc.potential, function(langName, lcode) {
