@@ -5,7 +5,7 @@ draft: false
 
 # Privacy Statement
 
-smaller 9 December 2016, version 1.0
+smaller 9 August 2019, version 1.1
 
 ##  1. What is Facebook Tracking Exposed?
 
@@ -49,5 +49,8 @@ We will never sell or share your personally identifiable information with anyone
 
 ## 7. Will you stop collecting my information?
 
-Yes. If you want us to stop collecting your information, just uninstall the web browser addon. If you want us to delete the information we’ve already collected, send a request to support﹫tracking・exposed, or mention it in our facebook page: [Personalization Algorithms](https://www.facebook.com/personalizationalgorithm) - contact us including your Facebook User ID and we will delete everything you’ve submitted. Please be aware that other people may have made a copy of the data while it was available on our website. We cannot force them to delete the copy.
+Yes. If you want us to stop collecting your information, just uninstall the web browser addon. If you want us to delete the information we’ve already collected, send a request to support﹫tracking・exposed, or mention it in our facebook page: [Personalization Algorithms](https://www.facebook.com/personalizationalgorithm) - contact us including your Facebook User ID and we will delete everything you’ve submitted. Please be aware that other people may have made a copy of the data while it was available on our website. We cannot force them to delete the copy. You can also reach out to us in our [mattermost chat](https://chat.securitywithoutborders.org/community/channels/trackingexposed), or [twitter](https://twitter.com/@trackingexposed).
 
+## 8. Third parties
+
+We collaborate with a third-party perfroming Semantic Analysis for us. The company name is Spazio Dati and their product is [Dandelion](https://dandelion.eu); They receive anonymized snippet of texts from the collected posts, and return a list of pertinent terms. They are operating under GDPR terms, they do not process personal data, and they can't know the supporter who send that tu us, (the evidence source), or the posts original author.
