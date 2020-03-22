@@ -13,6 +13,15 @@ draft: false
 </h3>
 
 {{<resource
+  kind="article"
+  when="March"
+  title="Exploring Facebook’s role in Ethiopia’s rising ethnic tensions"
+  author="Syver Petersen"
+  description="Africa’s second-most populous country is undergoing a political revolution forcing old and new ethnic grievances to the surface. A blog post on how Facebook is involved in Ethiopia’s political transition, and how fbtrex tool support the exploration of information diets differences, between the country’s largest ethnic groups"
+  resource1="blogpost"
+  resource1href="https://data-activism.net/2020/03/bigdata-sur-exploring-facebooks-role-in-ethiopias-rising-ethnic-tensions/">}}
+
+{{<resource
   kind="event"
   when="January"
   title="Youtube Tracking Exposed — DMI UvA Winter School project pitch"
