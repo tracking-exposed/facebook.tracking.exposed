@@ -13,6 +13,66 @@ draft: false
 </h3>
 
 {{<resource
+  kind="link"
+  when="September"
+  title="(Italian) radio interview before Tracking Exposed Workshop"
+  description="DisruptionLab in Berlino organized a three day event on Data Tracking, with panel discussion, keynotes and workshop. Tracking Exposed host a workshop named 'smash the filter bubble'. Salvatore got interviewed by a Radio show in Colone that transmits also in Italian"
+  href="https://www1.wdr.de/radio/cosmo/programm/sendungen/radio-colonia/il-tema/algoritmi-facebook-100.html"
+  resource1="Workshop schedule"
+  resource1href="https://www.disruptionlab.org/data-cities#workshops"
+  resource2="Facebook event"
+  resource2href="https://www.facebook.com/events/299142674482022/">}}
+
+{{<resource
+  kind="link"
+  title="Designing data transparency – ideas from the community"
+  description="YourData is openDemocracy’s project to bring more transparency to data use on the web. Personalisation is where websites shows you specific content dependent on data they have about you. Like showing you information about floral dresses because they think you’re a woman, or more articles about Bernie Sanders because you’re viewing from the US. -- this is the opening of YourData initiative from openDemocracy, as Tracking Exposed we partecipated with a few proposals"
+  when="September"  
+  nature="external"
+  author="Matthew Linears"
+  resource1="articles from Matthew Linears"
+  resource1href="https://www.opendemocracy.net/en/author/matthew-linares/"
+  href="https://www.opendemocracy.net/en/digitaliberties/designing-data-transparency-ideas-from-the-community/">}}
+
+{{<resource
+  kind="paper"
+  title="Warehouse of information: Amazon's data collection practices and their relation to GDPR"
+  when="September"  
+  nature="external"
+  author="Dimitri Koehorst (UvA master thesis)"
+  authorLink="https://duckduckgo.com/?q=dimitri+koehorst+uva+amazon+algorithm+analysis"
+  description="In recent times, data has become increasingly central to a variety of different companies. While the use of data has become widespread, there are some companies whose entire business model revolves around the use of data. One such company is Amazon. Initially it was merely an online bookstore, but as the company grew it incorporated multiple new branches, such as Amazon Web Services, which allow the company to collect data from a variety of different sources. Companies such as Amazon use this data to optimize their services, which allows them to gain certain advantages over their competitors. However, this usage of data is bound by international regulations, one of which is the GDPR, the new data protection legislation of the European Union. By using data collected from the Amazon.com webstore as a case study, this thesis investigates the shift of companies towards a data-oriented business model, and investigates certain problems that this shift brings. This is done through the research question: How can we conceptualize the data collection practices of Amazon in relation to the General Data Protection Regulation?"
+  href="https://github.com/tracking-exposed/presentation/blob/master/Dimitri%20Koehorst%20Master%20Thesis%20Final%20Version.pdf">}}
+
+{{<resource
+  kind="link"
+  when="Summer"
+  title="Youtube collaborative observation"
+  description="We apply the collaborative observation to YouTube, regardless the management and personalization of COVID-19 informative videos; we released open data, improved technology, and wrote a paper with preliminary findings."
+  href="https://youtube.tracking.exposed/wetest/1/"
+  resource2="analysis updates"
+  resource2href="https://youtube.tracking.exposed/wetest/announcement-1/"
+  resource1="preprint paper (14 pages)"
+  resource1href="https://github.com/tracking-exposed/experiments-data/blob/master/wetest1/wetest-paper-submitted-preprint.pdf">}}
+
+{{<resource
+  kind="paper"
+  when="April"
+  title="Thinking Outside the Black-Box: The Case for “Algorithmic Sovereignty” in Social Media"
+  author="Urbano Reviglio, Claudio Agosti"
+  description="This article is an interdisciplinary critical analysis of personalization systems and the gatekeeping role of current mainstream social media. The first section presents a literature review of data-driven personalization and its challenges in social media. The second section sheds light on increasing concerns regarding algorithms’ ability to overtly persuade—and covertly manipulate—users for the sake of engagement, introducing the emergence of the exclusive ownership of behavioral modification through hyper-nudging techniques. The third section empirically analyzes users’ expectations and behaviors regarding such data-driven personalization to frame a conceptualization of users’ agency. The fourth section introduces the concept of “algorithmic sovereignty.” Current projects that aim to grant this algorithmic sovereignty highlight some potential applications. Together this novel theoretical framework and empirical applications suggest that, to preserve trust, social media should open their personalization algorithms to a social negotiation as the first step toward a more sustainable social media landscape. To decentralize the immense power of mainstream social media, guarantee a democratic oversight, and mitigate the unintended undesirable consequences of their algorithmic curation, public institutions and civil society could help in developing and researching public algorithms, fostering a collective awareness so as to eventually ensure a fair and accountable “algorithmic sovereignty.”"
+  href="https://journals.sagepub.com/doi/full/10.1177/2056305120915613">}}
+
+{{<resource
+  kind="link"
+  when="March"
+  title="Pornhub collaborative observation"
+  description="Our team worked on a new concept for algorithm analysis: collaborative observation. A bunch of people performs the same operation for 24 hours, and we began this experiment why watching Pornhub personalizaton and recommendation algorithm."
+  href="https://pornhub.tracking.exposed/potest/final-1"
+  resource1="web slides"
+  resource1href="https://pornhub.tracking.exposed/slides/potest1/">}}
+
+{{<resource
   kind="article"
   when="March"
   title="Exploring Facebook’s role in Ethiopia’s rising ethnic tensions"
