@@ -13,14 +13,6 @@ draft: false
 </h3>
 
 {{<resource
-  kind="paper"
-  when="September"
-  title="Implementing Eco’s Model Reader with Word Embeddings. An Experiment on Facebook Ideological Bots"
-  description="First outline of a methodology for computational pragmatics using FBTREX dataset. In the paper, we found that the algorithm creates different model readers for each relevant theme in the dataset and that the right-wing ideology was dominant cross-profiles"
-  href="https://iris.unimore.it/retrieve/handle/11380/1220856/300738/Paper_JADT_final-3.pdf"
-  author="Leonardo Sanna">}}
-
-{{<resource
   kind="link"
   when="September"
   title="(Italian) radio interview before Tracking Exposed Workshop"
@@ -51,6 +43,14 @@ draft: false
   authorLink="https://duckduckgo.com/?q=dimitri+koehorst+uva+amazon+algorithm+analysis"
   description="In recent times, data has become increasingly central to a variety of different companies. While the use of data has become widespread, there are some companies whose entire business model revolves around the use of data. One such company is Amazon. Initially it was merely an online bookstore, but as the company grew it incorporated multiple new branches, such as Amazon Web Services, which allow the company to collect data from a variety of different sources. Companies such as Amazon use this data to optimize their services, which allows them to gain certain advantages over their competitors. However, this usage of data is bound by international regulations, one of which is the GDPR, the new data protection legislation of the European Union. By using data collected from the Amazon.com webstore as a case study, this thesis investigates the shift of companies towards a data-oriented business model, and investigates certain problems that this shift brings. This is done through the research question: How can we conceptualize the data collection practices of Amazon in relation to the General Data Protection Regulation?"
   href="https://github.com/tracking-exposed/presentation/blob/master/Dimitri%20Koehorst%20Master%20Thesis%20Final%20Version.pdf">}}
+
+{{<resource
+  kind="paper"
+  when="June"
+  title="Implementing Eco’s Model Reader with Word Embeddings. An Experiment on Facebook Ideological Bots"
+  description="First outline of a methodology for computational pragmatics using FBTREX dataset. In the paper, we found that the algorithm creates different model readers for each relevant theme in the dataset and that the right-wing ideology was dominant cross-profiles"
+  href="https://iris.unimore.it/retrieve/handle/11380/1220856/300738/Paper_JADT_final-3.pdf"
+  author="Leonardo Sanna">}}
 
 {{<resource
   kind="link"
