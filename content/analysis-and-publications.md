@@ -13,6 +13,14 @@ draft: false
 </h3>
 
 {{<resource
+  kind="paper"
+  when="September"
+  title="Implementing Eco’s Model Reader with Word Embeddings. An Experiment on Facebook Ideological Bots"
+  description="First outline of a methodology for computational pragmatics using FBTREX dataset. In the paper, we found that the algorithm creates different model readers for each relevant theme in the dataset and that the right-wing ideology was dominant cross-profiles"
+  href="https://iris.unimore.it/retrieve/handle/11380/1220856/300738/Paper_JADT_final-3.pdf"
+  author="Leonardo Sanna">}}
+
+{{<resource
   kind="link"
   when="September"
   title="(Italian) radio interview before Tracking Exposed Workshop"
@@ -22,7 +30,7 @@ draft: false
   resource1href="https://www.disruptionlab.org/data-cities#workshops"
   resource2="Facebook event"
   resource2href="https://www.facebook.com/events/299142674482022/">}}
-
+  
 {{<resource
   kind="link"
   title="Designing data transparency – ideas from the community"
