@@ -21,17 +21,17 @@ canonifyURLs = true
 
 [menu]
  [[menu.main]]
-    name= "Reality Check"
-    url = "/reality-check/"
+    name= "Project status"
+    url = "#"
     weight = -180
  [[menu.main]]
+    parent = "Project status"
+    name= "Reality Check"
+    url = "/reality-check/"
+ [[menu.main]]
+    parent = "Project status"
     name = "Zuckless News"
     url = "/zuckless-news/"
-    weight = -170
- [[menu.main]]
-    name = "Analysis & Publications"
-    url = "/analysis-and-publications/"
-    weight = -160
 
  [[menu.main]]
     name = "More"
