@@ -7,13 +7,20 @@ Our code is released under as GPL free software license, and content produced un
 
 ## Contacts
 
-Chat with us on Mattermost, (kindly hosted by [Security Without Border](https://securitywithoutborders.org/)): [Channel #trackingexposed](https://chat.securitywithoutborders.org/community/channels/trackingexposed)
+The email for non-personal inquiry is **support** [at](#) *tracking* [dot](#) **exposed** - Project leader is [Claudio Agosti](https://twitter.com/_vecna), **claudio** [at](#) *tracking* [dot](#) **exposed**. 
 
-Our Facebook group, where we should manage experiments (but, actually, is not happening) is [Personalisation Algorithms](https://www.facebook.com/personalizationalgorithm), because there is where the adopters of fbTREX are.
+[Tracking Exposed on twitter](https://twitter.com/trackingexposed).
 
-The email for non-personal inquiry is **support** [at](#) *tracking* [dot](#) **exposed** - Project leader is [Claudio Agosti](https://twitter.com/_vecna), **claudio** [at](#) *tracking* [dot](#) **exposed**.
+Mattermost, which is the free software version of Slack, you can find us in channel [#trackingexposed](https://chat.securitywithoutborders.org/community/channels/trackingexposed). Server kindly shared with [Security Without Border](https://securitywithoutborders.org/).
+
+Our Facebook group, where we should manage and control experiments (but, actually, it is not happening) is [Personalisation Algorithms](https://www.facebook.com/personalizationalgorithm), because there is where the adopters of fbTREX might talk in comments.
 
 ---
+
+## 2020
+
+- [Dandelion](https://dandelion.eu), Spaziodati semantic analysis engine.
+
 ## 2019
 
 ### Sponsor and Partners

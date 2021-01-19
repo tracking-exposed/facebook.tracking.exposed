@@ -21,6 +21,7 @@ function initializeReality(page) {
 }
 
 function renderDay(item, count) {
+    let counts = _.countBy(item.nature);
     daily = `<div id="day-${item.day}" class="graph-day flex-fill pl-3 pr-3 graph-day-border" data-day="${item.day}">
         <span class="text-muted">${moment(item.day).format('LL')}</span><br>
         <p>
@@ -53,8 +54,8 @@ function renderDay(item, count) {
         bindto: pieId,
         data: {
             columns: [
-                ['organic', item.nature.organic],
-                ['ads', item.nature.sponsored]
+                ['organic', counts.post || 0 ],
+                ['ads', counts.ad || 0 ]
             ],
             type: 'pie',
             labels: false
@@ -71,7 +72,7 @@ function renderDay(item, count) {
         }
     });
     return {
-        c3pie, 
+        c3pie,
         day: item.day,
     }
 }
@@ -140,8 +141,8 @@ function upsertDailyPies(page) {
         $('#loading-fetching').addClass('d-none');
         $('#loading-empty').removeClass('d-none');
 
-        pieCharts = _.compact(_.map(_.reverse(dailyStats.stats), function(item, count) { 
-            if(!item.npost)
+        pieCharts = _.compact(_.map(_.reverse(dailyStats.stats), function(item, count) {
+            if(!item.sum)
                 return null;
             return renderDay(item, count);
         }));
@@ -197,7 +198,7 @@ function renderTimelineDay(day) {
     // clean the existing timeline, if any
     $('#daily-timeline').html("");
 
-    // fetch from the "personal enrich" API: 
+    // fetch from the "personal enrich" API:
     // https://facebook.tracking.exposed/docs
     const url = buildApiUrl(`/personal/${token}/enrich`, day, 2);
 
@@ -236,7 +237,7 @@ function renderTimelineDay(day) {
                     let topicsCount = [];
 
                     // topics
-                    _.each(item.labels, function(topic, index) { 
+                    _.each(item.labels, function(topic, index) {
                         var exists = _.find(topicsCount, { 'topic':  topic });
                         if (exists) {
                             exists.count = exists.count + 1;
@@ -245,7 +246,7 @@ function renderTimelineDay(day) {
                                 topic: topic,
                                 count: 1
                             });
-                        }        
+                        }
                     });
 
                     let topicsOrdered = _.orderBy(topicsCount, ['count'], ['desc']);
@@ -286,13 +287,13 @@ function renderTimelineDay(day) {
                         console.log("multiple attribution wasn't happening since the shared post were working", item);
                     }
 
-                    const displaySource = item.attributions && item.attributions[0] ? 
+                    const displaySource = item.attributions && item.attributions[0] ?
                         item.attributions[0].display : "";
                     const sourceLink = item.attributions && item.attributions[0] && _.size(item.attributions[0].fblink) ?
-                            item.attributions[0].fblink : 
-                                ( item.feed_id && item.feed_id.authorId ? 
+                            item.attributions[0].fblink :
+                                ( item.feed_id && item.feed_id.authorId ?
                                 'https://facebook.com/' + item.feed_id.authorId : "#" );
-                    const cleanSource = item.attributions && item.attributions[0] ? 
+                    const cleanSource = item.attributions && item.attributions[0] ?
                         item.attributions[0].content : "";
                     const permaLink = item.permaLink ? 'https://facebook.com' + item.permaLink : "#";
 
@@ -328,7 +329,7 @@ function renderTimelineDay(day) {
                         </div>
                     </li>`;
 
-                    $('#daily-timeline').append(htmlItem); 
+                    $('#daily-timeline').append(htmlItem);
                 }
             }
         });
@@ -337,7 +338,7 @@ function renderTimelineDay(day) {
             e.preventDefault();
             $('#topics-' + $(this).data('semid')).find('.list-item').removeClass('d-none');
             $(this).remove();
-        }); 
+        });
 
         initIsotope();
     });
@@ -384,4 +385,3 @@ function initializeStats() {
     console.log(data);
   });
 };
-
