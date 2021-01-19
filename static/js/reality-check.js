@@ -220,6 +220,7 @@ function renderTimelineDay(day) {
 
         // build topics
         _.each(data, function(item, count) {
+            console.log(item);
             if (item.labels != undefined || true) { // remind Claudio you add this 'cos labels might miss
                 // depending on occurence count, update the 'Seen $x (times)' or 'Once' is default
                 if (semanticIds[item.semanticId]) {
@@ -281,22 +282,17 @@ function renderTimelineDay(day) {
                         isAd = '(Sponsored)';
                     }
 
-                    const textList = _.replace(item.fullText, '\n', '</br>')
-
+                    const textList = _.replace(item.texts, '\n', '</br>')
+/*
                     if(_.size(item.attributions) > 1) {
                         console.log("multiple attribution wasn't happening since the shared post were working", item);
                     }
-
-                    const displaySource = item.attributions && item.attributions[0] ?
-                        item.attributions[0].display : "";
-                    const sourceLink = item.attributions && item.attributions[0] && _.size(item.attributions[0].fblink) ?
-                            item.attributions[0].fblink :
-                                ( item.feed_id && item.feed_id.authorId ?
-                                'https://facebook.com/' + item.feed_id.authorId : "#" );
-                    const cleanSource = item.attributions && item.attributions[0] ?
-                        item.attributions[0].content : "";
-                    const permaLink = item.permaLink ? 'https://facebook.com' + item.permaLink : "#";
-
+*/
+                    const displaySource = item.publisherName;
+                    const sourceLink =
+                      ( _.get(item, 'meaningfulId.local', []).length ) ?
+                      'https://facebook.com/' + _.get(item, 'meaningfulId.local')[0].profileName : "#";
+                    const permaLink = sourceLink;
                     const htmlItem = `
                     <li id="daily-${day}-${item.semanticId}" class="row table-item ${item.nature}">
                         <div id="daily-topics-${day}-${item.semanticId}" class="col-sm-4 col-md-4 col-lg-3 pl-0">
@@ -319,7 +315,11 @@ function renderTimelineDay(day) {
                                 ${seenCount}
                             </span>
                             <div class="clearfix"></div>
-                            <div class="mt-2 mb-3">${textList}</div>
+                            <div class="mt-2 mb-3">
+                              ${textList}
+                              <br>
+                              <a href="/debug/html/#${item.id}" target=_blank><code>raw</code></a>
+                            <div>
                             <a href="${permaLink}" class="${permaLink.length == 1 ? 'd-none' : ''}">
                                 Original Post
                             </a>
@@ -354,10 +354,18 @@ function initIsotope() {
       date: '.date'
     }
   });
-
+/*
   $('.filter-by').on('click', function() {
-    var filter = $(this).data('filter');
-    console.log('filterBy: ' + filter);
+    let filter ='*';
+    if($(this).data('filter') == '.organic')
+      filter = '.post';
+    else if($(this).data('filter') == '.sponsored')
+      filter = '.sponsored';
+    else if($(this).date('filter') == '*') {
+      // nothing
+    } else {
+      console.error("Unexpected", $(this).data('filter'));
+    }
     $timeline.isotope({ filter: filter });
     $('.filter-by').removeClass('active');
     $(this).addClass('active');
@@ -370,6 +378,7 @@ function initIsotope() {
     $('.sort-by').removeClass('active');
     $(this).addClass('active');
   });
+  */
 }
 
 function downloadCSV() {
