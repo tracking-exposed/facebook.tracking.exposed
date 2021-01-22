@@ -220,7 +220,7 @@ function renderTimelineDay(day) {
 
         // build topics
         _.each(data, function(item, count) {
-            console.log(item);
+          console.log(item);
             if (item.labels != undefined || true) { // remind Claudio you add this 'cos labels might miss
                 // depending on occurence count, update the 'Seen $x (times)' or 'Once' is default
                 if (semanticIds[item.semanticId]) {
@@ -252,11 +252,11 @@ function renderTimelineDay(day) {
 
                     let topicsOrdered = _.orderBy(topicsCount, ['count'], ['desc']);
                     let htmlTopic = '';
-                    _.each(topicsOrdered, function(item, index) {
-                        let topicText = item.topic;
-                        if (item.topic.length > 27) {
-                            topicText = `<span title="${item.topic}">
-                                ${item.topic.substring(0, 27)}...
+                    _.each(topicsOrdered, function(titem, index) {
+                        let topicText = titem.topic;
+                        if (titem.topic.length > 27) {
+                            topicText = `<span title="${titem.topic}">
+                                ${titem.topic.substring(0, 27)}...
                             </span>`;
                         }
                         if (index >= 4) {
@@ -264,10 +264,12 @@ function renderTimelineDay(day) {
                         }
                         htmlTopic += `
                         <li class="list-item mb-2 ${isHidden}">
-                            <span class="topic-count num-${item.count}">
-                                ${item.count}
+                            <img style="width:20px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSI1MTJweCIgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEycHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIiB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzIGlkPSJkZWZzMTkiLz48ZyBpZD0iZzMwMjEiLz48ZyBpZD0iTGF5ZXJfMV8xXyIvPjxnIGlkPSJMYXllcl8xXzFfLTciIHRyYW5zZm9ybT0idHJhbnNsYXRlKC04MTkuNjcyLC02MS45Mjk5OTEpIi8+PGcgaWQ9ImcyOTg5Ij48cmVjdCBoZWlnaHQ9IjUxMiIgaWQ9InJlY3QyOTg5IiByeD0iNzAiIHJ5PSI3MCIgc3R5bGU9ImZpbGw6I2VhNzgxOTtmaWxsLW9wYWNpdHk6MTtzdHJva2U6bm9uZSIgdHJhbnNmb3JtPSJzY2FsZSgtMSwtMSkiIHdpZHRoPSI1MTIiIHg9Ii01MTIiIHk9Ii01MTIiLz48cGF0aCBkPSJtIDgxLjA1NjQzLDI2Ny4wNDk1OCBjIDQzLjcwNDEsMCA4NC43ODg3OSwxNy4wNzIxNCAxMTUuNjY0MDcsNDguMTIzOTUgMzAuOTMxNzksMzEuMDUxNzkgNDcuOTYxNTYsNzIuNDExODQgNDcuOTYxNTYsMTE2LjQ0MDcyIGggNjcuMzQ5NTEgYyAwLC0xMjcuODg1NyAtMTAzLjYxODk4LC0yMzEuOTIxMjQgLTIzMC45NzUxNCwtMjMxLjkyMTI0IHYgNjcuMzU2NTcgeiBNIDgxLjE2MjQsMTQ3LjY1MDU0IGMgMTU1Ljc2MDMsMCAyODIuNDg4MDgsMTI3LjQxOTcgMjgyLjQ4ODA4LDI4NC4wNDg0NCBIIDQzMSBDIDQzMSwyMzcuOTI1MjggMjc0LjA1MzU0LDgwLjMwMTAyIDgxLjE2MjQsODAuMzAxMDIgdiA2Ny4zNDk1MiB6IG0gOTMuMTM0MjEsMjM2Ljk5NzY5IGMgMCwyNS43NTY0NyAtMjAuODkxODMsNDYuNjQ4MyAtNDYuNjQ4Myw0Ni42NDgzIEMgMTAxLjg5MTg0LDQzMS4yOTY1MyA4MSw0MTAuNDExNzYgODEsMzg0LjY0ODIzIGMgMCwtMjUuNzcwNiAyMC44ODQ3NywtNDYuNjQ4MzEgNDYuNjQxMjQsLTQ2LjY0ODMxIDI1Ljc1NjQ5LDAgNDYuNjU1MzcsMjAuODc3NzEgNDYuNjU1MzcsNDYuNjQ4MzEgeiIgaWQ9InBhdGgzODQ0IiBzdHlsZT0iZmlsbDojZmZmZmZmIi8+PC9nPjwvc3ZnPg==">
+                            <a href="https://facebook.tracking.exposed/feeds/0/${item.lang}/${titem.topic}" target=_blank>${topicText}</a>
+
+                            <span class="topic-count num-${titem.count}">
+                                ${titem.count}
                             </span>
-                            ${topicText}
                         </li>`;
                     });
 
@@ -332,6 +334,7 @@ function renderTimelineDay(day) {
                     $('#daily-timeline').append(htmlItem);
                 }
             }
+            $(".amount").text(data.length + " Posts");
         });
 
         $('.show-topics').on('click', function(e) {
