@@ -1,6 +1,6 @@
 ---
-title: Page moved
+title: Check all our publication and analysis
 draft: false
 ---
 
-# Please check [https://tracking.exposed/analysis-and-publications](https://tracking.exposed/analysis-and-publications).
+# Go to our main site [https://tracking.exposed/impact/](https://tracking.exposed/impact/).
