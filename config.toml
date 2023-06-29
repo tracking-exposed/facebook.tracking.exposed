@@ -9,7 +9,7 @@ canonifyURLs = true
     openGraphSiteName = "Facebook Tracking Exposed"
     subsite = "facebook"
     description = "Facebook Tracking Exposed is a web browser addon that collects the stories visible in your Facebook Newsfeed and a website that aggregates that data from all the users who have the addon installed. Our vision is to increase transparency behind personalization algorithms"
-    tagline = "Make an accessible framework so anyone can analyze Facebook's newsfeed algorithm"
+    tagline = "This tool to make Facebook personalization algorithm is now DISCONTINUED"
 
 [permalinks]
     posts = "/:slug/"
@@ -20,18 +20,18 @@ canonifyURLs = true
        unsafe = true
 
 [menu]
- [[menu.main]]
-    name= "Project status"
-    url = "#"
-    weight = -180
- [[menu.main]]
-    parent = "Project status"
-    name= "Reality Check"
-    url = "/reality-check/"
- [[menu.main]]
-    parent = "Project status"
-    name = "Zuckless News"
-    url = "/zuckless-news/"
+# [[menu.main]]
+#    name= "Project status"
+#    url = "#"
+#    weight = -180
+# [[menu.main]]
+#    parent = "Project status"
+#    name= "Reality Check"
+#    url = "/reality-check/"
+# [[menu.main]]
+#    parent = "Project status"
+#    name = "Zuckless News"
+#    url = "/zuckless-news/"
 
  [[menu.main]]
     name = "More"
@@ -67,6 +67,12 @@ canonifyURLs = true
     parent = "More"
     url = "/privacy/"
     weight = -150
+
+
+ [[menu.main]]
+   name = "Umbrella project"
+   url = "https://tracking.exposed/"
+   weight = -20
 
  [[menu.featured]]
     name= "Reality Check"
