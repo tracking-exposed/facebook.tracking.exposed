@@ -9,7 +9,7 @@ canonifyURLs = true
     openGraphSiteName = "Facebook Tracking Exposed"
     subsite = "facebook"
     description = "Facebook Tracking Exposed is a web browser addon that collects the stories visible in your Facebook Newsfeed and a website that aggregates that data from all the users who have the addon installed. Our vision is to increase transparency behind personalization algorithms"
-    tagline = "This tool to make Facebook personalization algorithm is now DISCONTINUED"
+    tagline = "This tool to analyze the Facebook timeline algorithm is now DISCONTINUED"
 
 [permalinks]
     posts = "/:slug/"

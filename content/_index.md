@@ -1,6 +1,6 @@
 ---
 title: Facebook Tracking Exposed
-date: 2019-05-22T15:01:21+01:00
+date: 2023-06-29T15:01:21+01:00
 draft: false
 description: We operate to expose how tracking and profiting from user data had a negative impact on society, so that proper political and civil actions can be taken.
 ---
@@ -21,9 +21,11 @@ description: We operate to expose how tracking and profiting from user data had 
 <br />
 <br />
 
-This project started in 2016 by [Claudio Agosti](https://linktr.ee/claudio.agosti), with crucial technical support at the early stage from [Alberto Granzotto](https://www.granzotto.net/); In the years it expanded to become the more generalized project of algorithm accountability known as [Tracking Exposed](https://tracking.exposed).
+This project started in 2016 by [Claudio Agosti](https://linktr.ee/claudio.agosti), with crucial technical support at the early stage from [Alberto Granzotto](https://www.granzotto.net/); In the years it expanded to become the first generalized toolkit for adversarial algorithm accountability known as [Tracking Exposed](https://tracking.exposed).
 
-facebook.tracking.exposed (fbtrex) **was the first worldwide data donation**, enabled pioneering research and inspired many other organisations to replicate the approach. It was also **fundamental in the first sock-puppet algorithm analysis** in real world scenario, and in being one of the technologies that **clashed with the anti-scraping techniques implemented by Facebook**, demonstrating how resilience is also possible here (at a cost).
+facebook.tracking.exposed (fbtrex) **was the first worldwide data donation** project, enabled pioneering researches and inspired many other organisations to replicate the approach. It was also **fundamental in the first sock-puppet algorithm analysis** in Facebook, recording evidences and patterns only explained by whistleblowers years later. 
+
+The main challenge was **resist the anti-scraping techniques implemented by Facebook**, but the design was solid enough to resist for 5 years, resilience is possible, at a cost.
 
 fbtrex was the skeleton upon which was build the equivalent system to analyze [YouTube (in 2018)](https://youtube.tracking.exposed), [PornHub (in 2019)](https://pornhub.tracking.exposed), [Amazon (in 2019)](https://amazon.tracking.exposed) and [TikTok (in 2020)](https://tiktok.tracking.exposed). The software was always published in AGPL-3 license on [git](https://github.com/tracking-exposed/facebook), but it stopped being maintained at the end of 2021, when the [Tracking Exposed](https://tracking.exposed) project will start a refocusing movement, and in 2023 become [AI Forensics](https://aiforensics.org). Below a list of resources produced by researchers using the tool.
 
@@ -31,6 +33,8 @@ fbtrex was the skeleton upon which was build the equivalent system to analyze [Y
     <iframe src="https://player.vimeo.com/video/304403527?h=0597e1080e" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
     <small><a href="https://vimeo.com/304403527">How fbtrex was initially designed</a>, by Michele Invernizzi for Density Design.</small>
 </div>
+
+Follows a chronological list of publications, articles, and videos about fbtrex:
 
 ## 2021
 
