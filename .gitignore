@@ -1,6 +1,5 @@
 *.swp
 *.swo
 resources/
-themes/
 public/*
 .infrastructure/*
